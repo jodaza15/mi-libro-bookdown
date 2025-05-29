@@ -1,0 +1,6 @@
+bookdown::gitbook:
+  config:
+    toc:
+      collapse: section
+    download: ["pdf", "epub"]
+    search: yes

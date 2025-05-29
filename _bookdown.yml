@@ -1,0 +1,4 @@
+book_filename: "mi-libro-bookdown"
+output_dir: "docs"
+new_session: yes
+
