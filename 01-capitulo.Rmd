@@ -1,3 +1,328 @@
-# Primer capítulo
+# Análisis Descriptivo
 
-Este es el primer capítulo de tu libro .
+A continuación, se realizará una revisión descriptiva de los precios del bitcoin desde el 1 de enero de 2018 al 27 de abril de 2025, en este capítulo se mostrará por medio de gráficos la estacionalidad, tendencia y otras características de la serie de tiempo.
+
+Dentro de este análisis descriptivo se validará algunas medias móviles y el movimiento de los retornos de los precios diarios del bitcoin.
+
+```{r}
+#install.packages("quantmod")
+#install.packages("zoo")
+#install.packages("forecast")
+library(quantmod)
+library(zoo)
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(viridis)
+library(ggExtra)
+library(tidyr)
+library(plotly)
+library(hrbrthemes)
+library(forecast)
+
+```
+
+```{r}
+
+# Descargar datos de Yahoo Finance
+getSymbols("BTC-USD",
+           src = "yahoo",
+           from = "2018-01-01",
+           to = "2025-04-27",#Sys.Date(),
+           periodicity = "daily")
+
+# Convertir el objeto descargado a 'zoo'
+btc_zoo <- as.zoo(`BTC-USD`)
+
+# Ver las primeras filas
+tail(btc_zoo)
+
+
+```
+**1. Graficos de precios HLOC**
+
+```{r}
+tc_df <- data.frame(date = index(btc_zoo), coredata(btc_zoo))
+
+# Gráfico de Open
+ggplot(tc_df, aes(x = date, y = BTC.USD.Open)) +
+  geom_line(color = "blue") +
+  labs(title = "Precio de Apertura (Open) - BTC/USD",
+       x = "Fecha",
+       y = "Precio (USD)") +
+  theme_minimal()
+
+# Gráfico de High
+ggplot(tc_df, aes(x = date, y = BTC.USD.High)) +
+  geom_line(color = "green") +
+  labs(title = "Precio más Alto (High) - BTC/USD",
+       x = "Fecha",
+       y = "Precio (USD)") +
+  theme_minimal()
+
+# gráfico de Low
+ggplot(tc_df, aes(x = date, y = BTC.USD.Low)) +
+  geom_line(color = "red") +
+  labs(title = "Precio más Bajo (Low) - BTC/USD",
+       x = "Fecha",
+       y = "Precio (USD)") +
+  theme_minimal()
+
+# Gráfico de Close
+ggplot(tc_df, aes(x = date, y = BTC.USD.Close)) +
+  geom_line(color = "purple") +
+  labs(title = "Precio de Cierre (Close) - BTC/USD",
+       x = "Fecha",
+       y = "Precio (USD)") +
+  theme_minimal()
+```
+
+**2. Grafico de seasonal**
+
+```{r}
+# Extraemos la serie de precios de cierre
+btc_close <- tc_df$BTC.USD.Close
+
+# Convertir a objeto de serie de tiempo (ts)
+# Frecuencia = 365 asumiendo datos diarios
+btc_close_ts <- ts(btc_close, start = c(2018, 1), frequency = 365)
+
+```
+
+```{r}
+
+ggseasonplot(btc_close_ts, year.labels = TRUE) +
+  ggtitle("Seasonal Plot - BTC/USD Close Price")
+
+```
+**3. Grafico de subserie**
+```{r}
+ggsubseriesplot(btc_close_ts) +
+  ggtitle("Subseries Plot - BTC/USD Close Price")
+
+```
+
+**4. Grafico de autocorrelación**
+
+```{r}
+ggAcf(btc_close_ts) +
+  ggtitle("ACF - BTC/USD Close Price")
+
+```
+
+**5. Grafico de descomposición de la serie de tiempo**
+
+```{r}
+# Descomposición
+btc_close_decomp <- decompose(btc_close_ts)
+
+# Graficar la descomposición
+plot(btc_close_decomp)
+
+```
+
+**6. Grafica de retraso**
+
+```{r}
+# Desplazamiento de 5 periodos atrás
+btc_close_lag5 <- stats::lag(btc_close_ts, k = -5)
+
+# Graficar el backshift
+plot(btc_close_lag5, main = "Backshift de 5 periodos - BTC/USD Close",
+     ylab = "Precio (USD)", xlab = "Fecha", col = "blue")
+lines(btc_close_ts, col = "gray")  # Opcional: agregar la serie original en gris
+legend("topleft", legend = c("Backshift (Lag 5)", "Original"), col = c("blue", "gray"), lty = 1)
+
+```
+
+**7. Grafico de diferenciación**
+
+```{r}
+# Diferencia de la serie
+btc_close_diff <- diff(btc_close_ts)
+
+# Graficar la serie diferenciada
+plot(btc_close_diff, main = "Diferencia de 1 periodo - BTC/USD Close",
+     ylab = "Cambio en Precio (USD)", xlab = "Fecha", col = "red")
+abline(h = 0, lty = 2, col = "black")  
+```
+
+**8. Grafico de medias moviles**
+
+```{r}
+
+# Media móvil de 5 periodos
+ma_5 <- rollmean(btc_close_ts, k = 5, fill = NA, align = "right")
+
+# Media móvil de 10 periodos
+ma_10 <- rollmean(btc_close_ts, k = 10, fill = NA, align = "right")
+
+```
+```{r}
+# Grafica
+plot(btc_close_ts, main = "BTC/USD Close con Medias Móviles (5 y 10 periodos)",
+     ylab = "Precio (USD)", xlab = "Fecha", col = "black", lwd = 1)
+
+lines(ma_5, col = "blue", lwd = 2)
+lines(ma_10, col = "red", lwd = 2)
+
+legend("topleft",
+       legend = c("Precio Cierre", "Media Móvil 5", "Media Móvil 10"),
+       col = c("black", "blue", "red"),
+       lty = 1,
+       lwd = 2)
+
+```
+
+**9. Grafico de precios y medias moviles interactivo **
+
+
+```{r}
+tc_df <- tc_df %>%
+  mutate(
+    MA5 = rollmean(BTC.USD.Close, k = 5, fill = NA, align = "right"),
+    MA10 = rollmean(BTC.USD.Close, k = 10, fill = NA, align = "right")
+  )
+
+# Crear gráfico
+p <- tc_df %>%
+  ggplot(aes(x = date)) +
+  
+  # Área del precio de cierre
+  geom_area(aes(y = BTC.USD.Close), fill = "#69b3a2", alpha = 0.3) +
+  geom_line(aes(y = BTC.USD.Close, color = "Precio Cierre"), size = 1) +
+  
+  # Línea MA5
+  geom_line(aes(y = MA5, color = "Media Móvil 5"), size = 0.8) +
+  
+  # Línea MA10
+  geom_line(aes(y = MA10, color = "Media Móvil 10"), size = 0.8) +
+  
+  ylab("Precio BTC/USD ($)") +
+  xlab("Fecha") +
+  ggtitle("Precio de Bitcoin con Medias Móviles (5 y 10 periodos)") +
+  theme_ipsum() +
+  scale_color_manual(values = c(
+    "Precio Cierre" = "#69b3a2",
+    "Media Móvil 5" = "blue",
+    "Media Móvil 10" = "red"
+  ))
+
+# Hacer el gráfico interactivo
+p <- ggplotly(p)
+
+# Mostrar
+p
+```
+
+**10. Grafico de precios diferenciados interactivo **
+
+```{r}
+# Crear la serie de diferencias
+tc_df <- tc_df %>%
+  mutate(
+    diferencia = c(NA, diff(BTC.USD.Close))  # Usamos c(NA, diff(...)) para que el tamaño quede igual
+  )
+
+# Crear el gráfico de diferencias
+p_diff <-tc_df %>%
+  ggplot(aes(x = date)) +
+  
+  # Área para la diferencia
+  geom_area(aes(y = diferencia), fill = "#FF7F0E", alpha = 0.3) +
+  geom_line(aes(y = diferencia, color = "Diferencia Diario"), size = 1) +
+  
+  ylab("Cambio Diario BTC/USD ($)") +
+  xlab("Fecha") +
+  ggtitle("Diferencia de Precio de Bitcoin (BTC/USD) entre días") +
+  theme_ipsum() +
+  scale_color_manual(values = c("Diferencia Diario" = "#FF7F0E"))
+
+# Convertir en gráfico interactivo
+p_diff <- ggplotly(p_diff)
+
+# Mostrar
+p_diff
+```
+
+**11. Grafico de retornos de precios interactivo**
+
+```{r}
+tc_df <-tc_df %>%
+  mutate(
+    retorno_pct = (BTC.USD.Close / lag(BTC.USD.Close) - 1) * 100
+  )
+
+
+```
+
+```{r}
+# Crear gráfico de retornos porcentuales
+p_retornos <- tc_df %>%
+  ggplot(aes(x = date)) +
+  
+  # Área del retorno
+  geom_area(aes(y = retorno_pct), fill = "#1f77b4", alpha = 0.3) +
+  geom_line(aes(y = retorno_pct, color = "Retorno % Diario"), size = 1) +
+  
+  ylab("Retorno Diario BTC/USD (%)") +
+  xlab("Fecha") +
+  ggtitle("Retornos Porcentuales Diarios de Bitcoin (BTC/USD)") +
+  theme_ipsum() +
+  scale_color_manual(values = c("Retorno % Diario" = "#1f77b4")) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black")  # Línea base en 0%
+
+
+p_retornos <- ggplotly(p_retornos)
+
+p_retornos
+
+```
+
+**12. Grafico heatmap de retornos diarios**
+
+```{r}
+
+# Asegurarnos que existe retorno_pct
+tc_df <- tc_df %>%
+  mutate(
+    retorno_pct = (BTC.USD.Close / lag(BTC.USD.Close) - 1) * 100
+  )
+
+# Agregar variables de día, mes y año
+tc_df <- tc_df %>%
+  mutate(
+    year = year(date),
+    month = month(date, label = TRUE),
+    day = day(date)
+  )
+
+# Crear gráfico tipo "heatmap" para retornos diarios
+p <- ggplot(tc_df, aes(x = day, y = month, fill = retorno_pct)) +
+  geom_tile(color = "white", size = 0.1) +
+  scale_fill_viridis(name = "Retorno Diario (%)", option = "C", na.value = "grey90") +
+  facet_wrap(~ year, ncol = 1) +
+  scale_x_continuous(breaks = c(1,10,20,31)) +
+  theme_minimal(base_size = 8) +
+  labs(title = "Retornos diarios de Bitcoin (BTC/USD) por día y mes",
+       x = "Día del mes",
+       y = "Mes") +
+  theme(legend.position = "bottom",
+        plot.title = element_text(size = 14),
+        axis.text.y = element_text(size = 6),
+        axis.text.x = element_text(size = 7),
+        strip.background = element_rect(colour = "white"),
+        plot.title.position = "plot",
+        legend.title = element_text(size = 8),
+        legend.text = element_text(size = 6)) +
+  removeGrid()
+
+p
+
+```
+
+
+
+
+
+

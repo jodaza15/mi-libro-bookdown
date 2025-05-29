@@ -31,7 +31,7 @@
   
   
 
-<link rel="next" href="primer-capítulo.html"/>
+<link rel="next" href="análisis-descriptivo.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,6 +52,14 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 
@@ -72,8 +80,139 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
-<li class="chapter" data-level="2" data-path="primer-capítulo.html"><a href="primer-capítulo.html"><i class="fa fa-check"></i><b>2</b> Primer capítulo</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introdución</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#justificación."><i class="fa fa-check"></i><b>1.1</b> Justificación.</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#fuente-de-información."><i class="fa fa-check"></i><b>1.2</b> Fuente de información.</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="análisis-descriptivo.html"><a href="análisis-descriptivo.html"><i class="fa fa-check"></i><b>2</b> Análisis Descriptivo</a></li>
+<li class="chapter" data-level="3" data-path="modelado.html"><a href="modelado.html"><i class="fa fa-check"></i><b>3</b> MODELADO</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="modelado.html"><a href="modelado.html#modelo-de-holt-winters"><i class="fa fa-check"></i><b>3.1</b> Modelo de Holt Winters</a></li>
+<li class="chapter" data-level="3.2" data-path="modelado.html"><a href="modelado.html#installing-package-into-cloudlibx86_64-pc-linux-gnu-library4.4"><i class="fa fa-check"></i><b>3.2</b> Installing package into ‘/cloud/lib/x86_64-pc-linux-gnu-library/4.4’</a></li>
+<li class="chapter" data-level="3.3" data-path="modelado.html"><a href="modelado.html#as-lib-is-unspecified"><i class="fa fa-check"></i><b>3.3</b> (as ‘lib’ is unspecified)</a></li>
+<li class="chapter" data-level="3.4" data-path="modelado.html"><a href="modelado.html#loading-required-package-xts"><i class="fa fa-check"></i><b>3.4</b> Loading required package: xts</a></li>
+<li class="chapter" data-level="3.5" data-path="modelado.html"><a href="modelado.html#loading-required-package-zoo"><i class="fa fa-check"></i><b>3.5</b> Loading required package: zoo</a></li>
+<li class="chapter" data-level="3.6" data-path="modelado.html"><a href="modelado.html#section"><i class="fa fa-check"></i><b>3.6</b> </a></li>
+<li class="chapter" data-level="3.7" data-path="modelado.html"><a href="modelado.html#attaching-package-zoo"><i class="fa fa-check"></i><b>3.7</b> Attaching package: ‘zoo’</a></li>
+<li class="chapter" data-level="3.8" data-path="modelado.html"><a href="modelado.html#the-following-objects-are-masked-from-packagebase"><i class="fa fa-check"></i><b>3.8</b> The following objects are masked from ‘package:base’:</a></li>
+<li class="chapter" data-level="3.9" data-path="modelado.html"><a href="modelado.html#section-1"><i class="fa fa-check"></i><b>3.9</b> </a></li>
+<li class="chapter" data-level="3.10" data-path="modelado.html"><a href="modelado.html#as.date-as.date.numeric"><i class="fa fa-check"></i><b>3.10</b> as.Date, as.Date.numeric</a></li>
+<li class="chapter" data-level="3.11" data-path="modelado.html"><a href="modelado.html#loading-required-package-ttr"><i class="fa fa-check"></i><b>3.11</b> Loading required package: TTR</a></li>
+<li class="chapter" data-level="3.12" data-path="modelado.html"><a href="modelado.html#registered-s3-method-overwritten-by-quantmod"><i class="fa fa-check"></i><b>3.12</b> Registered S3 method overwritten by ‘quantmod’:</a></li>
+<li class="chapter" data-level="3.13" data-path="modelado.html"><a href="modelado.html#method-from"><i class="fa fa-check"></i><b>3.13</b> method from</a></li>
+<li class="chapter" data-level="3.14" data-path="modelado.html"><a href="modelado.html#as.zoo.data.frame-zoo"><i class="fa fa-check"></i><b>3.14</b> as.zoo.data.frame zoo</a></li>
+<li class="chapter" data-level="3.15" data-path="modelado.html"><a href="modelado.html#btc-usd"><i class="fa fa-check"></i><b>3.15</b> [1] “BTC-USD”</a></li>
+<li class="chapter" data-level="3.16" data-path="modelado.html"><a href="modelado.html#btc-usd.open-btc-usd.high-btc-usd.low-btc-usd.close-btc-usd.volume"><i class="fa fa-check"></i><b>3.16</b> BTC-USD.Open BTC-USD.High BTC-USD.Low BTC-USD.Close BTC-USD.Volume</a></li>
+<li class="chapter" data-level="3.17" data-path="modelado.html"><a href="modelado.html#section-2"><i class="fa fa-check"></i><b>3.17</b> 2025-04-22 87521.88 93817.38 87084.53 93441.89 55899038456</a></li>
+<li class="chapter" data-level="3.18" data-path="modelado.html"><a href="modelado.html#section-3"><i class="fa fa-check"></i><b>3.18</b> 2025-04-23 93427.59 94535.73 91962.96 93699.11 41719568821</a></li>
+<li class="chapter" data-level="3.19" data-path="modelado.html"><a href="modelado.html#section-4"><i class="fa fa-check"></i><b>3.19</b> 2025-04-24 93692.40 94016.20 91696.71 93943.80 31483175315</a></li>
+<li class="chapter" data-level="3.20" data-path="modelado.html"><a href="modelado.html#section-5"><i class="fa fa-check"></i><b>3.20</b> 2025-04-25 93954.25 95768.39 92898.59 94720.50 40915232364</a></li>
+<li class="chapter" data-level="3.21" data-path="modelado.html"><a href="modelado.html#section-6"><i class="fa fa-check"></i><b>3.21</b> 2025-04-26 94714.65 95251.36 93927.25 94646.93 17612825123</a></li>
+<li class="chapter" data-level="3.22" data-path="modelado.html"><a href="modelado.html#section-7"><i class="fa fa-check"></i><b>3.22</b> 2025-04-27 94660.91 95301.20 93665.40 93754.84 18090367764</a></li>
+<li class="chapter" data-level="3.23" data-path="modelado.html"><a href="modelado.html#btc-usd.adjusted"><i class="fa fa-check"></i><b>3.23</b> BTC-USD.Adjusted</a></li>
+<li class="chapter" data-level="3.24" data-path="modelado.html"><a href="modelado.html#section-8"><i class="fa fa-check"></i><b>3.24</b> 2025-04-22 93441.89</a></li>
+<li class="chapter" data-level="3.25" data-path="modelado.html"><a href="modelado.html#section-9"><i class="fa fa-check"></i><b>3.25</b> 2025-04-23 93699.11</a></li>
+<li class="chapter" data-level="3.26" data-path="modelado.html"><a href="modelado.html#section-10"><i class="fa fa-check"></i><b>3.26</b> 2025-04-24 93943.80</a></li>
+<li class="chapter" data-level="3.27" data-path="modelado.html"><a href="modelado.html#section-11"><i class="fa fa-check"></i><b>3.27</b> 2025-04-25 94720.50</a></li>
+<li class="chapter" data-level="3.28" data-path="modelado.html"><a href="modelado.html#section-12"><i class="fa fa-check"></i><b>3.28</b> 2025-04-26 94646.93</a></li>
+<li class="chapter" data-level="3.29" data-path="modelado.html"><a href="modelado.html#section-13"><i class="fa fa-check"></i><b>3.29</b> 2025-04-27 93754.84</a></li>
+<li class="chapter" data-level="3.30" data-path="modelado.html"><a href="modelado.html#length-class-mode"><i class="fa fa-check"></i><b>3.30</b> Length Class Mode</a></li>
+<li class="chapter" data-level="3.31" data-path="modelado.html"><a href="modelado.html#fitted-9236-mts-numeric"><i class="fa fa-check"></i><b>3.31</b> fitted 9236 mts numeric</a></li>
+<li class="chapter" data-level="3.32" data-path="modelado.html"><a href="modelado.html#x-2674-ts-numeric"><i class="fa fa-check"></i><b>3.32</b> x 2674 ts numeric</a></li>
+<li class="chapter" data-level="3.33" data-path="modelado.html"><a href="modelado.html#alpha-1--none--numeric"><i class="fa fa-check"></i><b>3.33</b> alpha 1 -none- numeric</a></li>
+<li class="chapter" data-level="3.34" data-path="modelado.html"><a href="modelado.html#beta-1--none--numeric"><i class="fa fa-check"></i><b>3.34</b> beta 1 -none- numeric</a></li>
+<li class="chapter" data-level="3.35" data-path="modelado.html"><a href="modelado.html#gamma-1--none--numeric"><i class="fa fa-check"></i><b>3.35</b> gamma 1 -none- numeric</a></li>
+<li class="chapter" data-level="3.36" data-path="modelado.html"><a href="modelado.html#coefficients-367--none--numeric"><i class="fa fa-check"></i><b>3.36</b> coefficients 367 -none- numeric</a></li>
+<li class="chapter" data-level="3.37" data-path="modelado.html"><a href="modelado.html#seasonal-1--none--character"><i class="fa fa-check"></i><b>3.37</b> seasonal 1 -none- character</a></li>
+<li class="chapter" data-level="3.38" data-path="modelado.html"><a href="modelado.html#sse-1--none--numeric"><i class="fa fa-check"></i><b>3.38</b> SSE 1 -none- numeric</a></li>
+<li class="chapter" data-level="3.39" data-path="modelado.html"><a href="modelado.html#call-2--none--call"><i class="fa fa-check"></i><b>3.39</b> call 2 -none- call</a></li>
+<li class="chapter" data-level="3.40" data-path="modelado.html"><a href="modelado.html#warning-using-size-aesthetic-for-lines-was-deprecated-in-ggplot2-3.4.0."><i class="fa fa-check"></i><b>3.40</b> Warning: Using <code>size</code> aesthetic for lines was deprecated in ggplot2 3.4.0.</a></li>
+<li class="chapter" data-level="3.41" data-path="modelado.html"><a href="modelado.html#ℹ-please-use-linewidth-instead."><i class="fa fa-check"></i><b>3.41</b> ℹ Please use <code>linewidth</code> instead.</a></li>
+<li class="chapter" data-level="3.42" data-path="modelado.html"><a href="modelado.html#this-warning-is-displayed-once-every-8-hours."><i class="fa fa-check"></i><b>3.42</b> This warning is displayed once every 8 hours.</a></li>
+<li class="chapter" data-level="3.43" data-path="modelado.html"><a href="modelado.html#call-lifecyclelast_lifecycle_warnings-to-see-where-this-warning-was"><i class="fa fa-check"></i><b>3.43</b> Call <code>lifecycle::last_lifecycle_warnings()</code> to see where this warning was</a></li>
+<li class="chapter" data-level="3.44" data-path="modelado.html"><a href="modelado.html#generated."><i class="fa fa-check"></i><b>3.44</b> generated.</a></li>
+<li class="chapter" data-level="3.45" data-path="modelado.html"><a href="modelado.html#dont-know-how-to-automatically-pick-scale-for-object-of-type-.-defaulting"><i class="fa fa-check"></i><b>3.45</b> Don’t know how to automatically pick scale for object of type <ts>. Defaulting</a></li>
+<li class="chapter" data-level="3.46" data-path="modelado.html"><a href="modelado.html#to-continuous."><i class="fa fa-check"></i><b>3.46</b> to continuous.</a></li>
+<li class="chapter" data-level="3.47" data-path="modelado.html"><a href="modelado.html#metodología-box-jenkins"><i class="fa fa-check"></i><b>3.47</b> Metodología Box-Jenkins</a></li>
+<li class="chapter" data-level="3.48" data-path="modelado.html"><a href="modelado.html#modelo-arima"><i class="fa fa-check"></i><b>3.48</b> Modelo Arima</a>
+<ul>
+<li class="chapter" data-level="3.48.1" data-path="modelado.html"><a href="modelado.html#transformación-serie-de-tiempo-a-estacionaria."><i class="fa fa-check"></i><b>3.48.1</b> Transformación serie de tiempo a estacionaria.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.49" data-path="modelado.html"><a href="modelado.html#section-14"><i class="fa fa-check"></i><b>3.49</b> </a></li>
+<li class="chapter" data-level="3.50" data-path="modelado.html"><a href="modelado.html#augmented-dickey-fuller-test"><i class="fa fa-check"></i><b>3.50</b> Augmented Dickey-Fuller Test</a></li>
+<li class="chapter" data-level="3.51" data-path="modelado.html"><a href="modelado.html#section-15"><i class="fa fa-check"></i><b>3.51</b> </a></li>
+<li class="chapter" data-level="3.52" data-path="modelado.html"><a href="modelado.html#data-btc_ts"><i class="fa fa-check"></i><b>3.52</b> data: btc_ts</a></li>
+<li class="chapter" data-level="3.53" data-path="modelado.html"><a href="modelado.html#dickey-fuller--1.9006-lag-order-13-p-value-0.6204"><i class="fa fa-check"></i><b>3.53</b> Dickey-Fuller = -1.9006, Lag order = 13, p-value = 0.6204</a></li>
+<li class="chapter" data-level="3.54" data-path="modelado.html"><a href="modelado.html#alternative-hypothesis-stationary"><i class="fa fa-check"></i><b>3.54</b> alternative hypothesis: stationary</a></li>
+<li class="chapter" data-level="3.55" data-path="modelado.html"><a href="modelado.html#section-16"><i class="fa fa-check"></i><b>3.55</b> [1] 1</a></li>
+<li class="chapter" data-level="3.56" data-path="modelado.html"><a href="modelado.html#section-17"><i class="fa fa-check"></i><b>3.56</b> [1] 1</a></li>
+<li class="chapter" data-level="3.57" data-path="modelado.html"><a href="modelado.html#warning-in-adf.testdif.btc.ts-alternative-cstationary-explosive"><i class="fa fa-check"></i><b>3.57</b> Warning in adf.test(dif.btc.ts, , alternative = c(“stationary”, “explosive”)):</a></li>
+<li class="chapter" data-level="3.58" data-path="modelado.html"><a href="modelado.html#p-value-smaller-than-printed-p-value"><i class="fa fa-check"></i><b>3.58</b> p-value smaller than printed p-value</a></li>
+<li class="chapter" data-level="3.59" data-path="modelado.html"><a href="modelado.html#section-18"><i class="fa fa-check"></i><b>3.59</b> </a></li>
+<li class="chapter" data-level="3.60" data-path="modelado.html"><a href="modelado.html#augmented-dickey-fuller-test-1"><i class="fa fa-check"></i><b>3.60</b> Augmented Dickey-Fuller Test</a></li>
+<li class="chapter" data-level="3.61" data-path="modelado.html"><a href="modelado.html#section-19"><i class="fa fa-check"></i><b>3.61</b> </a></li>
+<li class="chapter" data-level="3.62" data-path="modelado.html"><a href="modelado.html#data-dif.btc.ts"><i class="fa fa-check"></i><b>3.62</b> data: dif.btc.ts</a></li>
+<li class="chapter" data-level="3.63" data-path="modelado.html"><a href="modelado.html#dickey-fuller--12.708-lag-order-13-p-value-0.01"><i class="fa fa-check"></i><b>3.63</b> Dickey-Fuller = -12.708, Lag order = 13, p-value = 0.01</a></li>
+<li class="chapter" data-level="3.64" data-path="modelado.html"><a href="modelado.html#alternative-hypothesis-stationary-1"><i class="fa fa-check"></i><b>3.64</b> alternative hypothesis: stationary</a>
+<ul>
+<li class="chapter" data-level="3.64.1" data-path="modelado.html"><a href="modelado.html#funciones-de-acf-y-pact"><i class="fa fa-check"></i><b>3.64.1</b> Funciones de ACF y PACT</a></li>
+<li class="chapter" data-level="3.64.2" data-path="modelado.html"><a href="modelado.html#modelado-autoarima"><i class="fa fa-check"></i><b>3.64.2</b> Modelado Autoarima</a></li>
+</ul></li>
+<li class="chapter" data-level="3.65" data-path="modelado.html"><a href="modelado.html#series-dif.btc.ts"><i class="fa fa-check"></i><b>3.65</b> Series: dif.btc.ts</a></li>
+<li class="chapter" data-level="3.66" data-path="modelado.html"><a href="modelado.html#arima100-with-zero-mean"><i class="fa fa-check"></i><b>3.66</b> ARIMA(1,0,0) with zero mean</a></li>
+<li class="chapter" data-level="3.67" data-path="modelado.html"><a href="modelado.html#section-20"><i class="fa fa-check"></i><b>3.67</b> </a></li>
+<li class="chapter" data-level="3.68" data-path="modelado.html"><a href="modelado.html#coefficients"><i class="fa fa-check"></i><b>3.68</b> Coefficients:</a></li>
+<li class="chapter" data-level="3.69" data-path="modelado.html"><a href="modelado.html#ar1"><i class="fa fa-check"></i><b>3.69</b> ar1</a></li>
+<li class="chapter" data-level="3.70" data-path="modelado.html"><a href="modelado.html#section-21"><i class="fa fa-check"></i><b>3.70</b> -0.0620</a></li>
+<li class="chapter" data-level="3.71" data-path="modelado.html"><a href="modelado.html#s.e.-0.0193"><i class="fa fa-check"></i><b>3.71</b> s.e. 0.0193</a></li>
+<li class="chapter" data-level="3.72" data-path="modelado.html"><a href="modelado.html#section-22"><i class="fa fa-check"></i><b>3.72</b> </a></li>
+<li class="chapter" data-level="3.73" data-path="modelado.html"><a href="modelado.html#sigma2-1491145-log-likelihood--22790.75"><i class="fa fa-check"></i><b>3.73</b> sigma^2 = 1491145: log likelihood = -22790.75</a></li>
+<li class="chapter" data-level="3.74" data-path="modelado.html"><a href="modelado.html#aic45585.49-aicc45585.5-bic45597.27"><i class="fa fa-check"></i><b>3.74</b> AIC=45585.49 AICc=45585.5 BIC=45597.27</a></li>
+<li class="chapter" data-level="3.75" data-path="modelado.html"><a href="modelado.html#successfully-loaded-changepoint-package-version-2.3"><i class="fa fa-check"></i><b>3.75</b> Successfully loaded changepoint package version 2.3</a></li>
+<li class="chapter" data-level="3.76" data-path="modelado.html"><a href="modelado.html#warning-from-v.2.3-the-default-method-in-cpt.-functions-has-changed-from-amoc-to-pelt."><i class="fa fa-check"></i><b>3.76</b> WARNING: From v.2.3 the default method in cpt.* functions has changed from AMOC to PELT.</a></li>
+<li class="chapter" data-level="3.77" data-path="modelado.html"><a href="modelado.html#see-news-for-details-of-all-changes."><i class="fa fa-check"></i><b>3.77</b> See NEWS for details of all changes.</a></li>
+<li class="chapter" data-level="3.78" data-path="modelado.html"><a href="modelado.html#section-23"><i class="fa fa-check"></i><b>3.78</b> [1] 2654</a></li>
+<li class="chapter" data-level="3.79" data-path="modelado.html"><a href="modelado.html#point-forecast-lo-80-hi-80-lo-95-hi-95"><i class="fa fa-check"></i><b>3.79</b> Point Forecast Lo 80 Hi 80 Lo 95 Hi 95</a></li>
+<li class="chapter" data-level="3.80" data-path="modelado.html"><a href="modelado.html#section-24"><i class="fa fa-check"></i><b>3.80</b> 2025.3260 -382.83972 -1792.1618 1026.4824 -2538.212 1772.532</a></li>
+<li class="chapter" data-level="3.81" data-path="modelado.html"><a href="modelado.html#section-25"><i class="fa fa-check"></i><b>3.81</b> 2025.3288 652.66945 -756.6527 2061.9916 -1502.703 2808.042</a></li>
+<li class="chapter" data-level="3.82" data-path="modelado.html"><a href="modelado.html#section-26"><i class="fa fa-check"></i><b>3.82</b> 2025.3315 -672.31585 -2081.6380 737.0063 -2827.688 1483.056</a></li>
+<li class="chapter" data-level="3.83" data-path="modelado.html"><a href="modelado.html#section-27"><i class="fa fa-check"></i><b>3.83</b> 2025.3342 -491.49158 -1900.8137 917.8306 -2646.864 1663.881</a></li>
+<li class="chapter" data-level="3.84" data-path="modelado.html"><a href="modelado.html#section-28"><i class="fa fa-check"></i><b>3.84</b> 2025.3370 167.17408 -1242.1481 1576.4962 -1988.198 2322.546</a></li>
+<li class="chapter" data-level="3.85" data-path="modelado.html"><a href="modelado.html#section-29"><i class="fa fa-check"></i><b>3.85</b> 2025.3397 425.05245 -984.2697 1834.3746 -1730.320 2580.425</a></li>
+<li class="chapter" data-level="3.86" data-path="modelado.html"><a href="modelado.html#section-30"><i class="fa fa-check"></i><b>3.86</b> 2025.3425 420.51955 -988.8026 1829.8417 -1734.853 2575.892</a></li>
+<li class="chapter" data-level="3.87" data-path="modelado.html"><a href="modelado.html#section-31"><i class="fa fa-check"></i><b>3.87</b> 2025.3452 -343.72783 -1753.0500 1065.5943 -2499.100 1811.644</a></li>
+<li class="chapter" data-level="3.88" data-path="modelado.html"><a href="modelado.html#section-32"><i class="fa fa-check"></i><b>3.88</b> 2025.3479 -109.59213 -1518.9143 1299.7301 -2264.964 2045.780</a></li>
+<li class="chapter" data-level="3.89" data-path="modelado.html"><a href="modelado.html#section-33"><i class="fa fa-check"></i><b>3.89</b> 2025.3507 -342.08749 -1751.4097 1067.2347 -2497.460 1813.285</a></li>
+<li class="chapter" data-level="3.90" data-path="modelado.html"><a href="modelado.html#section-34"><i class="fa fa-check"></i><b>3.90</b> 2025.3534 -1066.13994 -2475.4621 343.1823 -3221.512 1089.232</a></li>
+<li class="chapter" data-level="3.91" data-path="modelado.html"><a href="modelado.html#section-35"><i class="fa fa-check"></i><b>3.91</b> 2025.3562 27.44961 -1381.8726 1436.7718 -2127.923 2182.822</a></li>
+<li class="chapter" data-level="3.92" data-path="modelado.html"><a href="modelado.html#regresión-de-una-serie-de-tiempo-y-algoritmo-facebooks-prophet"><i class="fa fa-check"></i><b>3.92</b> Regresión de una serie de tiempo y Algoritmo Facebook´s Prophet</a>
+<ul>
+<li class="chapter" data-level="3.92.1" data-path="modelado.html"><a href="modelado.html#regresión-de-una-serie"><i class="fa fa-check"></i><b>3.92.1</b> Regresión de una serie</a></li>
+<li class="chapter" data-level="3.92.2" data-path="modelado.html"><a href="modelado.html#algoritmo-facebooks-prophet"><i class="fa fa-check"></i><b>3.92.2</b> Algoritmo Facebook´s Prophet</a></li>
+</ul></li>
+<li class="chapter" data-level="3.93" data-path="modelado.html"><a href="modelado.html#loading-required-package-rcpp"><i class="fa fa-check"></i><b>3.93</b> Loading required package: Rcpp</a></li>
+<li class="chapter" data-level="3.94" data-path="modelado.html"><a href="modelado.html#loading-required-package-rlang"><i class="fa fa-check"></i><b>3.94</b> Loading required package: rlang</a></li>
+<li class="chapter" data-level="3.95" data-path="modelado.html"><a href="modelado.html#disabling-daily-seasonality.-run-prophet-with-daily.seasonalitytrue-to-override-this."><i class="fa fa-check"></i><b>3.95</b> Disabling daily seasonality. Run prophet with daily.seasonality=TRUE to override this.</a></li>
+<li class="chapter" data-level="3.96" data-path="modelado.html"><a href="modelado.html#section-36"><i class="fa fa-check"></i><b>3.96</b> </a></li>
+<li class="chapter" data-level="3.97" data-path="modelado.html"><a href="modelado.html#shapiro-wilk-normality-test"><i class="fa fa-check"></i><b>3.97</b> Shapiro-Wilk normality test</a></li>
+<li class="chapter" data-level="3.98" data-path="modelado.html"><a href="modelado.html#section-37"><i class="fa fa-check"></i><b>3.98</b> </a></li>
+<li class="chapter" data-level="3.99" data-path="modelado.html"><a href="modelado.html#data-residuos"><i class="fa fa-check"></i><b>3.99</b> data: residuos</a></li>
+<li class="chapter" data-level="3.100" data-path="modelado.html"><a href="modelado.html#w-0.97799-p-value-2.2e-16"><i class="fa fa-check"></i><b>3.100</b> W = 0.97799, p-value &lt; 2.2e-16</a></li>
+<li class="chapter" data-level="3.101" data-path="modelado.html"><a href="modelado.html#making-83-forecasts-with-cutoffs-between-2018-07-03-and-2025-03-28"><i class="fa fa-check"></i><b>3.101</b> Making 83 forecasts with cutoffs between 2018-07-03 and 2025-03-28</a></li>
+<li class="chapter" data-level="3.102" data-path="modelado.html"><a href="modelado.html#warning-in-cross_validationmodelo_pr-initial-180-period-30-horizon"><i class="fa fa-check"></i><b>3.102</b> Warning in cross_validation(modelo_pr, initial = 180, period = 30, horizon =</a></li>
+<li class="chapter" data-level="3.103" data-path="modelado.html"><a href="modelado.html#seasonality-has-period-of-365.25-days-which-is-larger-than-initial"><i class="fa fa-check"></i><b>3.103</b> 30, : Seasonality has period of 365.25 days which is larger than initial</a></li>
+<li class="chapter" data-level="3.104" data-path="modelado.html"><a href="modelado.html#window.-consider-increasing-initial."><i class="fa fa-check"></i><b>3.104</b> window. Consider increasing initial.</a></li>
+<li class="chapter" data-level="3.105" data-path="modelado.html"><a href="modelado.html#warning-in-.localobject-non-zero-return-code-in-optimizing"><i class="fa fa-check"></i><b>3.105</b> Warning in .local(object, …): non-zero return code in optimizing</a></li>
+<li class="chapter" data-level="3.106" data-path="modelado.html"><a href="modelado.html#optimization-terminated-abnormally.-falling-back-to-newton-optimizer."><i class="fa fa-check"></i><b>3.106</b> Optimization terminated abnormally. Falling back to Newton optimizer.</a></li>
+<li class="chapter" data-level="3.107" data-path="modelado.html"><a href="modelado.html#horizon-mse-rmse-mae-mape-mdape-smape-coverage"><i class="fa fa-check"></i><b>3.107</b> horizon mse rmse mae mape mdape smape coverage</a></li>
+<li class="chapter" data-level="3.108" data-path="modelado.html"><a href="modelado.html#days-57994507-7615.412-5233.187-0.1679582-0.1274214-0.1706609-0.4337349"><i class="fa fa-check"></i><b>3.108</b> 1 3 days 57994507 7615.412 5233.187 0.1679582 0.1274214 0.1706609 0.4337349</a></li>
+<li class="chapter" data-level="3.109" data-path="modelado.html"><a href="modelado.html#days-60848792-7800.564-5395.434-0.1760910-0.1285579-0.1797146-0.4176707"><i class="fa fa-check"></i><b>3.109</b> 2 4 days 60848792 7800.564 5395.434 0.1760910 0.1285579 0.1797146 0.4176707</a></li>
+<li class="chapter" data-level="3.110" data-path="modelado.html"><a href="modelado.html#days-67162563-8195.277-5674.725-0.1879776-0.1426778-0.1928939-0.4096386"><i class="fa fa-check"></i><b>3.110</b> 3 5 days 67162563 8195.277 5674.725 0.1879776 0.1426778 0.1928939 0.4096386</a></li>
+<li class="chapter" data-level="3.111" data-path="modelado.html"><a href="modelado.html#days-70884858-8419.315-5867.574-0.1957333-0.1514895-0.2045129-0.4096386"><i class="fa fa-check"></i><b>3.111</b> 4 6 days 70884858 8419.315 5867.574 0.1957333 0.1514895 0.2045129 0.4096386</a></li>
+<li class="chapter" data-level="3.112" data-path="modelado.html"><a href="modelado.html#days-72944942-8540.781-6008.401-0.2014874-0.1540398-0.2131053-0.4096386"><i class="fa fa-check"></i><b>3.112</b> 5 7 days 72944942 8540.781 6008.401 0.2014874 0.1540398 0.2131053 0.4096386</a></li>
+<li class="chapter" data-level="3.113" data-path="modelado.html"><a href="modelado.html#days-73639451-8581.343-5998.679-0.2047503-0.1514895-0.2174448-0.4096386"><i class="fa fa-check"></i><b>3.113</b> 6 8 days 73639451 8581.343 5998.679 0.2047503 0.1514895 0.2174448 0.4096386</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -96,10 +235,25 @@
 <p class="author"><em>Tu nombre</em></p>
 <p class="date"><em>2025-05-29</em></p>
 </div>
-<div id="introducción" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">1</span> Introducción<a href="index.html#introducción" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Bienvenido a mi libro gracias.</p>
+<div id="introdución" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> Introdución<a href="index.html#introdución" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Este es el primer capítulo de tu libro .</p>
+<div id="justificación." class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Justificación.<a href="index.html#justificación." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dentro de los mercados financieros donde la volatilidad es parte de su naturaleza, el mercado de las criptomonedas sobresale por ser altamente voluble con alta incertidumbre en función de sus proyecciones y predicciones. Esto se da principalmente porque es un mercado no regulado que opera las 24 horas del día en los 7 días de la semana.</p>
+<p>Según TradingView (s.f.), la dominancia de Bitcoin en el mercado de criptomonedas es de más del 50%, lo que lo hace el dominador del mercado. Es por ello, el interés de realizar el estudio de series de tiempo a esta criptomoneda desde un enfoque univariado.</p>
+<p>Para este estudio se propone realizar análisis de serie para:</p>
+<ol style="list-style-type: decimal">
+<li>Periodo diario: Desde 01 de enero de 2022 al 27 de abril de 2025.</li>
+<li>Se evaluará diferentes modelos estadísticos y de machine learning en busca del modelo que mejor ajuste al comportamiento del mercado.</li>
+</ol>
+</div>
+<div id="fuente-de-información." class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Fuente de información.<a href="index.html#fuente-de-información." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para el propósito del presente estudio se conectará directamente a la fuente de datos de yahoo binance por medio del paquete ZOO de r. tanto el paquete como la información de yahoo finance es libre y no tiene restricciones para su uso.</p>
+<p>el periodo ha evaluar es del 1 de enero de 2018 al 27 de abril de 2025.</p>
 
+</div>
 </div>
             </section>
 
@@ -107,7 +261,7 @@
         </div>
       </div>
 
-<a href="primer-capítulo.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="análisis-descriptivo.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,0 +1,351 @@
+# MODELADO
+
+## Modelo de Holt Winters
+
+La metodología de Holt-Winters, también conocida como suavizamiento exponencial triple, es una técnica ampliamente utilizada en el análisis de series temporales para realizar pronósticos que presentan patrones de tendencia y estacionalidad. Esta metodología extiende el suavizamiento exponencial simple incorporando componentes adicionales que permiten capturar dinámicamente la evolución de la tendencia y la estacionalidad a lo largo del tiempo. Holt-Winters se presenta en dos variantes principales: aditiva y multiplicativa, dependiendo de la naturaleza del componente estacional. Es particularmente útil en contextos donde los datos muestran fluctuaciones regulares en intervalos específicos (como días, semanas o meses), y permite generar predicciones a corto y mediano plazo con un alto grado de precisión. Su implementación práctica ha demostrado ser eficaz en áreas como la economía, la meteorología, la gestión de inventarios y el consumo de recursos, como agua o energía(Hurtado Garzón 2013).
+
+Teniendo en cuenta la fase de preprocesamiento, se observa que la serie transformada por el logaritmo (es decir no se uso la serie diferenciada que es estacionaria) presenta una estacionalidad visible, así como una tendencia definida, caracterizada por un comportamiento que decrece, se estabiliza y vuelve a decrecer. Esto indica que cumple con los criterios visuales necesarios para aplicar la metodología en cuestión. Además, el patrón estacional parece ser claro y repetitivo, lo cual sugiere la presencia de una estacionalidad aditiva. No obstante, al implementar el modelo, es importante considerar los residuos, ya que se identifican picos que podrían estar asociados a eventos atípicos o posibles errores de medición.
+
+Cabe resaltar que esta metodología no requiere que la serie sea estacionaria. En cambio, se enfoca en identificar una tendencia y una estacionalidad bien definidas, ya que el pronóstico se basa en estos dos componentes junto con la media de la serie.
+
+A continuación, se procede a aplicar el método de Holt Winter a los precios de cierre diarios del Bitcoin, dentro de la aplicación de este modelo se asume una estacionalidad aditiva.
+```{r}
+install.packages("quantmod")
+
+```
+```{r}
+library(quantmod)
+library(zoo)
+library(forecast)
+library(ggplot2)
+```
+
+ ```{r cargar-librerias, message=FALSE, warning=FALSE} library(quantmod) # <- Esta línea es clave library(zoo) # (si vas a usar as.zoo) ``
+
+```{r}
+# Descargar datos de Yahoo Finance
+getSymbols("BTC-USD",
+           src = "yahoo",
+           from = "2018-01-01",
+           to = "2025-04-27",#Sys.Date(),
+           periodicity = "daily")
+
+# Convertir el objeto descargado a 'zoo'
+btc_zoo <- as.zoo(`BTC-USD`)
+
+# Ver las primeras filas
+tail(btc_zoo)
+```
+
+```{r}
+library(zoo)
+btc_close <- as.zoo(btc_zoo$`BTC-USD.Close`)
+btc_ts <- ts(coredata(btc_close), frequency = 365, start = c(2018, 1))
+```
+
+a continuación se aplica el modelo.
+```{r}
+modelo_hw <- HoltWinters(btc_ts)
+```
+
+
+```{r}
+summary(modelo_hw)
+```
+Pronostico de 30 días.
+
+```{r}
+# Pronóstico a futuro (30 días)
+forecast_hw <- forecast(modelo_hw, h = 30)
+autoplot(forecast_hw) +
+  ggtitle("Pronóstico de BTC/USD con Holt-Winters") +
+  ylab("Precio de Cierre") +
+  xlab("Fecha")
+```
+
+Pronóstico para 110 días.
+```{r}
+ultimos_10 <- tail(btc_ts, 10)
+
+# Pronóstico 
+forecast_hw <- forecast(modelo_hw, h = 110)
+proyeccion <- forecast_hw$mean
+
+serie_completa <- ts(c(ultimos_10, proyeccion), start = time(ultimos_10)[1], frequency = frequency(btc_ts))
+
+
+df_proyeccion <- data.frame(
+  Fecha = time(serie_completa),
+  Precio = as.numeric(serie_completa),
+  Tipo = c(rep("Real", length(ultimos_10)), rep("Pronóstico", length(proyeccion)))
+)
+
+# Grafico
+ggplot(df_proyeccion, aes(x = Fecha, y = Precio, color = Tipo)) +
+  geom_line(size = 1.2) +
+  ggtitle("BTC/USD: Últimos 10 días + Pronóstico Holt-Winters") +
+  ylab("Precio de cierre") +
+  xlab("Fecha") +
+  scale_color_manual(values = c("Real" = "black", "Pronóstico" = "blue")) +
+  theme_minimal()
+```
+
+
+## Metodología Box-Jenkins
+La metodología Box-Jenkins es un enfoque sistemático que permite identificar, estimar y validar modelos ARMA o ARIMA que se ajusten adecuadamente a una serie de tiempo. Esta metodología consta de cuatro etapas principales:
+
+Identificación del modelo En esta etapa se analiza si la serie es estacionaria. Si no lo es, se aplican transformaciones (como la diferenciación) para lograr la estacionariedad. A continuación, se identifican los posibles valores de los parámetros del modelo ARIMA(p, d, q), con base en el análisis gráfico y estadístico.
+Actividades comunes:
+
+Análisis gráfico: para detectar tendencia, estacionalidad o cambios en la media.
+
+Prueba de estacionariedad: como la prueba de Dickey-Fuller, que evalúa si la serie tiene raíz unitaria.
+
+Diferenciación: si la serie no es estacionaria, se aplica una o más veces para lograr la estacionariedad y determinar el parámetro d.
+
+Revisión de ACF y PACF:
+
+ACF (autocorrelación): ayuda a identificar el orden q (media móvil).
+
+PACF (autocorrelación parcial): permite sugerir el orden p (autorregresivo).
+
+Estimación de parámetros Una vez identificado el modelo, se ajusta a los datos para estimar sus parámetros.
+
+Actividades:
+
+Estimar los coeficientes mediante métodos como máxima verosimilitud.
+
+Evaluar la significancia estadística de los parámetros.
+
+Comparar modelos alternativos utilizando criterios como:
+
+AIC (Criterio de Información de Akaike)
+
+BIC (Criterio de Información Bayesiano)
+
+RMSE (Raíz del error cuadrático medio)
+
+Verificación del modelo Se valida que los residuos del modelo se comporten como ruido blanco, es decir, que no presenten autocorrelación y tengan media cero y varianza constante.
+Actividades:
+
+Analizar los residuos en el tiempo.
+
+Revisar los gráficos de ACF y PACF de los residuos.
+
+Verificar la normalidad mediante histogramas o pruebas como Shapiro-Wilk.
+
+Verificar independencia mediante pruebas como Ljung-Box.
+
+Si los supuestos no se cumplen, se debe reconsiderar el modelo y repetir las etapas anteriores.
+
+Pronóstico Una vez validado el modelo, se procede a generar pronósticos a corto, mediano o largo plazo.
+Actividades:
+
+Generar predicciones con intervalos de confianza.
+
+Comparar los pronósticos con datos reales (si están disponibles).
+
+Evaluar la precisión del modelo predictivo.
+
+Cabe resaltar que actualmente se dispone de la librería forecast en R, la cual incluye la función auto.arima, que permite seleccionar automáticamente los parámetros del modelo ARIMA de forma eficiente. Este procedimiento se basa en criterios estadísticos como AIC o BIC para identificar la combinación óptima de parámetros (p,d,q).
+
+Gracias a esta automatización, se simplifican varios pasos tradicionales del proceso de modelado, como la inspección visual de los gráficos ACF y PACF, la identificación manual del grado de diferenciación d, y la evaluación de múltiples combinaciones de parámetros para encontrar el mejor modelo.
+
+Por tanto, en esta etapa nos enfocaremos únicamente en la validación de los supuestos del modelo sobre los residuos y en la evaluación del desempeño de los pronósticos (Hurtado Garzón 2013).
+
+## Modelo Arima
+
+Los modelos autorregresivos integrados de media móvil (ARIMA, por sus siglas en inglés: AutoRegressive Integrated Moving Average) combinan tres componentes:
+
+AR (Autorregresivo): la serie se explica por sus propios valores pasados.
+
+I (Integrado): se aplican diferenciaciones a la serie para hacerla estacionaria.
+
+MA (Media móvil): se modela el error como una combinación lineal de errores pasados.
+
+Un modelo ARIMA se denota como ARIMA(p, d, q), donde:
+
+p: número de términos autorregresivos (AR).
+
+d: número de diferenciaciones necesarias para hacer la serie estacionaria.
+
+q: número de términos de medias móviles (MA).
+
+Estos modelos permiten describir y pronosticar el comportamiento de una serie de tiempo a partir de sus valores y errores pasados (Hurtado Garzón 2013).
+
+
+###  Transformación serie de tiempo a estacionaria.
+
+```{r}
+library(tseries)
+adf.test(btc_ts,, alternative = c("stationary", "explosive"))
+```
+
+
+De acuerdo a la prueba Dickey Fuller se concluye que la serie de tiempo no es estacionaria dado que el Valor P esta por encima 0.05 , tal como se esperaba de acuerdo a su naturaleza de mercado financiero.
+
+Por lo tanto a continuación se procede a realizar la diferenciación de la serie de tiempo.
+
+```{r}
+
+ndiffs(btc_ts)
+## [1] 1
+#nos indica que 1 así que diferenciamos una vez y la llamamos dif.Indice.ts
+dif.btc.ts<-diff(btc_ts)
+#la graficamos
+plot(dif.btc.ts, main=" ", ylab="valor", col="deepskyblue", xlab="Años")
+title(main="DIF Precios diarios BTC")
+```
+Ahora se procede a confirmar nuevamente con la prueba Dickey Fuller que la serie diferenciada si sea estacionaria.
+
+```{r}
+adf.test(dif.btc.ts,, alternative = c("stationary", "explosive"))
+```
+De acuerdo al resultado de la prueba, se puede afirmar que la serie diferenciada es estacionaria
+
+### Funciones de ACF y PACT
+
+Continuando con la metodología Box-Jenkins, ahora se define y genera las funciones ACF y PACT
+
+En análisis de series de tiempo, la ACF (Función de Autocorrelación) y la PACF (Función de Autocorrelación Parcial) son herramientas visuales que ayudan a identificar la estructura de dependencia dentro de una serie temporal. La ACF muestra la correlación de una serie consigo misma a diferentes rezagos, mientras que la PACF controla la correlación de los rezagos anteriores al evaluar la correlación en un rezago específico. 
+
+ACF (Función de Autocorrelación)
+La ACF grafica la correlación entre una variable y sus valores rezagados en diferentes rezagos (diferencia de tiempo entre una observación y otra). 
+Ayuda a identificar patrones como estacionalidad, tendencias y persistencia en la serie. 
+
+Se utiliza para determinar el orden del modelo AR (Autorregresivo) y MA (Promedio Móvil). 
+
+PACF (Función de Autocorrelación Parcial)
+La PACF muestra la correlación entre una variable y sus valores rezagados, después de haber eliminado el efecto de los rezagos intermedios. 
+Ayuda a identificar el rezago exacto después del cual las autocorrelaciones cesan, lo cual es crucial para determinar el orden del modelo AR. 
+
+Se utiliza para identificar la presencia de patrones estacionales en la serie. 
+Diferencias clave:
+La ACF considera todas las correlaciones, mientras que la PACF solo considera las correlaciones directas, eliminando las indirectas.
+La ACF es útil para identificar la estructura general de correlación, mientras que la PACF ayuda a identificar la estructura de dependencia más precisa. 
+Interpretación:
+
+Un corte abrupto en el gráfico ACF en un rezago específico sugiere que un modelo de series temporales con ese número de rezagos podría ser apropiado.
+Un gráfico ACF que decae lentamente puede indicar una tendencia en los datos.
+Un corte brusco en el gráfico PACF puede indicar la presencia de estacionalidad.
+
+```{r}
+ACF<-acf(dif.btc.ts)
+```
+```{r}
+PACF<-pacf(dif.btc.ts)
+```
+### Modelado Autoarima
+
+```{r}
+modelo<-auto.arima(dif.btc.ts)
+modelo
+
+```
+
+```{r}
+library(changepoint)
+mval<-cpt.mean(dif.btc.ts,method = "AMOC") 
+cpts(mval)
+
+```
+
+```{r}
+plot(mval, type = "l", cpt.col = "blue", xlab = "Value", cpt.width = 4, main = "default penalty")
+```
+```{r}
+pred<-forecast(dif.btc.ts,h=12)
+pred
+```
+```{r}
+plot(pred, main=" ", ylab="valor", col="red", xlab="Años")
+title(main="Predicción DIF Precios del Bitcoin")
+
+```
+
+
+## Regresión de una serie de tiempo y Algoritmo Facebook´s Prophet
+
+### Regresión de una serie
+
+El proceso de transformar una serie en una regresión consiste en usar sus valores pasados(lags) para predecir valores futuros, esto se logra mediante la creación de variables yt−1yt−1, yt−2yt−2, en general yt−kyt−k para algun k entero y un tiempo t de manera que lo valores ytyt se puedan estimar mediante el modelo:
+
+yt=β0+β1yt−1+...+βkyt−k+ϵt
+
+esta es la forma de una regresión lineal autoregresiva AR(p)(Hamilton 1994).Ademas de esta forma se pueden agregar un conjunto de variables externas XtXt, de forma que el modelo se convierte en:yt=β0+β1yt−1+...+βkyt−k+βk+1Xt+ϵtyt=β0+β1yt−1+...+βkyt−k+βk+1Xt+ϵt denominado modelo ARX (Ljung 1999)
+
+
+### Algoritmo Facebook´s Prophet
+
+Prophet es un algoritmo desarrollado por el equipo de investigación de facebook para el pronostico de series de tiempo, su finalidad es la robustez frente a datos faltantes, cambios en la tendencia y múltiples estacionalidades. El modelo Prophet no es una regresión como tal, mas bien es una descomposición de forma aditiva, ya que se asume una descomposición de la serie de la siguiente forma:
+y(t)=g(t)+s(t)+h(t)+ϵty(t)=g(t)+s(t)+h(t)+ϵt donde:
+g(t):tendencia 
+s(t):estacionalidad
+g(t):efecto de dias festivos
+ϵt:error(ruido blanco)
+dado que este metodo solo busca pronosticar valores futuros, no es necesario validar supuestos de normalidad en los errores, sin embargo si se debe verificar como una buena practica, que estos no estén correlacionados y que tengan media cero y varianza constante(Facebook Core Data Science Team 2023).
+
+
+```{r}
+library(prophet)
+start_date <- as.Date("2018-01-01")  
+btc_df <- data.frame(
+  ds = seq(start_date, by = "day", length.out = length(btc_ts)),
+  y = as.numeric(btc_ts)
+)
+
+```
+
+```{r}
+modelo_pr <- prophet(btc_df)
+
+# Hacer predicciones a  30 días
+future <- make_future_dataframe(modelo_pr, periods = 30)
+
+forecast <- predict(modelo_pr, future)
+
+# Grafico
+plot(modelo_pr, forecast) +
+  ggtitle("Predicción de precios BTC con Prophet")
+
+```
+```{r}
+# Residuales 
+residuos <- btc_df$y - predict(modelo_pr, btc_df)$yhat[1:nrow(btc_df)]
+
+# Graficar residuos
+plot(residuos, type = "l", main = "Residuos", ylab = "Error", xlab = "Tiempo")
+
+# Autocorrelación
+acf(residuos, main = "ACF de los residuos")
+
+# Normalidad
+qqnorm(residuos); qqline(residuos)
+shapiro.test(residuos)  # prueba de normalidad
+
+```
+
+
+```{r}
+prophet_plot_components(modelo_pr, forecast)
+
+```
+
+```{r}
+
+# Validación cruzada: horizonte de 30 días
+df_cv <- cross_validation(modelo_pr, initial = 180, period = 30, horizon = 30, units = "days")
+df_p <- performance_metrics(df_cv)
+
+# Ver resultados
+head(df_p)
+
+# Gráfico de RMSE
+plot_cross_validation_metric(df_cv, metric = "rmse")
+
+```
+
+
+
+
+

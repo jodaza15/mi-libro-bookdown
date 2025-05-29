@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 MODELADO | Mi libro con bookdown</title>
+  <meta name="description" content="3 MODELADO | Mi libro con bookdown" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 MODELADO | Mi libro con bookdown" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 MODELADO | Mi libro con bookdown" />
+  
+  
+  
+
+<meta name="author" content="Tu nombre" />
+
+
+<meta name="date" content="2025-05-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="análisis-descriptivo.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introdución</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#justificación."><i class="fa fa-check"></i><b>1.1</b> Justificación.</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#fuente-de-información."><i class="fa fa-check"></i><b>1.2</b> Fuente de información.</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="análisis-descriptivo.html"><a href="análisis-descriptivo.html"><i class="fa fa-check"></i><b>2</b> Análisis Descriptivo</a></li>
+<li class="chapter" data-level="3" data-path="modelado.html"><a href="modelado.html"><i class="fa fa-check"></i><b>3</b> MODELADO</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="modelado.html"><a href="modelado.html#modelo-de-holt-winters"><i class="fa fa-check"></i><b>3.1</b> Modelo de Holt Winters</a></li>
+<li class="chapter" data-level="3.2" data-path="modelado.html"><a href="modelado.html#metodología-box-jenkins"><i class="fa fa-check"></i><b>3.2</b> Metodología Box-Jenkins</a></li>
+<li class="chapter" data-level="3.3" data-path="modelado.html"><a href="modelado.html#modelo-arima"><i class="fa fa-check"></i><b>3.3</b> Modelo Arima</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="modelado.html"><a href="modelado.html#transformación-serie-de-tiempo-a-estacionaria."><i class="fa fa-check"></i><b>3.3.1</b> Transformación serie de tiempo a estacionaria.</a></li>
+<li class="chapter" data-level="3.3.2" data-path="modelado.html"><a href="modelado.html#funciones-de-acf-y-pact"><i class="fa fa-check"></i><b>3.3.2</b> Funciones de ACF y PACT</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="modelado.html"><a href="modelado.html#regresión-de-una-serie-de-tiempo-y-algoritmo-facebooks-prophet"><i class="fa fa-check"></i><b>3.4</b> Regresión de una serie de tiempo y Algoritmo Facebook´s Prophet</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="modelado.html"><a href="modelado.html#regresión-de-una-serie"><i class="fa fa-check"></i><b>3.4.1</b> Regresión de una serie</a></li>
+<li class="chapter" data-level="3.4.2" data-path="modelado.html"><a href="modelado.html#algoritmo-facebooks-prophet"><i class="fa fa-check"></i><b>3.4.2</b> Algoritmo Facebook´s Prophet</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Mi libro con bookdown</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="modelado" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> MODELADO<a href="modelado.html#modelado" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="modelo-de-holt-winters" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Modelo de Holt Winters<a href="modelado.html#modelo-de-holt-winters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La metodología de Holt-Winters, también conocida como suavizamiento exponencial triple, es una técnica ampliamente utilizada en el análisis de series temporales para realizar pronósticos que presentan patrones de tendencia y estacionalidad. Esta metodología extiende el suavizamiento exponencial simple incorporando componentes adicionales que permiten capturar dinámicamente la evolución de la tendencia y la estacionalidad a lo largo del tiempo. Holt-Winters se presenta en dos variantes principales: aditiva y multiplicativa, dependiendo de la naturaleza del componente estacional. Es particularmente útil en contextos donde los datos muestran fluctuaciones regulares en intervalos específicos (como días, semanas o meses), y permite generar predicciones a corto y mediano plazo con un alto grado de precisión. Su implementación práctica ha demostrado ser eficaz en áreas como la economía, la meteorología, la gestión de inventarios y el consumo de recursos, como agua o energía(Hurtado Garzón 2013).</p>
+<p>Teniendo en cuenta la fase de preprocesamiento, se observa que la serie transformada por el logaritmo (es decir no se uso la serie diferenciada que es estacionaria) presenta una estacionalidad visible, así como una tendencia definida, caracterizada por un comportamiento que decrece, se estabiliza y vuelve a decrecer. Esto indica que cumple con los criterios visuales necesarios para aplicar la metodología en cuestión. Además, el patrón estacional parece ser claro y repetitivo, lo cual sugiere la presencia de una estacionalidad aditiva. No obstante, al implementar el modelo, es importante considerar los residuos, ya que se identifican picos que podrían estar asociados a eventos atípicos o posibles errores de medición.</p>
+<p>Cabe resaltar que esta metodología no requiere que la serie sea estacionaria. En cambio, se enfoca en identificar una tendencia y una estacionalidad bien definidas, ya que el pronóstico se basa en estos dos componentes junto con la media de la serie.</p>
+<p>A continuación, se procede a aplicar el método de Holt Winter a los precios de cierre diarios del Bitcoin, dentro de la aplicación de este modelo se asume una estacionalidad aditiva.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="modelado.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;quantmod&quot;</span>)</span></code></pre></div>
+<pre><code>## Installing package into &#39;/cloud/lib/x86_64-pc-linux-gnu-library/4.4&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="modelado.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(quantmod)</span></code></pre></div>
+<pre><code>## Loading required package: xts</code></pre>
+<pre><code>## Loading required package: zoo</code></pre>
+<pre><code>## 
+## Attaching package: &#39;zoo&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     as.Date, as.Date.numeric</code></pre>
+<pre><code>## Loading required package: TTR</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
+##   method            from
+##   as.zoo.data.frame zoo</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="modelado.html#cb10-1" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb10-2"><a href="modelado.html#cb10-2" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb10-3"><a href="modelado.html#cb10-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<p>`<code>{r cargar-librerias, message=FALSE, warning=FALSE} library(quantmod) # &lt;- Esta línea es clave library(zoo) # (si vas a usar as.zoo)</code></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="modelado.html#cb11-1" tabindex="-1"></a><span class="co"># Descargar datos de Yahoo Finance</span></span>
+<span id="cb11-2"><a href="modelado.html#cb11-2" tabindex="-1"></a><span class="fu">getSymbols</span>(<span class="st">&quot;BTC-USD&quot;</span>,</span>
+<span id="cb11-3"><a href="modelado.html#cb11-3" tabindex="-1"></a>           <span class="at">src =</span> <span class="st">&quot;yahoo&quot;</span>,</span>
+<span id="cb11-4"><a href="modelado.html#cb11-4" tabindex="-1"></a>           <span class="at">from =</span> <span class="st">&quot;2018-01-01&quot;</span>,</span>
+<span id="cb11-5"><a href="modelado.html#cb11-5" tabindex="-1"></a>           <span class="at">to =</span> <span class="st">&quot;2025-04-27&quot;</span>,<span class="co">#Sys.Date(),</span></span>
+<span id="cb11-6"><a href="modelado.html#cb11-6" tabindex="-1"></a>           <span class="at">periodicity =</span> <span class="st">&quot;daily&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;BTC-USD&quot;</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="modelado.html#cb13-1" tabindex="-1"></a><span class="co"># Convertir el objeto descargado a &#39;zoo&#39;</span></span>
+<span id="cb13-2"><a href="modelado.html#cb13-2" tabindex="-1"></a>btc_zoo <span class="ot">&lt;-</span> <span class="fu">as.zoo</span>(<span class="st">`</span><span class="at">BTC-USD</span><span class="st">`</span>)</span>
+<span id="cb13-3"><a href="modelado.html#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="modelado.html#cb13-4" tabindex="-1"></a><span class="co"># Ver las primeras filas</span></span>
+<span id="cb13-5"><a href="modelado.html#cb13-5" tabindex="-1"></a><span class="fu">tail</span>(btc_zoo)</span></code></pre></div>
+<pre><code>##            BTC-USD.Open BTC-USD.High BTC-USD.Low BTC-USD.Close BTC-USD.Volume
+## 2025-04-22     87521.88     93817.38    87084.53      93441.89    55899038456
+## 2025-04-23     93427.59     94535.73    91962.96      93699.11    41719568821
+## 2025-04-24     93692.40     94016.20    91696.71      93943.80    31483175315
+## 2025-04-25     93954.25     95768.39    92898.59      94720.50    40915232364
+## 2025-04-26     94714.65     95251.36    93927.25      94646.93    17612825123
+## 2025-04-27     94660.91     95301.20    93665.40      93754.84    18090367764
+##            BTC-USD.Adjusted
+## 2025-04-22         93441.89
+## 2025-04-23         93699.11
+## 2025-04-24         93943.80
+## 2025-04-25         94720.50
+## 2025-04-26         94646.93
+## 2025-04-27         93754.84</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="modelado.html#cb15-1" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb15-2"><a href="modelado.html#cb15-2" tabindex="-1"></a>btc_close <span class="ot">&lt;-</span> <span class="fu">as.zoo</span>(btc_zoo<span class="sc">$</span><span class="st">`</span><span class="at">BTC-USD.Close</span><span class="st">`</span>)</span>
+<span id="cb15-3"><a href="modelado.html#cb15-3" tabindex="-1"></a>btc_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">coredata</span>(btc_close), <span class="at">frequency =</span> <span class="dv">365</span>, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">1</span>))</span></code></pre></div>
+<p>a continuación se aplica el modelo.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="modelado.html#cb16-1" tabindex="-1"></a>modelo_hw <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(btc_ts)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="modelado.html#cb17-1" tabindex="-1"></a><span class="fu">summary</span>(modelo_hw)</span></code></pre></div>
+<pre><code>##              Length Class  Mode     
+## fitted       9236   mts    numeric  
+## x            2674   ts     numeric  
+## alpha           1   -none- numeric  
+## beta            1   -none- numeric  
+## gamma           1   -none- numeric  
+## coefficients  367   -none- numeric  
+## seasonal        1   -none- character
+## SSE             1   -none- numeric  
+## call            2   -none- call</code></pre>
+<p>Pronostico de 30 días.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="modelado.html#cb19-1" tabindex="-1"></a><span class="co"># Pronóstico a futuro (30 días)</span></span>
+<span id="cb19-2"><a href="modelado.html#cb19-2" tabindex="-1"></a>forecast_hw <span class="ot">&lt;-</span> <span class="fu">forecast</span>(modelo_hw, <span class="at">h =</span> <span class="dv">30</span>)</span>
+<span id="cb19-3"><a href="modelado.html#cb19-3" tabindex="-1"></a><span class="fu">autoplot</span>(forecast_hw) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="modelado.html#cb19-4" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Pronóstico de BTC/USD con Holt-Winters&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="modelado.html#cb19-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Precio de Cierre&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="modelado.html#cb19-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Fecha&quot;</span>)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Pronóstico para 110 días.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="modelado.html#cb20-1" tabindex="-1"></a>ultimos_10 <span class="ot">&lt;-</span> <span class="fu">tail</span>(btc_ts, <span class="dv">10</span>)</span>
+<span id="cb20-2"><a href="modelado.html#cb20-2" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="modelado.html#cb20-3" tabindex="-1"></a><span class="co"># Pronóstico </span></span>
+<span id="cb20-4"><a href="modelado.html#cb20-4" tabindex="-1"></a>forecast_hw <span class="ot">&lt;-</span> <span class="fu">forecast</span>(modelo_hw, <span class="at">h =</span> <span class="dv">110</span>)</span>
+<span id="cb20-5"><a href="modelado.html#cb20-5" tabindex="-1"></a>proyeccion <span class="ot">&lt;-</span> forecast_hw<span class="sc">$</span>mean</span>
+<span id="cb20-6"><a href="modelado.html#cb20-6" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="modelado.html#cb20-7" tabindex="-1"></a>serie_completa <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">c</span>(ultimos_10, proyeccion), <span class="at">start =</span> <span class="fu">time</span>(ultimos_10)[<span class="dv">1</span>], <span class="at">frequency =</span> <span class="fu">frequency</span>(btc_ts))</span>
+<span id="cb20-8"><a href="modelado.html#cb20-8" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="modelado.html#cb20-9" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="modelado.html#cb20-10" tabindex="-1"></a>df_proyeccion <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb20-11"><a href="modelado.html#cb20-11" tabindex="-1"></a>  <span class="at">Fecha =</span> <span class="fu">time</span>(serie_completa),</span>
+<span id="cb20-12"><a href="modelado.html#cb20-12" tabindex="-1"></a>  <span class="at">Precio =</span> <span class="fu">as.numeric</span>(serie_completa),</span>
+<span id="cb20-13"><a href="modelado.html#cb20-13" tabindex="-1"></a>  <span class="at">Tipo =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Real&quot;</span>, <span class="fu">length</span>(ultimos_10)), <span class="fu">rep</span>(<span class="st">&quot;Pronóstico&quot;</span>, <span class="fu">length</span>(proyeccion)))</span>
+<span id="cb20-14"><a href="modelado.html#cb20-14" tabindex="-1"></a>)</span>
+<span id="cb20-15"><a href="modelado.html#cb20-15" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="modelado.html#cb20-16" tabindex="-1"></a><span class="co"># Grafico</span></span>
+<span id="cb20-17"><a href="modelado.html#cb20-17" tabindex="-1"></a><span class="fu">ggplot</span>(df_proyeccion, <span class="fu">aes</span>(<span class="at">x =</span> Fecha, <span class="at">y =</span> Precio, <span class="at">color =</span> Tipo)) <span class="sc">+</span></span>
+<span id="cb20-18"><a href="modelado.html#cb20-18" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb20-19"><a href="modelado.html#cb20-19" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;BTC/USD: Últimos 10 días + Pronóstico Holt-Winters&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-20"><a href="modelado.html#cb20-20" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Precio de cierre&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-21"><a href="modelado.html#cb20-21" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Fecha&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-22"><a href="modelado.html#cb20-22" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span> <span class="ot">=</span> <span class="st">&quot;black&quot;</span>, <span class="st">&quot;Pronóstico&quot;</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb20-23"><a href="modelado.html#cb20-23" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
+<pre><code>## Don&#39;t know how to automatically pick scale for object of type &lt;ts&gt;. Defaulting
+## to continuous.</code></pre>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="metodología-box-jenkins" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Metodología Box-Jenkins<a href="modelado.html#metodología-box-jenkins" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La metodología Box-Jenkins es un enfoque sistemático que permite identificar, estimar y validar modelos ARMA o ARIMA que se ajusten adecuadamente a una serie de tiempo. Esta metodología consta de cuatro etapas principales:</p>
+<p>Identificación del modelo En esta etapa se analiza si la serie es estacionaria. Si no lo es, se aplican transformaciones (como la diferenciación) para lograr la estacionariedad. A continuación, se identifican los posibles valores de los parámetros del modelo ARIMA(p, d, q), con base en el análisis gráfico y estadístico.
+Actividades comunes:</p>
+<p>Análisis gráfico: para detectar tendencia, estacionalidad o cambios en la media.</p>
+<p>Prueba de estacionariedad: como la prueba de Dickey-Fuller, que evalúa si la serie tiene raíz unitaria.</p>
+<p>Diferenciación: si la serie no es estacionaria, se aplica una o más veces para lograr la estacionariedad y determinar el parámetro d.</p>
+<p>Revisión de ACF y PACF:</p>
+<p>ACF (autocorrelación): ayuda a identificar el orden q (media móvil).</p>
+<p>PACF (autocorrelación parcial): permite sugerir el orden p (autorregresivo).</p>
+<p>Estimación de parámetros Una vez identificado el modelo, se ajusta a los datos para estimar sus parámetros.</p>
+<p>Actividades:</p>
+<p>Estimar los coeficientes mediante métodos como máxima verosimilitud.</p>
+<p>Evaluar la significancia estadística de los parámetros.</p>
+<p>Comparar modelos alternativos utilizando criterios como:</p>
+<p>AIC (Criterio de Información de Akaike)</p>
+<p>BIC (Criterio de Información Bayesiano)</p>
+<p>RMSE (Raíz del error cuadrático medio)</p>
+<p>Verificación del modelo Se valida que los residuos del modelo se comporten como ruido blanco, es decir, que no presenten autocorrelación y tengan media cero y varianza constante.
+Actividades:</p>
+<p>Analizar los residuos en el tiempo.</p>
+<p>Revisar los gráficos de ACF y PACF de los residuos.</p>
+<p>Verificar la normalidad mediante histogramas o pruebas como Shapiro-Wilk.</p>
+<p>Verificar independencia mediante pruebas como Ljung-Box.</p>
+<p>Si los supuestos no se cumplen, se debe reconsiderar el modelo y repetir las etapas anteriores.</p>
+<p>Pronóstico Una vez validado el modelo, se procede a generar pronósticos a corto, mediano o largo plazo.
+Actividades:</p>
+<p>Generar predicciones con intervalos de confianza.</p>
+<p>Comparar los pronósticos con datos reales (si están disponibles).</p>
+<p>Evaluar la precisión del modelo predictivo.</p>
+<p>Cabe resaltar que actualmente se dispone de la librería forecast en R, la cual incluye la función auto.arima, que permite seleccionar automáticamente los parámetros del modelo ARIMA de forma eficiente. Este procedimiento se basa en criterios estadísticos como AIC o BIC para identificar la combinación óptima de parámetros (p,d,q).</p>
+<p>Gracias a esta automatización, se simplifican varios pasos tradicionales del proceso de modelado, como la inspección visual de los gráficos ACF y PACF, la identificación manual del grado de diferenciación d, y la evaluación de múltiples combinaciones de parámetros para encontrar el mejor modelo.</p>
+<p>Por tanto, en esta etapa nos enfocaremos únicamente en la validación de los supuestos del modelo sobre los residuos y en la evaluación del desempeño de los pronósticos (Hurtado Garzón 2013).</p>
+</div>
+<div id="modelo-arima" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Modelo Arima<a href="modelado.html#modelo-arima" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Los modelos autorregresivos integrados de media móvil (ARIMA, por sus siglas en inglés: AutoRegressive Integrated Moving Average) combinan tres componentes:</p>
+<p>AR (Autorregresivo): la serie se explica por sus propios valores pasados.</p>
+<p>I (Integrado): se aplican diferenciaciones a la serie para hacerla estacionaria.</p>
+<p>MA (Media móvil): se modela el error como una combinación lineal de errores pasados.</p>
+<p>Un modelo ARIMA se denota como ARIMA(p, d, q), donde:</p>
+<p>p: número de términos autorregresivos (AR).</p>
+<p>d: número de diferenciaciones necesarias para hacer la serie estacionaria.</p>
+<p>q: número de términos de medias móviles (MA).</p>
+<p>Estos modelos permiten describir y pronosticar el comportamiento de una serie de tiempo a partir de sus valores y errores pasados (Hurtado Garzón 2013).</p>
+<div id="transformación-serie-de-tiempo-a-estacionaria." class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Transformación serie de tiempo a estacionaria.<a href="modelado.html#transformación-serie-de-tiempo-a-estacionaria." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="modelado.html#cb23-1" tabindex="-1"></a><span class="fu">library</span>(tseries)</span>
+<span id="cb23-2"><a href="modelado.html#cb23-2" tabindex="-1"></a><span class="fu">adf.test</span>(btc_ts,, <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">&quot;stationary&quot;</span>, <span class="st">&quot;explosive&quot;</span>))</span></code></pre></div>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  btc_ts
+## Dickey-Fuller = -1.9006, Lag order = 13, p-value = 0.6204
+## alternative hypothesis: stationary</code></pre>
+<p>De acuerdo a la prueba Dickey Fuller se concluye que la serie de tiempo no es estacionaria dado que el Valor P esta por encima 0.05 , tal como se esperaba de acuerdo a su naturaleza de mercado financiero.</p>
+<p>Por lo tanto a continuación se procede a realizar la diferenciación de la serie de tiempo.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="modelado.html#cb25-1" tabindex="-1"></a><span class="fu">ndiffs</span>(btc_ts)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="modelado.html#cb27-1" tabindex="-1"></a><span class="do">## [1] 1</span></span>
+<span id="cb27-2"><a href="modelado.html#cb27-2" tabindex="-1"></a><span class="co">#nos indica que 1 así que diferenciamos una vez y la llamamos dif.Indice.ts</span></span>
+<span id="cb27-3"><a href="modelado.html#cb27-3" tabindex="-1"></a>dif.btc.ts<span class="ot">&lt;-</span><span class="fu">diff</span>(btc_ts)</span>
+<span id="cb27-4"><a href="modelado.html#cb27-4" tabindex="-1"></a><span class="co">#la graficamos</span></span>
+<span id="cb27-5"><a href="modelado.html#cb27-5" tabindex="-1"></a><span class="fu">plot</span>(dif.btc.ts, <span class="at">main=</span><span class="st">&quot; &quot;</span>, <span class="at">ylab=</span><span class="st">&quot;valor&quot;</span>, <span class="at">col=</span><span class="st">&quot;deepskyblue&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Años&quot;</span>)</span>
+<span id="cb27-6"><a href="modelado.html#cb27-6" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main=</span><span class="st">&quot;DIF Precios diarios BTC&quot;</span>)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+Ahora se procede a confirmar nuevamente con la prueba Dickey Fuller que la serie diferenciada si sea estacionaria.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="modelado.html#cb28-1" tabindex="-1"></a><span class="fu">adf.test</span>(dif.btc.ts,, <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">&quot;stationary&quot;</span>, <span class="st">&quot;explosive&quot;</span>))</span></code></pre></div>
+<pre><code>## Warning in adf.test(dif.btc.ts, , alternative = c(&quot;stationary&quot;, &quot;explosive&quot;)):
+## p-value smaller than printed p-value</code></pre>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  dif.btc.ts
+## Dickey-Fuller = -12.708, Lag order = 13, p-value = 0.01
+## alternative hypothesis: stationary</code></pre>
+<p>De acuerdo al resultado de la prueba, se puede afirmar que la serie diferenciada es estacionaria</p>
+</div>
+<div id="funciones-de-acf-y-pact" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Funciones de ACF y PACT<a href="modelado.html#funciones-de-acf-y-pact" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Continuando con la metodología Box-Jenkins, ahora se define y genera las funciones ACF y PACT</p>
+<p>En análisis de series de tiempo, la ACF (Función de Autocorrelación) y la PACF (Función de Autocorrelación Parcial) son herramientas visuales que ayudan a identificar la estructura de dependencia dentro de una serie temporal. La ACF muestra la correlación de una serie consigo misma a diferentes rezagos, mientras que la PACF controla la correlación de los rezagos anteriores al evaluar la correlación en un rezago específico.</p>
+<p>ACF (Función de Autocorrelación)
+La ACF grafica la correlación entre una variable y sus valores rezagados en diferentes rezagos (diferencia de tiempo entre una observación y otra).
+Ayuda a identificar patrones como estacionalidad, tendencias y persistencia en la serie.</p>
+<p>Se utiliza para determinar el orden del modelo AR (Autorregresivo) y MA (Promedio Móvil).</p>
+<p>PACF (Función de Autocorrelación Parcial)
+La PACF muestra la correlación entre una variable y sus valores rezagados, después de haber eliminado el efecto de los rezagos intermedios.
+Ayuda a identificar el rezago exacto después del cual las autocorrelaciones cesan, lo cual es crucial para determinar el orden del modelo AR.</p>
+<p>Se utiliza para identificar la presencia de patrones estacionales en la serie.
+Diferencias clave:
+La ACF considera todas las correlaciones, mientras que la PACF solo considera las correlaciones directas, eliminando las indirectas.
+La ACF es útil para identificar la estructura general de correlación, mientras que la PACF ayuda a identificar la estructura de dependencia más precisa.
+Interpretación:</p>
+<p>Un corte abrupto en el gráfico ACF en un rezago específico sugiere que un modelo de series temporales con ese número de rezagos podría ser apropiado.
+Un gráfico ACF que decae lentamente puede indicar una tendencia en los datos.
+Un corte brusco en el gráfico PACF puede indicar la presencia de estacionalidad.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="modelado.html#cb31-1" tabindex="-1"></a>ACF<span class="ot">&lt;-</span><span class="fu">acf</span>(dif.btc.ts)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="modelado.html#cb32-1" tabindex="-1"></a>PACF<span class="ot">&lt;-</span><span class="fu">pacf</span>(dif.btc.ts)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+### Modelado Autoarima</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="modelado.html#cb33-1" tabindex="-1"></a>modelo<span class="ot">&lt;-</span><span class="fu">auto.arima</span>(dif.btc.ts)</span>
+<span id="cb33-2"><a href="modelado.html#cb33-2" tabindex="-1"></a>modelo</span></code></pre></div>
+<pre><code>## Series: dif.btc.ts 
+## ARIMA(1,0,0) with zero mean 
+## 
+## Coefficients:
+##           ar1
+##       -0.0620
+## s.e.   0.0193
+## 
+## sigma^2 = 1491145:  log likelihood = -22790.75
+## AIC=45585.49   AICc=45585.5   BIC=45597.27</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="modelado.html#cb35-1" tabindex="-1"></a><span class="fu">library</span>(changepoint)</span></code></pre></div>
+<pre><code>## Successfully loaded changepoint package version 2.3
+##  WARNING: From v.2.3 the default method in cpt.* functions has changed from AMOC to PELT.
+##  See NEWS for details of all changes.</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="modelado.html#cb37-1" tabindex="-1"></a>mval<span class="ot">&lt;-</span><span class="fu">cpt.mean</span>(dif.btc.ts,<span class="at">method =</span> <span class="st">&quot;AMOC&quot;</span>) </span>
+<span id="cb37-2"><a href="modelado.html#cb37-2" tabindex="-1"></a><span class="fu">cpts</span>(mval)</span></code></pre></div>
+<pre><code>## [1] 2654</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="modelado.html#cb39-1" tabindex="-1"></a><span class="fu">plot</span>(mval, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">cpt.col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Value&quot;</span>, <span class="at">cpt.width =</span> <span class="dv">4</span>, <span class="at">main =</span> <span class="st">&quot;default penalty&quot;</span>)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="modelado.html#cb40-1" tabindex="-1"></a>pred<span class="ot">&lt;-</span><span class="fu">forecast</span>(dif.btc.ts,<span class="at">h=</span><span class="dv">12</span>)</span>
+<span id="cb40-2"><a href="modelado.html#cb40-2" tabindex="-1"></a>pred</span></code></pre></div>
+<pre><code>##           Point Forecast      Lo 80     Hi 80     Lo 95    Hi 95
+## 2025.3260     -382.83972 -1792.1618 1026.4824 -2538.212 1772.532
+## 2025.3288      652.66945  -756.6527 2061.9916 -1502.703 2808.042
+## 2025.3315     -672.31585 -2081.6380  737.0063 -2827.688 1483.056
+## 2025.3342     -491.49158 -1900.8137  917.8306 -2646.864 1663.881
+## 2025.3370      167.17408 -1242.1481 1576.4962 -1988.198 2322.546
+## 2025.3397      425.05245  -984.2697 1834.3746 -1730.320 2580.425
+## 2025.3425      420.51955  -988.8026 1829.8417 -1734.853 2575.892
+## 2025.3452     -343.72783 -1753.0500 1065.5943 -2499.100 1811.644
+## 2025.3479     -109.59213 -1518.9143 1299.7301 -2264.964 2045.780
+## 2025.3507     -342.08749 -1751.4097 1067.2347 -2497.460 1813.285
+## 2025.3534    -1066.13994 -2475.4621  343.1823 -3221.512 1089.232
+## 2025.3562       27.44961 -1381.8726 1436.7718 -2127.923 2182.822</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="modelado.html#cb42-1" tabindex="-1"></a><span class="fu">plot</span>(pred, <span class="at">main=</span><span class="st">&quot; &quot;</span>, <span class="at">ylab=</span><span class="st">&quot;valor&quot;</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Años&quot;</span>)</span>
+<span id="cb42-2"><a href="modelado.html#cb42-2" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main=</span><span class="st">&quot;Predicción DIF Precios del Bitcoin&quot;</span>)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+</div>
+<div id="regresión-de-una-serie-de-tiempo-y-algoritmo-facebooks-prophet" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Regresión de una serie de tiempo y Algoritmo Facebook´s Prophet<a href="modelado.html#regresión-de-una-serie-de-tiempo-y-algoritmo-facebooks-prophet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="regresión-de-una-serie" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Regresión de una serie<a href="modelado.html#regresión-de-una-serie" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El proceso de transformar una serie en una regresión consiste en usar sus valores pasados(lags) para predecir valores futuros, esto se logra mediante la creación de variables yt−1yt−1, yt−2yt−2, en general yt−kyt−k para algun k entero y un tiempo t de manera que lo valores ytyt se puedan estimar mediante el modelo:</p>
+<p>yt=β0+β1yt−1+…+βkyt−k+ϵt</p>
+<p>esta es la forma de una regresión lineal autoregresiva AR(p)(Hamilton 1994).Ademas de esta forma se pueden agregar un conjunto de variables externas XtXt, de forma que el modelo se convierte en:yt=β0+β1yt−1+…+βkyt−k+βk+1Xt+ϵtyt=β0+β1yt−1+…+βkyt−k+βk+1Xt+ϵt denominado modelo ARX (Ljung 1999)</p>
+</div>
+<div id="algoritmo-facebooks-prophet" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Algoritmo Facebook´s Prophet<a href="modelado.html#algoritmo-facebooks-prophet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Prophet es un algoritmo desarrollado por el equipo de investigación de facebook para el pronostico de series de tiempo, su finalidad es la robustez frente a datos faltantes, cambios en la tendencia y múltiples estacionalidades. El modelo Prophet no es una regresión como tal, mas bien es una descomposición de forma aditiva, ya que se asume una descomposición de la serie de la siguiente forma:
+y(t)=g(t)+s(t)+h(t)+ϵty(t)=g(t)+s(t)+h(t)+ϵt donde:
+g(t):tendencia
+s(t):estacionalidad
+g(t):efecto de dias festivos
+ϵt:error(ruido blanco)
+dado que este metodo solo busca pronosticar valores futuros, no es necesario validar supuestos de normalidad en los errores, sin embargo si se debe verificar como una buena practica, que estos no estén correlacionados y que tengan media cero y varianza constante(Facebook Core Data Science Team 2023).</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="modelado.html#cb43-1" tabindex="-1"></a><span class="fu">library</span>(prophet)</span></code></pre></div>
+<pre><code>## Loading required package: Rcpp</code></pre>
+<pre><code>## Loading required package: rlang</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="modelado.html#cb46-1" tabindex="-1"></a>start_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&quot;2018-01-01&quot;</span>)  </span>
+<span id="cb46-2"><a href="modelado.html#cb46-2" tabindex="-1"></a>btc_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb46-3"><a href="modelado.html#cb46-3" tabindex="-1"></a>  <span class="at">ds =</span> <span class="fu">seq</span>(start_date, <span class="at">by =</span> <span class="st">&quot;day&quot;</span>, <span class="at">length.out =</span> <span class="fu">length</span>(btc_ts)),</span>
+<span id="cb46-4"><a href="modelado.html#cb46-4" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">as.numeric</span>(btc_ts)</span>
+<span id="cb46-5"><a href="modelado.html#cb46-5" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="modelado.html#cb47-1" tabindex="-1"></a>modelo_pr <span class="ot">&lt;-</span> <span class="fu">prophet</span>(btc_df)</span></code></pre></div>
+<pre><code>## Disabling daily seasonality. Run prophet with daily.seasonality=TRUE to override this.</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="modelado.html#cb49-1" tabindex="-1"></a><span class="co"># Hacer predicciones a  30 días</span></span>
+<span id="cb49-2"><a href="modelado.html#cb49-2" tabindex="-1"></a>future <span class="ot">&lt;-</span> <span class="fu">make_future_dataframe</span>(modelo_pr, <span class="at">periods =</span> <span class="dv">30</span>)</span>
+<span id="cb49-3"><a href="modelado.html#cb49-3" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="modelado.html#cb49-4" tabindex="-1"></a>forecast <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_pr, future)</span>
+<span id="cb49-5"><a href="modelado.html#cb49-5" tabindex="-1"></a></span>
+<span id="cb49-6"><a href="modelado.html#cb49-6" tabindex="-1"></a><span class="co"># Grafico</span></span>
+<span id="cb49-7"><a href="modelado.html#cb49-7" tabindex="-1"></a><span class="fu">plot</span>(modelo_pr, forecast) <span class="sc">+</span></span>
+<span id="cb49-8"><a href="modelado.html#cb49-8" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Predicción de precios BTC con Prophet&quot;</span>)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="modelado.html#cb50-1" tabindex="-1"></a><span class="co"># Residuales </span></span>
+<span id="cb50-2"><a href="modelado.html#cb50-2" tabindex="-1"></a>residuos <span class="ot">&lt;-</span> btc_df<span class="sc">$</span>y <span class="sc">-</span> <span class="fu">predict</span>(modelo_pr, btc_df)<span class="sc">$</span>yhat[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(btc_df)]</span>
+<span id="cb50-3"><a href="modelado.html#cb50-3" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="modelado.html#cb50-4" tabindex="-1"></a><span class="co"># Graficar residuos</span></span>
+<span id="cb50-5"><a href="modelado.html#cb50-5" tabindex="-1"></a><span class="fu">plot</span>(residuos, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Residuos&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Error&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Tiempo&quot;</span>)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="modelado.html#cb51-1" tabindex="-1"></a><span class="co"># Autocorrelación</span></span>
+<span id="cb51-2"><a href="modelado.html#cb51-2" tabindex="-1"></a><span class="fu">acf</span>(residuos, <span class="at">main =</span> <span class="st">&quot;ACF de los residuos&quot;</span>)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-21-2.png" width="672" /></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="modelado.html#cb52-1" tabindex="-1"></a><span class="co"># Normalidad</span></span>
+<span id="cb52-2"><a href="modelado.html#cb52-2" tabindex="-1"></a><span class="fu">qqnorm</span>(residuos); <span class="fu">qqline</span>(residuos)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-21-3.png" width="672" /></p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="modelado.html#cb53-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(residuos)  <span class="co"># prueba de normalidad</span></span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  residuos
+## W = 0.97799, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="modelado.html#cb55-1" tabindex="-1"></a><span class="fu">prophet_plot_components</span>(modelo_pr, forecast)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="modelado.html#cb56-1" tabindex="-1"></a><span class="co"># Validación cruzada: horizonte de 30 días</span></span>
+<span id="cb56-2"><a href="modelado.html#cb56-2" tabindex="-1"></a>df_cv <span class="ot">&lt;-</span> <span class="fu">cross_validation</span>(modelo_pr, <span class="at">initial =</span> <span class="dv">180</span>, <span class="at">period =</span> <span class="dv">30</span>, <span class="at">horizon =</span> <span class="dv">30</span>, <span class="at">units =</span> <span class="st">&quot;days&quot;</span>)</span></code></pre></div>
+<pre><code>## Making 83 forecasts with cutoffs between 2018-07-03 and 2025-03-28</code></pre>
+<pre><code>## Warning in cross_validation(modelo_pr, initial = 180, period = 30, horizon =
+## 30, : Seasonality has period of 365.25 days which is larger than initial
+## window. Consider increasing initial.</code></pre>
+<pre><code>## Warning in .local(object, ...): non-zero return code in optimizing</code></pre>
+<pre><code>## Optimization terminated abnormally. Falling back to Newton optimizer.</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="modelado.html#cb61-1" tabindex="-1"></a>df_p <span class="ot">&lt;-</span> <span class="fu">performance_metrics</span>(df_cv)</span>
+<span id="cb61-2"><a href="modelado.html#cb61-2" tabindex="-1"></a></span>
+<span id="cb61-3"><a href="modelado.html#cb61-3" tabindex="-1"></a><span class="co"># Ver resultados</span></span>
+<span id="cb61-4"><a href="modelado.html#cb61-4" tabindex="-1"></a><span class="fu">head</span>(df_p)</span></code></pre></div>
+<pre><code>##   horizon      mse     rmse      mae      mape     mdape     smape  coverage
+## 1  3 days 57994507 7615.412 5233.187 0.1679582 0.1274214 0.1706609 0.4337349
+## 2  4 days 60848792 7800.564 5395.434 0.1760910 0.1285579 0.1797146 0.4257028
+## 3  5 days 67162563 8195.277 5674.725 0.1879776 0.1426778 0.1928939 0.4096386
+## 4  6 days 70884858 8419.315 5867.574 0.1957333 0.1514895 0.2045129 0.4136546
+## 5  7 days 72944942 8540.781 6008.401 0.2014874 0.1540398 0.2131053 0.3975904
+## 6  8 days 73639451 8581.343 5998.679 0.2047503 0.1514895 0.2174448 0.3975904</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="modelado.html#cb63-1" tabindex="-1"></a><span class="co"># Gráfico de RMSE</span></span>
+<span id="cb63-2"><a href="modelado.html#cb63-2" tabindex="-1"></a><span class="fu">plot_cross_validation_metric</span>(df_cv, <span class="at">metric =</span> <span class="st">&quot;rmse&quot;</span>)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="análisis-descriptivo.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["mi-libro-bookdown.pdf", "mi-libro-bookdown.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
