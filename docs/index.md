@@ -1,7 +1,7 @@
 ---
 title: "Mi libro con bookdown"
 author: "Tu nombre"
-date: "`r Sys.Date()`"
+date: "2025-05-29"
 site: bookdown::bookdown_site
 documentclass: book
 output: bookdown::gitbook
