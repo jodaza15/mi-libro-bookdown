@@ -11,12 +11,7 @@ Cabe resaltar que esta metodología no requiere que la serie sea estacionaria. E
 A continuación, se procede a aplicar el método de Holt Winter a los precios de cierre diarios del Bitcoin, dentro de la aplicación de este modelo se asume una estacionalidad aditiva.
 
 ``` r
-install.packages("quantmod")
-```
-
-```
-## Installing package into '/cloud/lib/x86_64-pc-linux-gnu-library/4.4'
-## (as 'lib' is unspecified)
+#install.packages("quantmod")
 ```
 
 ``` r
@@ -106,10 +101,26 @@ btc_close <- as.zoo(btc_zoo$`BTC-USD.Close`)
 btc_ts <- ts(coredata(btc_close), frequency = 365, start = c(2018, 1))
 ```
 
-a continuación se aplica el modelo.
+se procede a realizar la división de datos de entrenamiento y de test
 
 ``` r
-modelo_hw <- HoltWinters(btc_ts)
+# Porcentaje de división
+train_ratio <- 0.9
+n <- length(btc_ts)
+
+n_train <- floor(n * train_ratio)
+n_test <- n - n_train
+
+# Crear subconjuntos de entrenamiento y prueba
+btc_train <- window(btc_ts, end = time(btc_ts)[n_train])
+btc_test <- window(btc_ts, start = time(btc_ts)[n_train + 1])
+```
+
+
+a continuación se procede a entrenar el modelo.
+
+``` r
+modelo_hw <- HoltWinters(btc_train)
 ```
 
 
@@ -120,8 +131,8 @@ summary(modelo_hw)
 
 ```
 ##              Length Class  Mode     
-## fitted       9236   mts    numeric  
-## x            2674   ts     numeric  
+## fitted       8164   mts    numeric  
+## x            2406   ts     numeric  
 ## alpha           1   -none- numeric  
 ## beta            1   -none- numeric  
 ## gamma           1   -none- numeric  
@@ -130,62 +141,182 @@ summary(modelo_hw)
 ## SSE             1   -none- numeric  
 ## call            2   -none- call
 ```
-Pronostico de 30 días.
+Como siguiente paso se procede a realizar la predicción sobre el horizonte de prueba
 
 
 ``` r
-# Pronóstico a futuro (30 días)
-forecast_hw <- forecast(modelo_hw, h = 30)
+# Pronóstico sobre los datos de test
+forecast_hw <- forecast(modelo_hw, h = n_test)
 autoplot(forecast_hw) +
   ggtitle("Pronóstico de BTC/USD con Holt-Winters") +
   ylab("Precio de Cierre") +
   xlab("Fecha")
 ```
 
-<img src="02-capitulo_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="02-capitulo_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
-Pronóstico para 110 días.
 
 ``` r
-ultimos_10 <- tail(btc_ts, 10)
+# Graficar
+plot(forecast_hw, main = "Holt-Winters - Predicción vs Real")
+lines(btc_test, col = "red", lwd = 2)  # Observado en rojo
+legend("topleft", legend = c("Predicción", "Real"), col = c("blue", "red"), lty = 1)
+```
 
-# Pronóstico 
-forecast_hw <- forecast(modelo_hw, h = 110)
-proyeccion <- forecast_hw$mean
-
-serie_completa <- ts(c(ultimos_10, proyeccion), start = time(ultimos_10)[1], frequency = frequency(btc_ts))
+<img src="02-capitulo_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 
-df_proyeccion <- data.frame(
-  Fecha = time(serie_completa),
-  Precio = as.numeric(serie_completa),
-  Tipo = c(rep("Real", length(ultimos_10)), rep("Pronóstico", length(proyeccion)))
-)
-
-# Grafico
-ggplot(df_proyeccion, aes(x = Fecha, y = Precio, color = Tipo)) +
-  geom_line(size = 1.2) +
-  ggtitle("BTC/USD: Últimos 10 días + Pronóstico Holt-Winters") +
-  ylab("Precio de cierre") +
-  xlab("Fecha") +
-  scale_color_manual(values = c("Real" = "black", "Pronóstico" = "blue")) +
-  theme_minimal()
+``` r
+library(Metrics)
 ```
 
 ```
-## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-## ℹ Please use `linewidth` instead.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.
+## 
+## Attaching package: 'Metrics'
 ```
 
 ```
-## Don't know how to automatically pick scale for object of type <ts>. Defaulting
-## to continuous.
+## The following object is masked from 'package:forecast':
+## 
+##     accuracy
 ```
 
-<img src="02-capitulo_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+``` r
+# Extraer valores
+predicted <- forecast_hw$mean
+actual <- btc_test
+
+# Métricas
+rmse_val <- rmse(actual, predicted)
+mae_val <- mae(actual, predicted)
+mape_val <- mape(actual, predicted)
+
+cat("📊 RMSE:", rmse_val, "\n")
+```
+
+```
+## 📊 RMSE: 27326.58
+```
+
+``` r
+cat("📊 MAE :", mae_val, "\n")
+```
+
+```
+## 📊 MAE : 22457.13
+```
+
+``` r
+cat("📊 MAPE:", round(mape_val * 100, 2), "%\n")
+```
+
+```
+## 📊 MAPE: 24.56 %
+```
+
+## EXpanding windows Holt winter
+
+
+``` r
+expanding_holt_winters <- function(serie_ts, initial_train_ratio = 0.8) {
+  library(forecast)
+  library(Metrics)
+
+  n <- length(serie_ts)
+  n_train <- floor(n * initial_train_ratio)
+
+  errores <- c()
+  reales <- c()
+  predichos <- c()
+
+  for (i in n_train:(n - 1)) {
+    # Expanding window hasta el tiempo i
+    ts_train <- window(serie_ts, end = time(serie_ts)[i])
+    
+    # Ajustar modelo Holt-Winters
+    modelo <- HoltWinters(ts_train)
+
+    # Predecir 1 paso adelante
+    pred <- forecast(modelo, h = 1)$mean[1]
+    
+    # Valor real del siguiente punto
+    real <- serie_ts[i + 1]
+
+    # Guardar valores
+    errores <- c(errores, real - pred)
+    reales <- c(reales, real)
+    predichos <- c(predichos, pred)
+  }
+
+  # Evaluar métricas
+  rmse_val <- rmse(reales, predichos)
+  mae_val <- mae(reales, predichos)
+  mape_val <- mape(reales, predichos)
+
+  cat("📊 Expanding Window - Holt-Winters\n")
+  cat("RMSE:", round(rmse_val, 2), "\n")
+  cat("MAE :", round(mae_val, 2), "\n")
+  cat("MAPE:", round(mape_val * 100, 2), "%\n")
+
+  # Gráfico comparativo
+  ts_reales <- ts(reales, start = time(serie_ts)[n_train + 1], frequency = frequency(serie_ts))
+  ts_predichos <- ts(predichos, start = time(serie_ts)[n_train + 1], frequency = frequency(serie_ts))
+
+  plot(ts_reales, type = "l", col = "red", lwd = 2,
+       main = "Expanding Window: Real vs Predicción (Holt-Winters)",
+       ylab = "Precio BTC")
+  lines(ts_predichos, col = "blue", lwd = 2)
+  legend("topleft", legend = c("Real", "Predicción"), col = c("red", "blue"), lty = 1)
+}
+```
+
+
+``` r
+resultado_hw<-expanding_holt_winters(btc_ts, initial_train_ratio = 0.9)
+```
+
+```
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+```
+
+```
+## 📊 Expanding Window - Holt-Winters
+## RMSE: 2255.36 
+## MAE : 1608.23 
+## MAPE: 1.98 %
+```
+
+<img src="02-capitulo_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+
 
 
 ## Metodología Box-Jenkins
@@ -311,7 +442,7 @@ plot(dif.btc.ts, main=" ", ylab="valor", col="deepskyblue", xlab="Años")
 title(main="DIF Precios diarios BTC")
 ```
 
-<img src="02-capitulo_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="02-capitulo_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 Ahora se procede a confirmar nuevamente con la prueba Dickey Fuller que la serie diferenciada si sea estacionaria.
 
 
@@ -365,88 +496,189 @@ Un corte brusco en el gráfico PACF puede indicar la presencia de estacionalidad
 ACF<-acf(dif.btc.ts)
 ```
 
-<img src="02-capitulo_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="02-capitulo_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 ``` r
 PACF<-pacf(dif.btc.ts)
 ```
 
-<img src="02-capitulo_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="02-capitulo_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+A continuación se procede a dividir la serie de tiempo diferenciada para la fasde de entrenamiento y de test
+
+``` r
+# Parámetros de división
+train_ratio <- 0.9
+n <- length(dif.btc.ts)
+
+n_train <- floor(n * train_ratio)
+n_test <- n - n_train
+
+# Dividir en train y test
+dif_train <- window(dif.btc.ts, end = time(dif.btc.ts)[n_train])
+dif_test <- window(dif.btc.ts, start = time(dif.btc.ts)[n_train + 1])
+```
+
 ### Modelado Autoarima
 
 
 ``` r
-modelo<-auto.arima(dif.btc.ts)
+modelo <- auto.arima(dif_train)
 modelo
 ```
 
 ```
-## Series: dif.btc.ts 
+## Series: dif_train 
 ## ARIMA(1,0,0) with zero mean 
 ## 
 ## Coefficients:
 ##           ar1
-##       -0.0620
-## s.e.   0.0193
+##       -0.0533
+## s.e.   0.0204
 ## 
-## sigma^2 = 1491145:  log likelihood = -22790.75
-## AIC=45585.49   AICc=45585.5   BIC=45597.27
+## sigma^2 = 1100170:  log likelihood = -20140
+## AIC=40283.99   AICc=40284   BIC=40295.56
 ```
 
 
 ``` r
-library(changepoint)
-```
-
-```
-## Successfully loaded changepoint package version 2.3
-##  WARNING: From v.2.3 the default method in cpt.* functions has changed from AMOC to PELT.
-##  See NEWS for details of all changes.
-```
-
-``` r
-mval<-cpt.mean(dif.btc.ts,method = "AMOC") 
-cpts(mval)
-```
-
-```
-## [1] 2654
+pred_arima <- forecast(modelo, h = n_test)
 ```
 
 
 ``` r
-plot(mval, type = "l", cpt.col = "blue", xlab = "Value", cpt.width = 4, main = "default penalty")
+d <- ndiffs(btc_ts)
+last_value <- btc_ts[n_train + d]  # valor original antes del primer test
+predicted <- cumsum(pred_arima$mean) + last_value
+
+
+# Valores reales correspondientes a la serie original
+actual <- window(btc_ts, start = time(btc_ts)[n_train + d + 1])
 ```
 
-<img src="02-capitulo_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 ``` r
-pred<-forecast(dif.btc.ts,h=12)
-pred
+summary(actual)
 ```
 
 ```
-##           Point Forecast      Lo 80     Hi 80     Lo 95    Hi 95
-## 2025.3260     -382.83972 -1792.1618 1026.4824 -2538.212 1772.532
-## 2025.3288      652.66945  -756.6527 2061.9916 -1502.703 2808.042
-## 2025.3315     -672.31585 -2081.6380  737.0063 -2827.688 1483.056
-## 2025.3342     -491.49158 -1900.8137  917.8306 -2646.864 1663.881
-## 2025.3370      167.17408 -1242.1481 1576.4962 -1988.198 2322.546
-## 2025.3397      425.05245  -984.2697 1834.3746 -1730.320 2580.425
-## 2025.3425      420.51955  -988.8026 1829.8417 -1734.853 2575.892
-## 2025.3452     -343.72783 -1753.0500 1065.5943 -2499.100 1811.644
-## 2025.3479     -109.59213 -1518.9143 1299.7301 -2264.964 2045.780
-## 2025.3507     -342.08749 -1751.4097 1067.2347 -2497.460 1813.285
-## 2025.3534    -1066.13994 -2475.4621  343.1823 -3221.512 1089.232
-## 2025.3562       27.44961 -1381.8726 1436.7718 -2127.923 2182.822
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   53949   64326   84623   81836   96457  106146
 ```
 
 ``` r
-plot(pred, main=" ", ylab="valor", col="red", xlab="Años")
-title(main="Predicción DIF Precios del Bitcoin")
+summary(predicted)
 ```
 
-<img src="02-capitulo_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   61614   61615   61615   61615   61615   61625
+```
+
+
+
+
+``` r
+rmse_val <- rmse(actual, predicted)
+mae_val <- mae(actual, predicted)
+mape_val <- mape(actual, predicted)
+
+cat("📊 RMSE:", rmse_val, "\n")
+```
+
+```
+## 📊 RMSE: 25727.04
+```
+
+``` r
+cat("📊 MAE :", mae_val, "\n")
+```
+
+```
+## 📊 MAE : 21253.18
+```
+
+``` r
+cat("📊 MAPE:", round(mape_val * 100, 2), "%\n")
+```
+
+```
+## 📊 MAPE: 23.31 %
+```
+
+``` r
+predicted_ts <- ts(predicted, start = start(actual), frequency = frequency(btc_ts))
+plot(actual, type = "l", col = "red", lwd = 2,
+     main = "Predicción vs Real (ARIMA)",
+     ylab = "Precio",
+     ylim = range(c(actual, predicted_ts)) * c(0.9, 1.05))  # más margen abajo
+lines(predicted_ts, col = "blue", lwd = 2)
+```
+
+<img src="02-capitulo_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+
+## Expanding window Arima
+
+
+``` r
+expanding_arima_forecast <- function(serie_ts, initial_train_ratio = 0.9) {
+  library(forecast)
+  library(Metrics)
+
+  n <- length(serie_ts)
+  n_train <- floor(n * initial_train_ratio)
+
+  reales <- c()
+  predichos <- c()
+
+  for (i in n_train:(n - 1)) {
+    # 1. Ventana de entrenamiento hasta el tiempo i
+    ts_train <- window(serie_ts, end = time(serie_ts)[i])
+    
+    # 2. Ajustar modelo ARIMA automáticamente
+    modelo <- auto.arima(ts_train)
+    
+    # 3. Predecir un paso adelante
+    pred <- forecast(modelo, h = 1)$mean[1]
+    
+    # 4. Obtener valor real siguiente (para evaluación)
+    real <- serie_ts[i + 1]
+    
+    # 5. Guardar resultados
+    reales <- c(reales, real)
+    predichos <- c(predichos, pred)
+  }
+
+  # Convertir a ts para graficar alineado
+  ts_reales <- ts(reales, start = time(serie_ts)[n_train + 1], frequency = frequency(serie_ts))
+  ts_predichos <- ts(predichos, start = time(serie_ts)[n_train + 1], frequency = frequency(serie_ts))
+
+  # Evaluar métricas
+  rmse_val <- rmse(ts_reales, ts_predichos)
+  mae_val <- mae(ts_reales, ts_predichos)
+  mape_val <- mape(ts_reales, ts_predichos)
+
+  cat("📊 Expanding Window - ARIMA\n")
+  cat("RMSE:", round(rmse_val, 2), "\n")
+  cat("MAE :", round(mae_val, 2), "\n")
+  cat("MAPE:", round(mape_val * 100, 2), "%\n")
+
+  # Gráfico
+  plot(ts_reales, type = "l", col = "red", lwd = 2,
+       main = "Expanding Window: Real vs Predicción (ARIMA)",
+       ylab = "Precio BTC")
+  lines(ts_predichos, col = "blue", lwd = 2)
+  legend("topleft", legend = c("Real", "Predicción"), col = c("red", "blue"), lty = 1)
+
+  return(list(real = ts_reales, pred = ts_predichos,
+              rmse = rmse_val, mae = mae_val, mape = mape_val))
+}
+```
+
+
+``` r
+#resultado_arima <- expanding_arima_forecast(btc_ts, initial_train_ratio = 0.9)
+```
+
 
 
 ## Regresión de una serie de tiempo y Algoritmo Facebook´s Prophet
@@ -458,6 +690,178 @@ El proceso de transformar una serie en una regresión consiste en usar sus valor
 yt=β0+β1yt−1+...+βkyt−k+ϵt
 
 esta es la forma de una regresión lineal autoregresiva AR(p)(Hamilton 1994).Ademas de esta forma se pueden agregar un conjunto de variables externas XtXt, de forma que el modelo se convierte en:yt=β0+β1yt−1+...+βkyt−k+βk+1Xt+ϵtyt=β0+β1yt−1+...+βkyt−k+βk+1Xt+ϵt denominado modelo ARX (Ljung 1999)
+
+
+``` r
+# 1. Crear variable de tiempo
+tiempo <- 1:length(btc_ts)
+df_lm <- data.frame(
+  tiempo = tiempo,
+  precio = as.numeric(btc_ts)
+)
+```
+
+
+``` r
+# 2. Particionar por proporción
+train_ratio <- 0.8
+n <- nrow(df_lm)
+n_train <- floor(train_ratio * n)
+
+# Conjuntos de entrenamiento y prueba
+train_df <- df_lm[1:n_train, ]
+test_df  <- df_lm[(n_train + 1):n, ]
+```
+
+
+
+``` r
+modelo_lm <- lm(precio ~ tiempo, data = train_df)
+summary(modelo_lm)
+```
+
+```
+## 
+## Call:
+## lm(formula = precio ~ tiempo, data = train_df)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -16646  -8470  -5232   5103  41008 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 4677.2955   550.0311   8.504   <2e-16 ***
+## tiempo        15.5408     0.4452  34.905   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 12710 on 2137 degrees of freedom
+## Multiple R-squared:  0.3631,	Adjusted R-squared:  0.3628 
+## F-statistic:  1218 on 1 and 2137 DF,  p-value: < 2.2e-16
+```
+
+``` r
+pred_test <- predict(modelo_lm, newdata = test_df)
+actual_test <- test_df$precio
+```
+
+
+
+``` r
+rmse_val <- rmse(actual_test, pred_test)
+mae_val <- mae(actual_test, pred_test)
+mape_val <- mape(actual_test, pred_test)
+
+cat("📊 RMSE:", round(rmse_val, 2), "\n")
+```
+
+```
+## 📊 RMSE: 31857.51
+```
+
+``` r
+cat("📊 MAE :", round(mae_val, 2), "\n")
+```
+
+```
+## 📊 MAE : 27069.4
+```
+
+``` r
+cat("📊 MAPE:", round(mape_val * 100, 2), "%\n")
+```
+
+```
+## 📊 MAPE: 35.12 %
+```
+
+``` r
+plot(test_df$tiempo, actual_test, type = "l", col = "red", lwd = 2,
+     main = "Regresión Lineal: Predicción vs Real",
+     xlab = "Tiempo", ylab = "Precio BTC")
+lines(test_df$tiempo, pred_test, col = "blue", lwd = 2)
+legend("topleft", legend = c("Real", "Predicción"),
+       col = c("red", "blue"), lty = 1, lwd = 2)
+```
+
+<img src="02-capitulo_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+## Expanding Window Arima
+
+
+``` r
+expanding_linear_forecast <- function(serie_ts, initial_train_ratio = 0.9) {
+  library(Metrics)
+
+  n <- length(serie_ts)
+  n_train <- floor(n * initial_train_ratio)
+
+  reales <- c()
+  predichos <- c()
+
+  for (i in n_train:(n - 1)) {
+    # Construir datos de entrenamiento hasta el tiempo i
+    ts_train <- serie_ts[1:i]
+    tiempo_train <- 1:i
+    df_train <- data.frame(
+      tiempo = tiempo_train,
+      precio = as.numeric(ts_train)
+    )
+
+    # Ajustar modelo lineal
+    modelo <- lm(precio ~ tiempo, data = df_train)
+
+    # Predecir el siguiente punto (tiempo i+1)
+    nuevo <- data.frame(tiempo = i + 1)
+    pred <- predict(modelo, newdata = nuevo)
+
+    # Valor real en t = i + 1
+    real <- as.numeric(serie_ts[i + 1])
+
+    # Guardar resultados
+    reales <- c(reales, real)
+    predichos <- c(predichos, pred)
+  }
+
+  # Convertir a ts para alinear
+  ts_reales <- ts(reales, start = time(serie_ts)[n_train + 1], frequency = frequency(serie_ts))
+  ts_predichos <- ts(predichos, start = time(serie_ts)[n_train + 1], frequency = frequency(serie_ts))
+
+  # Evaluar métricas
+  rmse_val <- rmse(ts_reales, ts_predichos)
+  mae_val <- mae(ts_reales, ts_predichos)
+  mape_val <- mape(ts_reales, ts_predichos)
+
+  cat("📊 Expanding Window - Regresión Lineal\n")
+  cat("RMSE:", round(rmse_val, 2), "\n")
+  cat("MAE :", round(mae_val, 2), "\n")
+  cat("MAPE:", round(mape_val * 100, 2), "%\n")
+
+  # Gráfico
+  plot(ts_reales, type = "l", col = "red", lwd = 2,
+       main = "Expanding Window: Real vs Predicción (Regresión Lineal)",
+       ylab = "Precio BTC")
+  lines(ts_predichos, col = "blue", lwd = 2)
+  legend("topleft", legend = c("Real", "Predicción"), col = c("red", "blue"), lty = 1)
+
+  return(list(real = ts_reales, pred = ts_predichos,
+              rmse = rmse_val, mae = mae_val, mape = mape_val))
+}
+```
+
+
+``` r
+resultado_lm <- expanding_linear_forecast(btc_ts, initial_train_ratio = 0.9)
+```
+
+```
+## 📊 Expanding Window - Regresión Lineal
+## RMSE: 28586.75 
+## MAE : 25435.98 
+## MAPE: 29.17 %
+```
+
+<img src="02-capitulo_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 
 ### Algoritmo Facebook´s Prophet
@@ -484,6 +888,17 @@ library(prophet)
 ## Loading required package: rlang
 ```
 
+```
+## 
+## Attaching package: 'rlang'
+```
+
+```
+## The following object is masked from 'package:Metrics':
+## 
+##     ll
+```
+
 ``` r
 start_date <- as.Date("2018-01-01")  
 btc_df <- data.frame(
@@ -494,119 +909,445 @@ btc_df <- data.frame(
 
 
 ``` r
-modelo_pr <- prophet(btc_df)
+n <- nrow(btc_df)
+n_train <- floor(n * 0.8)
+
+df_train <- btc_df[1:n_train, ]
+df_test <- btc_df[(n_train + 1):n, ]
+```
+
+
+``` r
+modelo <- prophet(df_train)
 ```
 
 ```
 ## Disabling daily seasonality. Run prophet with daily.seasonality=TRUE to override this.
 ```
 
-``` r
-# Hacer predicciones a  30 días
-future <- make_future_dataframe(modelo_pr, periods = 30)
 
-forecast <- predict(modelo_pr, future)
-
-# Grafico
-plot(modelo_pr, forecast) +
-  ggtitle("Predicción de precios BTC con Prophet")
-```
-
-<img src="02-capitulo_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 ``` r
-# Residuales 
-residuos <- btc_df$y - predict(modelo_pr, btc_df)$yhat[1:nrow(btc_df)]
+# 4. Crear dataframe futuro para predecir el mismo horizonte de test
+future <- make_future_dataframe(modelo, periods = n - n_train)
 
-# Graficar residuos
-plot(residuos, type = "l", main = "Residuos", ylab = "Error", xlab = "Tiempo")
-```
-
-<img src="02-capitulo_files/figure-html/unnamed-chunk-21-1.png" width="672" />
-
-``` r
-# Autocorrelación
-acf(residuos, main = "ACF de los residuos")
-```
-
-<img src="02-capitulo_files/figure-html/unnamed-chunk-21-2.png" width="672" />
-
-``` r
-# Normalidad
-qqnorm(residuos); qqline(residuos)
-```
-
-<img src="02-capitulo_files/figure-html/unnamed-chunk-21-3.png" width="672" />
-
-``` r
-shapiro.test(residuos)  # prueba de normalidad
-```
-
-```
-## 
-## 	Shapiro-Wilk normality test
-## 
-## data:  residuos
-## W = 0.97799, p-value < 2.2e-16
+# 5. Predecir
+forecast <- predict(modelo, future)
+# 6. Extraer solo predicciones del período de prueba
+pred_test <- forecast[(n_train + 1):n, ]
 ```
 
 
 
 ``` r
-prophet_plot_components(modelo_pr, forecast)
-```
+rmse_val <- rmse(df_test$y, pred_test$yhat)
+mae_val  <- mae(df_test$y, pred_test$yhat)
+mape_val <- mape(df_test$y, pred_test$yhat)
 
-<img src="02-capitulo_files/figure-html/unnamed-chunk-22-1.png" width="672" />
-
-
-``` r
-# Validación cruzada: horizonte de 30 días
-df_cv <- cross_validation(modelo_pr, initial = 180, period = 30, horizon = 30, units = "days")
+cat("📊 Prophet con división 80/20:\n")
 ```
 
 ```
-## Making 83 forecasts with cutoffs between 2018-07-03 and 2025-03-28
-```
-
-```
-## Warning in cross_validation(modelo_pr, initial = 180, period = 30, horizon =
-## 30, : Seasonality has period of 365.25 days which is larger than initial
-## window. Consider increasing initial.
-```
-
-```
-## Warning in .local(object, ...): non-zero return code in optimizing
-```
-
-```
-## Optimization terminated abnormally. Falling back to Newton optimizer.
+## 📊 Prophet con división 80/20:
 ```
 
 ``` r
-df_p <- performance_metrics(df_cv)
-
-# Ver resultados
-head(df_p)
+cat("RMSE:", round(rmse_val, 2), "\n")
 ```
 
 ```
-##   horizon      mse     rmse      mae      mape     mdape     smape  coverage
-## 1  3 days 57994507 7615.412 5233.187 0.1679582 0.1274214 0.1706609 0.4337349
-## 2  4 days 60848792 7800.564 5395.434 0.1760910 0.1285579 0.1797146 0.4257028
-## 3  5 days 67162563 8195.277 5674.725 0.1879776 0.1426778 0.1928939 0.4096386
-## 4  6 days 70884858 8419.315 5867.574 0.1957333 0.1514895 0.2045129 0.4136546
-## 5  7 days 72944942 8540.781 6008.401 0.2014874 0.1540398 0.2131053 0.3975904
-## 6  8 days 73639451 8581.343 5998.679 0.2047503 0.1514895 0.2174448 0.3975904
+## RMSE: 33526.99
 ```
 
 ``` r
-# Gráfico de RMSE
-plot_cross_validation_metric(df_cv, metric = "rmse")
+cat("MAE :", round(mae_val, 2), "\n")
 ```
 
-<img src="02-capitulo_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+```
+## MAE : 29892.62
+```
+
+``` r
+cat("MAPE:", round(mape_val * 100, 2), "%\n")
+```
+
+```
+## MAPE: 40.53 %
+```
+
+``` r
+# 8. Gráfico
+plot(df_test$ds, df_test$y, type = "l", col = "red", lwd = 2,
+     main = "Predicción Prophet vs Real (80/20)",
+     ylab = "Precio BTC", xlab = "Fecha")
+lines(pred_test$ds, pred_test$yhat, col = "blue", lwd = 2)
+legend("topleft", legend = c("Real", "Predicción"), col = c("red", "blue"), lty = 1)
+```
+
+<img src="02-capitulo_files/figure-html/unnamed-chunk-41-1.png" width="672" />
+## Expading Window Prophet
+
+
+``` r
+expanding_prophet_forecast <- function(btc_ts, initial_train_ratio = 0.9) {
+  library(prophet)
+  library(Metrics)
+
+  # 1. Preparar datos con fecha y valor
+  btc_df <- data.frame(
+    ds = seq.Date(from = as.Date("2018-01-01"), by = "day", length.out = length(btc_ts)),
+    y = as.numeric(btc_ts)
+  )
+
+  n <- nrow(btc_df)
+  n_train <- floor(n * initial_train_ratio)
+
+  reales <- c()
+  predichos <- c()
+  fechas <- c()
+
+  for (i in n_train:(n - 1)) {
+    # Subconjunto hasta t = i
+    df_train <- btc_df[1:i, ]
+
+    # Entrenar modelo Prophet
+    modelo <- prophet(df_train, verbose = FALSE, daily.seasonality = FALSE)
+
+    # Crear data.frame para predecir t = i + 1
+    fecha_pred <- btc_df$ds[i + 1]
+    future <- data.frame(ds = fecha_pred)
+
+    # Predecir
+    forecast <- predict(modelo, future)
+
+    # Guardar resultados
+    reales <- c(reales, btc_df$y[i + 1])
+    predichos <- c(predichos, forecast$yhat[1])
+    fechas <- c(fechas, as.character(fecha_pred))
+  }
+
+  # Convertir a serie de tiempo
+  ts_reales <- ts(reales, start = n_train + 1, frequency = 1)
+  ts_predichos <- ts(predichos, start = n_train + 1, frequency = 1)
+
+  # Métricas
+  rmse_val <- rmse(ts_reales, ts_predichos)
+  mae_val  <- mae(ts_reales, ts_predichos)
+  mape_val <- mape(ts_reales, ts_predichos)
+
+  cat("📊 Expanding Window - Prophet\n")
+  cat("RMSE:", round(rmse_val, 2), "\n")
+  cat("MAE :", round(mae_val, 2), "\n")
+  cat("MAPE:", round(mape_val * 100, 2), "%\n")
+
+  # Gráfico
+  fechas_ts <- as.Date(fechas)
+  plot(fechas_ts, ts_reales, type = "l", col = "red", lwd = 2,
+       main = "Expanding Window: Real vs Predicción (Prophet)",
+       ylab = "Precio BTC", xlab = "Fecha")
+  lines(fechas_ts, ts_predichos, col = "blue", lwd = 2)
+  legend("topleft", legend = c("Real", "Predicción"), col = c("red", "blue"), lty = 1)
+
+  return(data.frame(
+    fecha = fechas_ts,
+    real = ts_reales,
+    pred = ts_predichos
+  ))
+}
+```
 
 
 
+``` r
+resultado_prophet <- expanding_prophet_forecast(btc_ts, initial_train_ratio = 0.9)
+```
+
+```
+## 📊 Expanding Window - Prophet
+## RMSE: 11777.56 
+## MAE : 10131.19 
+## MAPE: 12.34 %
+```
+
+<img src="02-capitulo_files/figure-html/unnamed-chunk-43-1.png" width="672" />
+
+## Red Neuronal Elman
+
+
+``` r
+install.packages("RSNNS")
+```
+
+```
+## Installing package into '/cloud/lib/x86_64-pc-linux-gnu-library/4.4'
+## (as 'lib' is unspecified)
+```
+
+
+``` r
+library(RSNNS)
+
+# Normalizar serie
+btc_norm <- (btc_ts - min(btc_ts)) / (max(btc_ts) - min(btc_ts))
+
+# Parámetros
+n_lags <- 7
+n <- length(btc_norm)
+n_train <- floor(n * 0.9)
+
+# Crear matriz de entrada y salida
+crear_dataset <- function(serie, n_lags) {
+  X <- embed(serie, n_lags + 1)
+  y <- X[, 1]
+  X <- X[, -1]
+  return(list(X = X, y = y))
+}
+
+datos <- crear_dataset(btc_norm, n_lags)
+
+X <- datos$X
+y <- datos$y
+
+# División train/test
+X_train <- X[1:(n_train - n_lags), ]
+y_train <- y[1:(n_train - n_lags)]
+
+X_test <- X[(n_train - n_lags + 1):(n - n_lags), ]
+y_test <- y[(n_train - n_lags + 1):(n - n_lags)]
+```
+
+
+``` r
+# Ajustar red Elman
+modelo_elman <- elman(X_train, y_train,
+                      size = 10,
+                      learnFuncParams = c(0.1), maxit = 100,
+                      linOut = TRUE)
+
+# Predicción
+pred_norm <- predict(modelo_elman, X_test)
+
+# Desnormalizar
+min_y <- min(btc_ts)
+max_y <- max(btc_ts)
+pred <- pred_norm * (max_y - min_y) + min_y
+real <- y_test * (max_y - min_y) + min_y
+```
+
+
+
+``` r
+library(Metrics)
+cat("📊 Elman Neural Net:\n")
+```
+
+```
+## 📊 Elman Neural Net:
+```
+
+``` r
+cat("RMSE:", round(rmse(real, pred), 2), "\n")
+```
+
+```
+## RMSE: 15327.92
+```
+
+``` r
+cat("MAE :", round(mae(real, pred), 2), "\n")
+```
+
+```
+## MAE : 12516.27
+```
+
+``` r
+cat("MAPE:", round(mape(real, pred) * 100, 2), "%\n")
+```
+
+```
+## MAPE: 13.7 %
+```
+
+``` r
+# Gráfico
+plot(real, type = "l", col = "red", lwd = 2, ylab = "Precio BTC", main = "Red Elman")
+lines(pred, col = "blue", lwd = 2)
+legend("topleft", legend = c("Real", "Predicho"), col = c("red", "blue"), lty = 1)
+```
+
+<img src="02-capitulo_files/figure-html/unnamed-chunk-47-1.png" width="672" />
+
+## Red Neuronal Elman con Expanding window
+
+
+``` r
+expanding_elman_forecast <- function(btc_ts, n_lags = 5, size = 10, initial_train_ratio = 0.8, maxit = 100) {
+  library(RSNNS)
+  library(Metrics)
+
+  # Normalizar la serie
+  btc_norm <- (btc_ts - min(btc_ts)) / (max(btc_ts) - min(btc_ts))
+  min_val <- min(btc_ts)
+  max_val <- max(btc_ts)
+
+  # Preparar función para ventana deslizante
+  crear_dataset <- function(serie, n_lags) {
+    X <- embed(serie, n_lags + 1)
+    y <- X[, 1]
+    X <- X[, -1]
+    return(list(X = X, y = y))
+  }
+
+  datos <- crear_dataset(btc_norm, n_lags)
+  X_all <- datos$X
+  y_all <- datos$y
+  total <- nrow(X_all)
+
+  # Punto inicial para expanding window
+  start <- floor(total * initial_train_ratio)
+
+  pred <- c()
+  real <- c()
+
+  for (i in start:(total - 1)) {
+    X_train <- X_all[1:i, ]
+    y_train <- y_all[1:i]
+    X_next  <- matrix(X_all[i + 1, ], nrow = 1)
+
+    # Ajustar red Elman
+    modelo <- elman(X_train, y_train,
+                    size = size,
+                    learnFuncParams = c(0.1),
+                    maxit = maxit,
+                    linOut = TRUE)
+
+    pred_i <- predict(modelo, X_next)
+    pred <- c(pred, pred_i)
+    real <- c(real, y_all[i + 1])
+  }
+
+  # Desnormalizar
+  pred_desnorm <- pred * (max_val - min_val) + min_val
+  real_desnorm <- real * (max_val - min_val) + min_val
+
+  # Métricas
+  rmse_val <- rmse(real_desnorm, pred_desnorm)
+  mae_val  <- mae(real_desnorm, pred_desnorm)
+  mape_val <- mape(real_desnorm, pred_desnorm)
+
+  cat("📊 Expanding Window - Red Elman\n")
+  cat("RMSE:", round(rmse_val, 2), "\n")
+  cat("MAE :", round(mae_val, 2), "\n")
+  cat("MAPE:", round(mape_val * 100, 2), "%\n")
+
+  # Gráfico
+  plot(real_desnorm, type = "l", col = "red", lwd = 2, ylab = "Precio BTC", main = "Red Elman - Expanding Window")
+  lines(pred_desnorm, col = "blue", lwd = 2)
+  legend("topleft", legend = c("Real", "Predicho"), col = c("red", "blue"), lty = 1)
+
+  return(data.frame(real = real_desnorm, pred = pred_desnorm))
+}
+```
+
+
+``` r
+resultado_elman <- expanding_elman_forecast(btc_ts, n_lags = 7, size = 10)
+```
+
+```
+## 📊 Expanding Window - Red Elman
+## RMSE: 2137.92 
+## MAE : 1542.39 
+## MAPE: 2.24 %
+```
+
+<img src="02-capitulo_files/figure-html/unnamed-chunk-49-1.png" width="672" />
+
+## Red neuronal Jordan
+
+
+``` r
+expanding_jordan_forecast <- function(btc_ts, n_lags = 7, size = 10, initial_train_ratio = 0.9, maxit = 100) {
+  library(RSNNS)
+  library(Metrics)
+
+  # 1. Normalizar serie
+  btc_norm <- (btc_ts - min(btc_ts)) / (max(btc_ts) - min(btc_ts))
+  min_val <- min(btc_ts)
+  max_val <- max(btc_ts)
+
+  # 2. Crear dataset con ventanas
+  crear_dataset <- function(serie, n_lags) {
+    X <- embed(serie, n_lags + 1)
+    y <- X[, 1]
+    X <- X[, -1]
+    return(list(X = X, y = y))
+  }
+
+  datos <- crear_dataset(btc_norm, n_lags)
+  X_all <- datos$X
+  y_all <- datos$y
+  total <- nrow(X_all)
+
+  # 3. División inicial
+  start <- floor(total * initial_train_ratio)
+
+  pred <- c()
+  real <- c()
+
+  for (i in start:(total - 1)) {
+    X_train <- X_all[1:i, ]
+    y_train <- y_all[1:i]
+    X_next  <- matrix(X_all[i + 1, ], nrow = 1)
+
+    # 4. Ajustar modelo Jordan
+    modelo <- jordan(X_train, y_train,
+                     size = size,
+                     learnFuncParams = c(0.1),
+                     maxit = maxit,
+                     linOut = TRUE)
+
+    pred_i <- predict(modelo, X_next)
+    pred <- c(pred, pred_i)
+    real <- c(real, y_all[i + 1])
+  }
+
+  # 5. Desnormalizar
+  pred_desnorm <- pred * (max_val - min_val) + min_val
+  real_desnorm <- real * (max_val - min_val) + min_val
+
+  # 6. Métricas
+  rmse_val <- rmse(real_desnorm, pred_desnorm)
+  mae_val  <- mae(real_desnorm, pred_desnorm)
+  mape_val <- mape(real_desnorm, pred_desnorm)
+
+  cat("📊 Expanding Window - Red Jordan\n")
+  cat("RMSE:", round(rmse_val, 2), "\n")
+  cat("MAE :", round(mae_val, 2), "\n")
+  cat("MAPE:", round(mape_val * 100, 2), "%\n")
+
+  # 7. Gráfico
+  plot(real_desnorm, type = "l", col = "red", lwd = 2, ylab = "Precio BTC", main = "Red Jordan - Expanding Window")
+  lines(pred_desnorm, col = "blue", lwd = 2)
+  legend("topleft", legend = c("Real", "Predicho"), col = c("red", "blue"), lty = 1)
+
+  return(data.frame(real = real_desnorm, pred = pred_desnorm))
+}
+```
+
+
+``` r
+resultado_jordan <- expanding_jordan_forecast(btc_ts, n_lags = 7, size = 10)
+```
+
+```
+## 📊 Expanding Window - Red Jordan
+## RMSE: 2350.64 
+## MAE : 1756.91 
+## MAPE: 2.16 %
+```
+
+<img src="02-capitulo_files/figure-html/unnamed-chunk-51-1.png" width="672" />
 
 

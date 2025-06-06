@@ -10,7 +10,7 @@ Cabe resaltar que esta metodología no requiere que la serie sea estacionaria. E
 
 A continuación, se procede a aplicar el método de Holt Winter a los precios de cierre diarios del Bitcoin, dentro de la aplicación de este modelo se asume una estacionalidad aditiva.
 ```{r}
-install.packages("quantmod")
+#install.packages("quantmod")
 
 ```
 ```{r}
@@ -43,52 +43,129 @@ btc_close <- as.zoo(btc_zoo$`BTC-USD.Close`)
 btc_ts <- ts(coredata(btc_close), frequency = 365, start = c(2018, 1))
 ```
 
-a continuación se aplica el modelo.
+se procede a realizar la división de datos de entrenamiento y de test
 ```{r}
-modelo_hw <- HoltWinters(btc_ts)
+
+# Porcentaje de división
+train_ratio <- 0.9
+n <- length(btc_ts)
+
+n_train <- floor(n * train_ratio)
+n_test <- n - n_train
+
+# Crear subconjuntos de entrenamiento y prueba
+btc_train <- window(btc_ts, end = time(btc_ts)[n_train])
+btc_test <- window(btc_ts, start = time(btc_ts)[n_train + 1])
+```
+
+
+a continuación se procede a entrenar el modelo.
+```{r}
+modelo_hw <- HoltWinters(btc_train)
+
 ```
 
 
 ```{r}
 summary(modelo_hw)
 ```
-Pronostico de 30 días.
+Como siguiente paso se procede a realizar la predicción sobre el horizonte de prueba
 
 ```{r}
-# Pronóstico a futuro (30 días)
-forecast_hw <- forecast(modelo_hw, h = 30)
+# Pronóstico sobre los datos de test
+forecast_hw <- forecast(modelo_hw, h = n_test)
 autoplot(forecast_hw) +
   ggtitle("Pronóstico de BTC/USD con Holt-Winters") +
   ylab("Precio de Cierre") +
   xlab("Fecha")
 ```
 
-Pronóstico para 110 días.
 ```{r}
-ultimos_10 <- tail(btc_ts, 10)
+# Graficar
+plot(forecast_hw, main = "Holt-Winters - Predicción vs Real")
+lines(btc_test, col = "red", lwd = 2)  # Observado en rojo
+legend("topleft", legend = c("Predicción", "Real"), col = c("blue", "red"), lty = 1)
 
-# Pronóstico 
-forecast_hw <- forecast(modelo_hw, h = 110)
-proyeccion <- forecast_hw$mean
-
-serie_completa <- ts(c(ultimos_10, proyeccion), start = time(ultimos_10)[1], frequency = frequency(btc_ts))
-
-
-df_proyeccion <- data.frame(
-  Fecha = time(serie_completa),
-  Precio = as.numeric(serie_completa),
-  Tipo = c(rep("Real", length(ultimos_10)), rep("Pronóstico", length(proyeccion)))
-)
-
-# Grafico
-ggplot(df_proyeccion, aes(x = Fecha, y = Precio, color = Tipo)) +
-  geom_line(size = 1.2) +
-  ggtitle("BTC/USD: Últimos 10 días + Pronóstico Holt-Winters") +
-  ylab("Precio de cierre") +
-  xlab("Fecha") +
-  scale_color_manual(values = c("Real" = "black", "Pronóstico" = "blue")) +
-  theme_minimal()
 ```
+
+```{r}
+library(Metrics)
+# Extraer valores
+predicted <- forecast_hw$mean
+actual <- btc_test
+
+# Métricas
+rmse_val <- rmse(actual, predicted)
+mae_val <- mae(actual, predicted)
+mape_val <- mape(actual, predicted)
+
+cat("📊 RMSE:", rmse_val, "\n")
+cat("📊 MAE :", mae_val, "\n")
+cat("📊 MAPE:", round(mape_val * 100, 2), "%\n")
+
+```
+
+## EXpanding windows Holt winter
+
+```{r}
+expanding_holt_winters <- function(serie_ts, initial_train_ratio = 0.8) {
+  library(forecast)
+  library(Metrics)
+
+  n <- length(serie_ts)
+  n_train <- floor(n * initial_train_ratio)
+
+  errores <- c()
+  reales <- c()
+  predichos <- c()
+
+  for (i in n_train:(n - 1)) {
+    # Expanding window hasta el tiempo i
+    ts_train <- window(serie_ts, end = time(serie_ts)[i])
+    
+    # Ajustar modelo Holt-Winters
+    modelo <- HoltWinters(ts_train)
+
+    # Predecir 1 paso adelante
+    pred <- forecast(modelo, h = 1)$mean[1]
+    
+    # Valor real del siguiente punto
+    real <- serie_ts[i + 1]
+
+    # Guardar valores
+    errores <- c(errores, real - pred)
+    reales <- c(reales, real)
+    predichos <- c(predichos, pred)
+  }
+
+  # Evaluar métricas
+  rmse_val <- rmse(reales, predichos)
+  mae_val <- mae(reales, predichos)
+  mape_val <- mape(reales, predichos)
+
+  cat("📊 Expanding Window - Holt-Winters\n")
+  cat("RMSE:", round(rmse_val, 2), "\n")
+  cat("MAE :", round(mae_val, 2), "\n")
+  cat("MAPE:", round(mape_val * 100, 2), "%\n")
+
+  # Gráfico comparativo
+  ts_reales <- ts(reales, start = time(serie_ts)[n_train + 1], frequency = frequency(serie_ts))
+  ts_predichos <- ts(predichos, start = time(serie_ts)[n_train + 1], frequency = frequency(serie_ts))
+
+  plot(ts_reales, type = "l", col = "red", lwd = 2,
+       main = "Expanding Window: Real vs Predicción (Holt-Winters)",
+       ylab = "Precio BTC")
+  lines(ts_predichos, col = "blue", lwd = 2)
+  legend("topleft", legend = c("Real", "Predicción"), col = c("red", "blue"), lty = 1)
+}
+
+```
+
+```{r}
+resultado_hw<-expanding_holt_winters(btc_ts, initial_train_ratio = 0.9)
+
+```
+
 
 
 ## Metodología Box-Jenkins
@@ -235,33 +312,138 @@ ACF<-acf(dif.btc.ts)
 ```{r}
 PACF<-pacf(dif.btc.ts)
 ```
+A continuación se procede a dividir la serie de tiempo diferenciada para la fasde de entrenamiento y de test
+```{r}
+# Parámetros de división
+train_ratio <- 0.9
+n <- length(dif.btc.ts)
+
+n_train <- floor(n * train_ratio)
+n_test <- n - n_train
+
+# Dividir en train y test
+dif_train <- window(dif.btc.ts, end = time(dif.btc.ts)[n_train])
+dif_test <- window(dif.btc.ts, start = time(dif.btc.ts)[n_train + 1])
+
+
+```
+
 ### Modelado Autoarima
 
 ```{r}
-modelo<-auto.arima(dif.btc.ts)
+modelo <- auto.arima(dif_train)
 modelo
 
 ```
 
 ```{r}
-library(changepoint)
-mval<-cpt.mean(dif.btc.ts,method = "AMOC") 
-cpts(mval)
+pred_arima <- forecast(modelo, h = n_test)
+```
+
+```{r}
+d <- ndiffs(btc_ts)
+last_value <- btc_ts[n_train + d]  # valor original antes del primer test
+predicted <- cumsum(pred_arima$mean) + last_value
+
+
+# Valores reales correspondientes a la serie original
+actual <- window(btc_ts, start = time(btc_ts)[n_train + d + 1])
 
 ```
 
 ```{r}
-plot(mval, type = "l", cpt.col = "blue", xlab = "Value", cpt.width = 4, main = "default penalty")
+summary(actual)
 ```
 ```{r}
-pred<-forecast(dif.btc.ts,h=12)
-pred
+summary(predicted)
 ```
+
+
+
 ```{r}
-plot(pred, main=" ", ylab="valor", col="red", xlab="Años")
-title(main="Predicción DIF Precios del Bitcoin")
+rmse_val <- rmse(actual, predicted)
+mae_val <- mae(actual, predicted)
+mape_val <- mape(actual, predicted)
+
+cat("📊 RMSE:", rmse_val, "\n")
+cat("📊 MAE :", mae_val, "\n")
+cat("📊 MAPE:", round(mape_val * 100, 2), "%\n")
 
 ```
+```{r}
+predicted_ts <- ts(predicted, start = start(actual), frequency = frequency(btc_ts))
+plot(actual, type = "l", col = "red", lwd = 2,
+     main = "Predicción vs Real (ARIMA)",
+     ylab = "Precio",
+     ylim = range(c(actual, predicted_ts)) * c(0.9, 1.05))  # más margen abajo
+lines(predicted_ts, col = "blue", lwd = 2)
+
+
+```
+
+## Expanding window Arima
+
+```{r}
+expanding_arima_forecast <- function(serie_ts, initial_train_ratio = 0.9) {
+  library(forecast)
+  library(Metrics)
+
+  n <- length(serie_ts)
+  n_train <- floor(n * initial_train_ratio)
+
+  reales <- c()
+  predichos <- c()
+
+  for (i in n_train:(n - 1)) {
+    # 1. Ventana de entrenamiento hasta el tiempo i
+    ts_train <- window(serie_ts, end = time(serie_ts)[i])
+    
+    # 2. Ajustar modelo ARIMA automáticamente
+    modelo <- auto.arima(ts_train)
+    
+    # 3. Predecir un paso adelante
+    pred <- forecast(modelo, h = 1)$mean[1]
+    
+    # 4. Obtener valor real siguiente (para evaluación)
+    real <- serie_ts[i + 1]
+    
+    # 5. Guardar resultados
+    reales <- c(reales, real)
+    predichos <- c(predichos, pred)
+  }
+
+  # Convertir a ts para graficar alineado
+  ts_reales <- ts(reales, start = time(serie_ts)[n_train + 1], frequency = frequency(serie_ts))
+  ts_predichos <- ts(predichos, start = time(serie_ts)[n_train + 1], frequency = frequency(serie_ts))
+
+  # Evaluar métricas
+  rmse_val <- rmse(ts_reales, ts_predichos)
+  mae_val <- mae(ts_reales, ts_predichos)
+  mape_val <- mape(ts_reales, ts_predichos)
+
+  cat("📊 Expanding Window - ARIMA\n")
+  cat("RMSE:", round(rmse_val, 2), "\n")
+  cat("MAE :", round(mae_val, 2), "\n")
+  cat("MAPE:", round(mape_val * 100, 2), "%\n")
+
+  # Gráfico
+  plot(ts_reales, type = "l", col = "red", lwd = 2,
+       main = "Expanding Window: Real vs Predicción (ARIMA)",
+       ylab = "Precio BTC")
+  lines(ts_predichos, col = "blue", lwd = 2)
+  legend("topleft", legend = c("Real", "Predicción"), col = c("red", "blue"), lty = 1)
+
+  return(list(real = ts_reales, pred = ts_predichos,
+              rmse = rmse_val, mae = mae_val, mape = mape_val))
+}
+
+```
+
+```{r}
+#resultado_arima <- expanding_arima_forecast(btc_ts, initial_train_ratio = 0.9)
+
+```
+
 
 
 ## Regresión de una serie de tiempo y Algoritmo Facebook´s Prophet
@@ -273,6 +455,125 @@ El proceso de transformar una serie en una regresión consiste en usar sus valor
 yt=β0+β1yt−1+...+βkyt−k+ϵt
 
 esta es la forma de una regresión lineal autoregresiva AR(p)(Hamilton 1994).Ademas de esta forma se pueden agregar un conjunto de variables externas XtXt, de forma que el modelo se convierte en:yt=β0+β1yt−1+...+βkyt−k+βk+1Xt+ϵtyt=β0+β1yt−1+...+βkyt−k+βk+1Xt+ϵt denominado modelo ARX (Ljung 1999)
+
+```{r}
+# 1. Crear variable de tiempo
+tiempo <- 1:length(btc_ts)
+df_lm <- data.frame(
+  tiempo = tiempo,
+  precio = as.numeric(btc_ts)
+)
+```
+
+```{r}
+# 2. Particionar por proporción
+train_ratio <- 0.8
+n <- nrow(df_lm)
+n_train <- floor(train_ratio * n)
+
+# Conjuntos de entrenamiento y prueba
+train_df <- df_lm[1:n_train, ]
+test_df  <- df_lm[(n_train + 1):n, ]
+```
+
+
+```{r}
+modelo_lm <- lm(precio ~ tiempo, data = train_df)
+summary(modelo_lm)
+```
+```{r}
+pred_test <- predict(modelo_lm, newdata = test_df)
+actual_test <- test_df$precio
+
+```
+
+
+```{r}
+rmse_val <- rmse(actual_test, pred_test)
+mae_val <- mae(actual_test, pred_test)
+mape_val <- mape(actual_test, pred_test)
+
+cat("📊 RMSE:", round(rmse_val, 2), "\n")
+cat("📊 MAE :", round(mae_val, 2), "\n")
+cat("📊 MAPE:", round(mape_val * 100, 2), "%\n")
+
+```
+```{r}
+plot(test_df$tiempo, actual_test, type = "l", col = "red", lwd = 2,
+     main = "Regresión Lineal: Predicción vs Real",
+     xlab = "Tiempo", ylab = "Precio BTC")
+lines(test_df$tiempo, pred_test, col = "blue", lwd = 2)
+legend("topleft", legend = c("Real", "Predicción"),
+       col = c("red", "blue"), lty = 1, lwd = 2)
+
+```
+## Expanding Window Arima
+
+```{r}
+expanding_linear_forecast <- function(serie_ts, initial_train_ratio = 0.9) {
+  library(Metrics)
+
+  n <- length(serie_ts)
+  n_train <- floor(n * initial_train_ratio)
+
+  reales <- c()
+  predichos <- c()
+
+  for (i in n_train:(n - 1)) {
+    # Construir datos de entrenamiento hasta el tiempo i
+    ts_train <- serie_ts[1:i]
+    tiempo_train <- 1:i
+    df_train <- data.frame(
+      tiempo = tiempo_train,
+      precio = as.numeric(ts_train)
+    )
+
+    # Ajustar modelo lineal
+    modelo <- lm(precio ~ tiempo, data = df_train)
+
+    # Predecir el siguiente punto (tiempo i+1)
+    nuevo <- data.frame(tiempo = i + 1)
+    pred <- predict(modelo, newdata = nuevo)
+
+    # Valor real en t = i + 1
+    real <- as.numeric(serie_ts[i + 1])
+
+    # Guardar resultados
+    reales <- c(reales, real)
+    predichos <- c(predichos, pred)
+  }
+
+  # Convertir a ts para alinear
+  ts_reales <- ts(reales, start = time(serie_ts)[n_train + 1], frequency = frequency(serie_ts))
+  ts_predichos <- ts(predichos, start = time(serie_ts)[n_train + 1], frequency = frequency(serie_ts))
+
+  # Evaluar métricas
+  rmse_val <- rmse(ts_reales, ts_predichos)
+  mae_val <- mae(ts_reales, ts_predichos)
+  mape_val <- mape(ts_reales, ts_predichos)
+
+  cat("📊 Expanding Window - Regresión Lineal\n")
+  cat("RMSE:", round(rmse_val, 2), "\n")
+  cat("MAE :", round(mae_val, 2), "\n")
+  cat("MAPE:", round(mape_val * 100, 2), "%\n")
+
+  # Gráfico
+  plot(ts_reales, type = "l", col = "red", lwd = 2,
+       main = "Expanding Window: Real vs Predicción (Regresión Lineal)",
+       ylab = "Precio BTC")
+  lines(ts_predichos, col = "blue", lwd = 2)
+  legend("topleft", legend = c("Real", "Predicción"), col = c("red", "blue"), lty = 1)
+
+  return(list(real = ts_reales, pred = ts_predichos,
+              rmse = rmse_val, mae = mae_val, mape = mape_val))
+}
+
+```
+
+```{r}
+resultado_lm <- expanding_linear_forecast(btc_ts, initial_train_ratio = 0.9)
+
+```
 
 
 ### Algoritmo Facebook´s Prophet
@@ -297,55 +598,352 @@ btc_df <- data.frame(
 ```
 
 ```{r}
-modelo_pr <- prophet(btc_df)
+n <- nrow(btc_df)
+n_train <- floor(n * 0.8)
 
-# Hacer predicciones a  30 días
-future <- make_future_dataframe(modelo_pr, periods = 30)
-
-forecast <- predict(modelo_pr, future)
-
-# Grafico
-plot(modelo_pr, forecast) +
-  ggtitle("Predicción de precios BTC con Prophet")
-
+df_train <- btc_df[1:n_train, ]
+df_test <- btc_df[(n_train + 1):n, ]
 ```
+
 ```{r}
-# Residuales 
-residuos <- btc_df$y - predict(modelo_pr, btc_df)$yhat[1:nrow(btc_df)]
-
-# Graficar residuos
-plot(residuos, type = "l", main = "Residuos", ylab = "Error", xlab = "Tiempo")
-
-# Autocorrelación
-acf(residuos, main = "ACF de los residuos")
-
-# Normalidad
-qqnorm(residuos); qqline(residuos)
-shapiro.test(residuos)  # prueba de normalidad
-
+modelo <- prophet(df_train)
 ```
 
 
 ```{r}
-prophet_plot_components(modelo_pr, forecast)
+# 4. Crear dataframe futuro para predecir el mismo horizonte de test
+future <- make_future_dataframe(modelo, periods = n - n_train)
+
+# 5. Predecir
+forecast <- predict(modelo, future)
+# 6. Extraer solo predicciones del período de prueba
+pred_test <- forecast[(n_train + 1):n, ]
+```
+
+
+```{r}
+rmse_val <- rmse(df_test$y, pred_test$yhat)
+mae_val  <- mae(df_test$y, pred_test$yhat)
+mape_val <- mape(df_test$y, pred_test$yhat)
+
+cat("📊 Prophet con división 80/20:\n")
+cat("RMSE:", round(rmse_val, 2), "\n")
+cat("MAE :", round(mae_val, 2), "\n")
+cat("MAPE:", round(mape_val * 100, 2), "%\n")
+
+
+```
+```{r}
+
+# 8. Gráfico
+plot(df_test$ds, df_test$y, type = "l", col = "red", lwd = 2,
+     main = "Predicción Prophet vs Real (80/20)",
+     ylab = "Precio BTC", xlab = "Fecha")
+lines(pred_test$ds, pred_test$yhat, col = "blue", lwd = 2)
+legend("topleft", legend = c("Real", "Predicción"), col = c("red", "blue"), lty = 1)
+```
+## Expading Window Prophet
+
+```{r}
+expanding_prophet_forecast <- function(btc_ts, initial_train_ratio = 0.9) {
+  library(prophet)
+  library(Metrics)
+
+  # 1. Preparar datos con fecha y valor
+  btc_df <- data.frame(
+    ds = seq.Date(from = as.Date("2018-01-01"), by = "day", length.out = length(btc_ts)),
+    y = as.numeric(btc_ts)
+  )
+
+  n <- nrow(btc_df)
+  n_train <- floor(n * initial_train_ratio)
+
+  reales <- c()
+  predichos <- c()
+  fechas <- c()
+
+  for (i in n_train:(n - 1)) {
+    # Subconjunto hasta t = i
+    df_train <- btc_df[1:i, ]
+
+    # Entrenar modelo Prophet
+    modelo <- prophet(df_train, verbose = FALSE, daily.seasonality = FALSE)
+
+    # Crear data.frame para predecir t = i + 1
+    fecha_pred <- btc_df$ds[i + 1]
+    future <- data.frame(ds = fecha_pred)
+
+    # Predecir
+    forecast <- predict(modelo, future)
+
+    # Guardar resultados
+    reales <- c(reales, btc_df$y[i + 1])
+    predichos <- c(predichos, forecast$yhat[1])
+    fechas <- c(fechas, as.character(fecha_pred))
+  }
+
+  # Convertir a serie de tiempo
+  ts_reales <- ts(reales, start = n_train + 1, frequency = 1)
+  ts_predichos <- ts(predichos, start = n_train + 1, frequency = 1)
+
+  # Métricas
+  rmse_val <- rmse(ts_reales, ts_predichos)
+  mae_val  <- mae(ts_reales, ts_predichos)
+  mape_val <- mape(ts_reales, ts_predichos)
+
+  cat("📊 Expanding Window - Prophet\n")
+  cat("RMSE:", round(rmse_val, 2), "\n")
+  cat("MAE :", round(mae_val, 2), "\n")
+  cat("MAPE:", round(mape_val * 100, 2), "%\n")
+
+  # Gráfico
+  fechas_ts <- as.Date(fechas)
+  plot(fechas_ts, ts_reales, type = "l", col = "red", lwd = 2,
+       main = "Expanding Window: Real vs Predicción (Prophet)",
+       ylab = "Precio BTC", xlab = "Fecha")
+  lines(fechas_ts, ts_predichos, col = "blue", lwd = 2)
+  legend("topleft", legend = c("Real", "Predicción"), col = c("red", "blue"), lty = 1)
+
+  return(data.frame(
+    fecha = fechas_ts,
+    real = ts_reales,
+    pred = ts_predichos
+  ))
+}
+
+```
+
+
+```{r}
+resultado_prophet <- expanding_prophet_forecast(btc_ts, initial_train_ratio = 0.9)
+
+```
+
+## Red Neuronal Elman
+
+```{r}
+install.packages("RSNNS")
 
 ```
 
 ```{r}
+library(RSNNS)
 
-# Validación cruzada: horizonte de 30 días
-df_cv <- cross_validation(modelo_pr, initial = 180, period = 30, horizon = 30, units = "days")
-df_p <- performance_metrics(df_cv)
+# Normalizar serie
+btc_norm <- (btc_ts - min(btc_ts)) / (max(btc_ts) - min(btc_ts))
 
-# Ver resultados
-head(df_p)
+# Parámetros
+n_lags <- 7
+n <- length(btc_norm)
+n_train <- floor(n * 0.9)
 
-# Gráfico de RMSE
-plot_cross_validation_metric(df_cv, metric = "rmse")
+# Crear matriz de entrada y salida
+crear_dataset <- function(serie, n_lags) {
+  X <- embed(serie, n_lags + 1)
+  y <- X[, 1]
+  X <- X[, -1]
+  return(list(X = X, y = y))
+}
+
+datos <- crear_dataset(btc_norm, n_lags)
+
+X <- datos$X
+y <- datos$y
+
+# División train/test
+X_train <- X[1:(n_train - n_lags), ]
+y_train <- y[1:(n_train - n_lags)]
+
+X_test <- X[(n_train - n_lags + 1):(n - n_lags), ]
+y_test <- y[(n_train - n_lags + 1):(n - n_lags)]
+
+```
+
+```{r}
+# Ajustar red Elman
+modelo_elman <- elman(X_train, y_train,
+                      size = 10,
+                      learnFuncParams = c(0.1), maxit = 100,
+                      linOut = TRUE)
+
+# Predicción
+pred_norm <- predict(modelo_elman, X_test)
+
+# Desnormalizar
+min_y <- min(btc_ts)
+max_y <- max(btc_ts)
+pred <- pred_norm * (max_y - min_y) + min_y
+real <- y_test * (max_y - min_y) + min_y
 
 ```
 
 
+```{r}
+library(Metrics)
+cat("📊 Elman Neural Net:\n")
+cat("RMSE:", round(rmse(real, pred), 2), "\n")
+cat("MAE :", round(mae(real, pred), 2), "\n")
+cat("MAPE:", round(mape(real, pred) * 100, 2), "%\n")
 
+# Gráfico
+plot(real, type = "l", col = "red", lwd = 2, ylab = "Precio BTC", main = "Red Elman")
+lines(pred, col = "blue", lwd = 2)
+legend("topleft", legend = c("Real", "Predicho"), col = c("red", "blue"), lty = 1)
+
+```
+
+## Red Neuronal Elman con Expanding window
+
+```{r}
+expanding_elman_forecast <- function(btc_ts, n_lags = 5, size = 10, initial_train_ratio = 0.8, maxit = 100) {
+  library(RSNNS)
+  library(Metrics)
+
+  # Normalizar la serie
+  btc_norm <- (btc_ts - min(btc_ts)) / (max(btc_ts) - min(btc_ts))
+  min_val <- min(btc_ts)
+  max_val <- max(btc_ts)
+
+  # Preparar función para ventana deslizante
+  crear_dataset <- function(serie, n_lags) {
+    X <- embed(serie, n_lags + 1)
+    y <- X[, 1]
+    X <- X[, -1]
+    return(list(X = X, y = y))
+  }
+
+  datos <- crear_dataset(btc_norm, n_lags)
+  X_all <- datos$X
+  y_all <- datos$y
+  total <- nrow(X_all)
+
+  # Punto inicial para expanding window
+  start <- floor(total * initial_train_ratio)
+
+  pred <- c()
+  real <- c()
+
+  for (i in start:(total - 1)) {
+    X_train <- X_all[1:i, ]
+    y_train <- y_all[1:i]
+    X_next  <- matrix(X_all[i + 1, ], nrow = 1)
+
+    # Ajustar red Elman
+    modelo <- elman(X_train, y_train,
+                    size = size,
+                    learnFuncParams = c(0.1),
+                    maxit = maxit,
+                    linOut = TRUE)
+
+    pred_i <- predict(modelo, X_next)
+    pred <- c(pred, pred_i)
+    real <- c(real, y_all[i + 1])
+  }
+
+  # Desnormalizar
+  pred_desnorm <- pred * (max_val - min_val) + min_val
+  real_desnorm <- real * (max_val - min_val) + min_val
+
+  # Métricas
+  rmse_val <- rmse(real_desnorm, pred_desnorm)
+  mae_val  <- mae(real_desnorm, pred_desnorm)
+  mape_val <- mape(real_desnorm, pred_desnorm)
+
+  cat("📊 Expanding Window - Red Elman\n")
+  cat("RMSE:", round(rmse_val, 2), "\n")
+  cat("MAE :", round(mae_val, 2), "\n")
+  cat("MAPE:", round(mape_val * 100, 2), "%\n")
+
+  # Gráfico
+  plot(real_desnorm, type = "l", col = "red", lwd = 2, ylab = "Precio BTC", main = "Red Elman - Expanding Window")
+  lines(pred_desnorm, col = "blue", lwd = 2)
+  legend("topleft", legend = c("Real", "Predicho"), col = c("red", "blue"), lty = 1)
+
+  return(data.frame(real = real_desnorm, pred = pred_desnorm))
+}
+
+```
+
+```{r}
+resultado_elman <- expanding_elman_forecast(btc_ts, n_lags = 7, size = 10)
+
+```
+
+## Red neuronal Jordan
+
+```{r}
+expanding_jordan_forecast <- function(btc_ts, n_lags = 7, size = 10, initial_train_ratio = 0.9, maxit = 100) {
+  library(RSNNS)
+  library(Metrics)
+
+  # 1. Normalizar serie
+  btc_norm <- (btc_ts - min(btc_ts)) / (max(btc_ts) - min(btc_ts))
+  min_val <- min(btc_ts)
+  max_val <- max(btc_ts)
+
+  # 2. Crear dataset con ventanas
+  crear_dataset <- function(serie, n_lags) {
+    X <- embed(serie, n_lags + 1)
+    y <- X[, 1]
+    X <- X[, -1]
+    return(list(X = X, y = y))
+  }
+
+  datos <- crear_dataset(btc_norm, n_lags)
+  X_all <- datos$X
+  y_all <- datos$y
+  total <- nrow(X_all)
+
+  # 3. División inicial
+  start <- floor(total * initial_train_ratio)
+
+  pred <- c()
+  real <- c()
+
+  for (i in start:(total - 1)) {
+    X_train <- X_all[1:i, ]
+    y_train <- y_all[1:i]
+    X_next  <- matrix(X_all[i + 1, ], nrow = 1)
+
+    # 4. Ajustar modelo Jordan
+    modelo <- jordan(X_train, y_train,
+                     size = size,
+                     learnFuncParams = c(0.1),
+                     maxit = maxit,
+                     linOut = TRUE)
+
+    pred_i <- predict(modelo, X_next)
+    pred <- c(pred, pred_i)
+    real <- c(real, y_all[i + 1])
+  }
+
+  # 5. Desnormalizar
+  pred_desnorm <- pred * (max_val - min_val) + min_val
+  real_desnorm <- real * (max_val - min_val) + min_val
+
+  # 6. Métricas
+  rmse_val <- rmse(real_desnorm, pred_desnorm)
+  mae_val  <- mae(real_desnorm, pred_desnorm)
+  mape_val <- mape(real_desnorm, pred_desnorm)
+
+  cat("📊 Expanding Window - Red Jordan\n")
+  cat("RMSE:", round(rmse_val, 2), "\n")
+  cat("MAE :", round(mae_val, 2), "\n")
+  cat("MAPE:", round(mape_val * 100, 2), "%\n")
+
+  # 7. Gráfico
+  plot(real_desnorm, type = "l", col = "red", lwd = 2, ylab = "Precio BTC", main = "Red Jordan - Expanding Window")
+  lines(pred_desnorm, col = "blue", lwd = 2)
+  legend("topleft", legend = c("Real", "Predicho"), col = c("red", "blue"), lty = 1)
+
+  return(data.frame(real = real_desnorm, pred = pred_desnorm))
+}
+
+```
+
+```{r}
+resultado_jordan <- expanding_jordan_forecast(btc_ts, n_lags = 7, size = 10)
+
+```
 
 

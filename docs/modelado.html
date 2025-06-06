@@ -153,17 +153,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="modelado.html"><a href="modelado.html"><i class="fa fa-check"></i><b>3</b> MODELADO</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="modelado.html"><a href="modelado.html#modelo-de-holt-winters"><i class="fa fa-check"></i><b>3.1</b> Modelo de Holt Winters</a></li>
-<li class="chapter" data-level="3.2" data-path="modelado.html"><a href="modelado.html#metodología-box-jenkins"><i class="fa fa-check"></i><b>3.2</b> Metodología Box-Jenkins</a></li>
-<li class="chapter" data-level="3.3" data-path="modelado.html"><a href="modelado.html#modelo-arima"><i class="fa fa-check"></i><b>3.3</b> Modelo Arima</a>
+<li class="chapter" data-level="3.2" data-path="modelado.html"><a href="modelado.html#expanding-windows-holt-winter"><i class="fa fa-check"></i><b>3.2</b> EXpanding windows Holt winter</a></li>
+<li class="chapter" data-level="3.3" data-path="modelado.html"><a href="modelado.html#metodología-box-jenkins"><i class="fa fa-check"></i><b>3.3</b> Metodología Box-Jenkins</a></li>
+<li class="chapter" data-level="3.4" data-path="modelado.html"><a href="modelado.html#modelo-arima"><i class="fa fa-check"></i><b>3.4</b> Modelo Arima</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="modelado.html"><a href="modelado.html#transformación-serie-de-tiempo-a-estacionaria."><i class="fa fa-check"></i><b>3.3.1</b> Transformación serie de tiempo a estacionaria.</a></li>
-<li class="chapter" data-level="3.3.2" data-path="modelado.html"><a href="modelado.html#funciones-de-acf-y-pact"><i class="fa fa-check"></i><b>3.3.2</b> Funciones de ACF y PACT</a></li>
+<li class="chapter" data-level="3.4.1" data-path="modelado.html"><a href="modelado.html#transformación-serie-de-tiempo-a-estacionaria."><i class="fa fa-check"></i><b>3.4.1</b> Transformación serie de tiempo a estacionaria.</a></li>
+<li class="chapter" data-level="3.4.2" data-path="modelado.html"><a href="modelado.html#funciones-de-acf-y-pact"><i class="fa fa-check"></i><b>3.4.2</b> Funciones de ACF y PACT</a></li>
+<li class="chapter" data-level="3.4.3" data-path="modelado.html"><a href="modelado.html#modelado-autoarima"><i class="fa fa-check"></i><b>3.4.3</b> Modelado Autoarima</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="modelado.html"><a href="modelado.html#regresión-de-una-serie-de-tiempo-y-algoritmo-facebooks-prophet"><i class="fa fa-check"></i><b>3.4</b> Regresión de una serie de tiempo y Algoritmo Facebook´s Prophet</a>
+<li class="chapter" data-level="3.5" data-path="modelado.html"><a href="modelado.html#expanding-window-arima"><i class="fa fa-check"></i><b>3.5</b> Expanding window Arima</a></li>
+<li class="chapter" data-level="3.6" data-path="modelado.html"><a href="modelado.html#regresión-de-una-serie-de-tiempo-y-algoritmo-facebooks-prophet"><i class="fa fa-check"></i><b>3.6</b> Regresión de una serie de tiempo y Algoritmo Facebook´s Prophet</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="modelado.html"><a href="modelado.html#regresión-de-una-serie"><i class="fa fa-check"></i><b>3.4.1</b> Regresión de una serie</a></li>
-<li class="chapter" data-level="3.4.2" data-path="modelado.html"><a href="modelado.html#algoritmo-facebooks-prophet"><i class="fa fa-check"></i><b>3.4.2</b> Algoritmo Facebook´s Prophet</a></li>
+<li class="chapter" data-level="3.6.1" data-path="modelado.html"><a href="modelado.html#regresión-de-una-serie"><i class="fa fa-check"></i><b>3.6.1</b> Regresión de una serie</a></li>
+<li class="chapter" data-level="3.6.2" data-path="modelado.html"><a href="modelado.html#algoritmo-facebooks-prophet"><i class="fa fa-check"></i><b>3.6.2</b> Algoritmo Facebook´s Prophet</a></li>
 </ul></li>
+<li class="chapter" data-level="3.7" data-path="modelado.html"><a href="modelado.html#red-neuronal-elman"><i class="fa fa-check"></i><b>3.7</b> Red Neuronal Elman</a></li>
+<li class="chapter" data-level="3.8" data-path="modelado.html"><a href="modelado.html#red-neuronal-elman-con-expanding-window"><i class="fa fa-check"></i><b>3.8</b> Red Neuronal Elman con Expanding window</a></li>
+<li class="chapter" data-level="3.9" data-path="modelado.html"><a href="modelado.html#red-neuronal-jordan"><i class="fa fa-check"></i><b>3.9</b> Red neuronal Jordan</a></li>
+<li class="chapter" data-level="3.10" data-path="modelado.html"><a href="modelado.html#r-markdown"><i class="fa fa-check"></i><b>3.10</b> R Markdown</a></li>
+<li class="chapter" data-level="3.11" data-path="modelado.html"><a href="modelado.html#including-plots"><i class="fa fa-check"></i><b>3.11</b> Including Plots</a></li>
 </ul></li>
 </ul>
 
@@ -190,10 +198,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Teniendo en cuenta la fase de preprocesamiento, se observa que la serie transformada por el logaritmo (es decir no se uso la serie diferenciada que es estacionaria) presenta una estacionalidad visible, así como una tendencia definida, caracterizada por un comportamiento que decrece, se estabiliza y vuelve a decrecer. Esto indica que cumple con los criterios visuales necesarios para aplicar la metodología en cuestión. Además, el patrón estacional parece ser claro y repetitivo, lo cual sugiere la presencia de una estacionalidad aditiva. No obstante, al implementar el modelo, es importante considerar los residuos, ya que se identifican picos que podrían estar asociados a eventos atípicos o posibles errores de medición.</p>
 <p>Cabe resaltar que esta metodología no requiere que la serie sea estacionaria. En cambio, se enfoca en identificar una tendencia y una estacionalidad bien definidas, ya que el pronóstico se basa en estos dos componentes junto con la media de la serie.</p>
 <p>A continuación, se procede a aplicar el método de Holt Winter a los precios de cierre diarios del Bitcoin, dentro de la aplicación de este modelo se asume una estacionalidad aditiva.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="modelado.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;quantmod&quot;</span>)</span></code></pre></div>
-<pre><code>## Installing package into &#39;/cloud/lib/x86_64-pc-linux-gnu-library/4.4&#39;
-## (as &#39;lib&#39; is unspecified)</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="modelado.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(quantmod)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="modelado.html#cb1-1" tabindex="-1"></a><span class="co">#install.packages(&quot;quantmod&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="modelado.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(quantmod)</span></code></pre></div>
 <pre><code>## Loading required package: xts</code></pre>
 <pre><code>## Loading required package: zoo</code></pre>
 <pre><code>## 
@@ -205,22 +211,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
 ##   method            from
 ##   as.zoo.data.frame zoo</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="modelado.html#cb10-1" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
-<span id="cb10-2"><a href="modelado.html#cb10-2" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb10-3"><a href="modelado.html#cb10-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="modelado.html#cb9-1" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb9-2"><a href="modelado.html#cb9-2" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb9-3"><a href="modelado.html#cb9-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
 <p>`<code>{r cargar-librerias, message=FALSE, warning=FALSE} library(quantmod) # &lt;- Esta línea es clave library(zoo) # (si vas a usar as.zoo)</code></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="modelado.html#cb11-1" tabindex="-1"></a><span class="co"># Descargar datos de Yahoo Finance</span></span>
-<span id="cb11-2"><a href="modelado.html#cb11-2" tabindex="-1"></a><span class="fu">getSymbols</span>(<span class="st">&quot;BTC-USD&quot;</span>,</span>
-<span id="cb11-3"><a href="modelado.html#cb11-3" tabindex="-1"></a>           <span class="at">src =</span> <span class="st">&quot;yahoo&quot;</span>,</span>
-<span id="cb11-4"><a href="modelado.html#cb11-4" tabindex="-1"></a>           <span class="at">from =</span> <span class="st">&quot;2018-01-01&quot;</span>,</span>
-<span id="cb11-5"><a href="modelado.html#cb11-5" tabindex="-1"></a>           <span class="at">to =</span> <span class="st">&quot;2025-04-27&quot;</span>,<span class="co">#Sys.Date(),</span></span>
-<span id="cb11-6"><a href="modelado.html#cb11-6" tabindex="-1"></a>           <span class="at">periodicity =</span> <span class="st">&quot;daily&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="modelado.html#cb10-1" tabindex="-1"></a><span class="co"># Descargar datos de Yahoo Finance</span></span>
+<span id="cb10-2"><a href="modelado.html#cb10-2" tabindex="-1"></a><span class="fu">getSymbols</span>(<span class="st">&quot;BTC-USD&quot;</span>,</span>
+<span id="cb10-3"><a href="modelado.html#cb10-3" tabindex="-1"></a>           <span class="at">src =</span> <span class="st">&quot;yahoo&quot;</span>,</span>
+<span id="cb10-4"><a href="modelado.html#cb10-4" tabindex="-1"></a>           <span class="at">from =</span> <span class="st">&quot;2018-01-01&quot;</span>,</span>
+<span id="cb10-5"><a href="modelado.html#cb10-5" tabindex="-1"></a>           <span class="at">to =</span> <span class="st">&quot;2025-04-27&quot;</span>,<span class="co">#Sys.Date(),</span></span>
+<span id="cb10-6"><a href="modelado.html#cb10-6" tabindex="-1"></a>           <span class="at">periodicity =</span> <span class="st">&quot;daily&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;BTC-USD&quot;</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="modelado.html#cb13-1" tabindex="-1"></a><span class="co"># Convertir el objeto descargado a &#39;zoo&#39;</span></span>
-<span id="cb13-2"><a href="modelado.html#cb13-2" tabindex="-1"></a>btc_zoo <span class="ot">&lt;-</span> <span class="fu">as.zoo</span>(<span class="st">`</span><span class="at">BTC-USD</span><span class="st">`</span>)</span>
-<span id="cb13-3"><a href="modelado.html#cb13-3" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="modelado.html#cb13-4" tabindex="-1"></a><span class="co"># Ver las primeras filas</span></span>
-<span id="cb13-5"><a href="modelado.html#cb13-5" tabindex="-1"></a><span class="fu">tail</span>(btc_zoo)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="modelado.html#cb12-1" tabindex="-1"></a><span class="co"># Convertir el objeto descargado a &#39;zoo&#39;</span></span>
+<span id="cb12-2"><a href="modelado.html#cb12-2" tabindex="-1"></a>btc_zoo <span class="ot">&lt;-</span> <span class="fu">as.zoo</span>(<span class="st">`</span><span class="at">BTC-USD</span><span class="st">`</span>)</span>
+<span id="cb12-3"><a href="modelado.html#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="modelado.html#cb12-4" tabindex="-1"></a><span class="co"># Ver las primeras filas</span></span>
+<span id="cb12-5"><a href="modelado.html#cb12-5" tabindex="-1"></a><span class="fu">tail</span>(btc_zoo)</span></code></pre></div>
 <pre><code>##            BTC-USD.Open BTC-USD.High BTC-USD.Low BTC-USD.Close BTC-USD.Volume
 ## 2025-04-22     87521.88     93817.38    87084.53      93441.89    55899038456
 ## 2025-04-23     93427.59     94535.73    91962.96      93699.11    41719568821
@@ -235,15 +241,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2025-04-25         94720.50
 ## 2025-04-26         94646.93
 ## 2025-04-27         93754.84</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="modelado.html#cb15-1" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
-<span id="cb15-2"><a href="modelado.html#cb15-2" tabindex="-1"></a>btc_close <span class="ot">&lt;-</span> <span class="fu">as.zoo</span>(btc_zoo<span class="sc">$</span><span class="st">`</span><span class="at">BTC-USD.Close</span><span class="st">`</span>)</span>
-<span id="cb15-3"><a href="modelado.html#cb15-3" tabindex="-1"></a>btc_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">coredata</span>(btc_close), <span class="at">frequency =</span> <span class="dv">365</span>, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">1</span>))</span></code></pre></div>
-<p>a continuación se aplica el modelo.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="modelado.html#cb16-1" tabindex="-1"></a>modelo_hw <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(btc_ts)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="modelado.html#cb14-1" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb14-2"><a href="modelado.html#cb14-2" tabindex="-1"></a>btc_close <span class="ot">&lt;-</span> <span class="fu">as.zoo</span>(btc_zoo<span class="sc">$</span><span class="st">`</span><span class="at">BTC-USD.Close</span><span class="st">`</span>)</span>
+<span id="cb14-3"><a href="modelado.html#cb14-3" tabindex="-1"></a>btc_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">coredata</span>(btc_close), <span class="at">frequency =</span> <span class="dv">365</span>, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">1</span>))</span></code></pre></div>
+<p>se procede a realizar la división de datos de entrenamiento y de test</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="modelado.html#cb15-1" tabindex="-1"></a><span class="co"># Porcentaje de división</span></span>
+<span id="cb15-2"><a href="modelado.html#cb15-2" tabindex="-1"></a>train_ratio <span class="ot">&lt;-</span> <span class="fl">0.9</span></span>
+<span id="cb15-3"><a href="modelado.html#cb15-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(btc_ts)</span>
+<span id="cb15-4"><a href="modelado.html#cb15-4" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="modelado.html#cb15-5" tabindex="-1"></a>n_train <span class="ot">&lt;-</span> <span class="fu">floor</span>(n <span class="sc">*</span> train_ratio)</span>
+<span id="cb15-6"><a href="modelado.html#cb15-6" tabindex="-1"></a>n_test <span class="ot">&lt;-</span> n <span class="sc">-</span> n_train</span>
+<span id="cb15-7"><a href="modelado.html#cb15-7" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="modelado.html#cb15-8" tabindex="-1"></a><span class="co"># Crear subconjuntos de entrenamiento y prueba</span></span>
+<span id="cb15-9"><a href="modelado.html#cb15-9" tabindex="-1"></a>btc_train <span class="ot">&lt;-</span> <span class="fu">window</span>(btc_ts, <span class="at">end =</span> <span class="fu">time</span>(btc_ts)[n_train])</span>
+<span id="cb15-10"><a href="modelado.html#cb15-10" tabindex="-1"></a>btc_test <span class="ot">&lt;-</span> <span class="fu">window</span>(btc_ts, <span class="at">start =</span> <span class="fu">time</span>(btc_ts)[n_train <span class="sc">+</span> <span class="dv">1</span>])</span></code></pre></div>
+<p>a continuación se procede a entrenar el modelo.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="modelado.html#cb16-1" tabindex="-1"></a>modelo_hw <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(btc_train)</span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="modelado.html#cb17-1" tabindex="-1"></a><span class="fu">summary</span>(modelo_hw)</span></code></pre></div>
 <pre><code>##              Length Class  Mode     
-## fitted       9236   mts    numeric  
-## x            2674   ts     numeric  
+## fitted       8164   mts    numeric  
+## x            2406   ts     numeric  
 ## alpha           1   -none- numeric  
 ## beta            1   -none- numeric  
 ## gamma           1   -none- numeric  
@@ -251,49 +268,132 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## seasonal        1   -none- character
 ## SSE             1   -none- numeric  
 ## call            2   -none- call</code></pre>
-<p>Pronostico de 30 días.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="modelado.html#cb19-1" tabindex="-1"></a><span class="co"># Pronóstico a futuro (30 días)</span></span>
-<span id="cb19-2"><a href="modelado.html#cb19-2" tabindex="-1"></a>forecast_hw <span class="ot">&lt;-</span> <span class="fu">forecast</span>(modelo_hw, <span class="at">h =</span> <span class="dv">30</span>)</span>
+<p>Como siguiente paso se procede a realizar la predicción sobre el horizonte de prueba</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="modelado.html#cb19-1" tabindex="-1"></a><span class="co"># Pronóstico sobre los datos de test</span></span>
+<span id="cb19-2"><a href="modelado.html#cb19-2" tabindex="-1"></a>forecast_hw <span class="ot">&lt;-</span> <span class="fu">forecast</span>(modelo_hw, <span class="at">h =</span> n_test)</span>
 <span id="cb19-3"><a href="modelado.html#cb19-3" tabindex="-1"></a><span class="fu">autoplot</span>(forecast_hw) <span class="sc">+</span></span>
 <span id="cb19-4"><a href="modelado.html#cb19-4" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Pronóstico de BTC/USD con Holt-Winters&quot;</span>) <span class="sc">+</span></span>
 <span id="cb19-5"><a href="modelado.html#cb19-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Precio de Cierre&quot;</span>) <span class="sc">+</span></span>
 <span id="cb19-6"><a href="modelado.html#cb19-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Fecha&quot;</span>)</span></code></pre></div>
-<p><img src="02-capitulo_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>Pronóstico para 110 días.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="modelado.html#cb20-1" tabindex="-1"></a>ultimos_10 <span class="ot">&lt;-</span> <span class="fu">tail</span>(btc_ts, <span class="dv">10</span>)</span>
-<span id="cb20-2"><a href="modelado.html#cb20-2" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="modelado.html#cb20-3" tabindex="-1"></a><span class="co"># Pronóstico </span></span>
-<span id="cb20-4"><a href="modelado.html#cb20-4" tabindex="-1"></a>forecast_hw <span class="ot">&lt;-</span> <span class="fu">forecast</span>(modelo_hw, <span class="at">h =</span> <span class="dv">110</span>)</span>
-<span id="cb20-5"><a href="modelado.html#cb20-5" tabindex="-1"></a>proyeccion <span class="ot">&lt;-</span> forecast_hw<span class="sc">$</span>mean</span>
-<span id="cb20-6"><a href="modelado.html#cb20-6" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="modelado.html#cb20-7" tabindex="-1"></a>serie_completa <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">c</span>(ultimos_10, proyeccion), <span class="at">start =</span> <span class="fu">time</span>(ultimos_10)[<span class="dv">1</span>], <span class="at">frequency =</span> <span class="fu">frequency</span>(btc_ts))</span>
-<span id="cb20-8"><a href="modelado.html#cb20-8" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="modelado.html#cb20-9" tabindex="-1"></a></span>
-<span id="cb20-10"><a href="modelado.html#cb20-10" tabindex="-1"></a>df_proyeccion <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb20-11"><a href="modelado.html#cb20-11" tabindex="-1"></a>  <span class="at">Fecha =</span> <span class="fu">time</span>(serie_completa),</span>
-<span id="cb20-12"><a href="modelado.html#cb20-12" tabindex="-1"></a>  <span class="at">Precio =</span> <span class="fu">as.numeric</span>(serie_completa),</span>
-<span id="cb20-13"><a href="modelado.html#cb20-13" tabindex="-1"></a>  <span class="at">Tipo =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Real&quot;</span>, <span class="fu">length</span>(ultimos_10)), <span class="fu">rep</span>(<span class="st">&quot;Pronóstico&quot;</span>, <span class="fu">length</span>(proyeccion)))</span>
-<span id="cb20-14"><a href="modelado.html#cb20-14" tabindex="-1"></a>)</span>
-<span id="cb20-15"><a href="modelado.html#cb20-15" tabindex="-1"></a></span>
-<span id="cb20-16"><a href="modelado.html#cb20-16" tabindex="-1"></a><span class="co"># Grafico</span></span>
-<span id="cb20-17"><a href="modelado.html#cb20-17" tabindex="-1"></a><span class="fu">ggplot</span>(df_proyeccion, <span class="fu">aes</span>(<span class="at">x =</span> Fecha, <span class="at">y =</span> Precio, <span class="at">color =</span> Tipo)) <span class="sc">+</span></span>
-<span id="cb20-18"><a href="modelado.html#cb20-18" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb20-19"><a href="modelado.html#cb20-19" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;BTC/USD: Últimos 10 días + Pronóstico Holt-Winters&quot;</span>) <span class="sc">+</span></span>
-<span id="cb20-20"><a href="modelado.html#cb20-20" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Precio de cierre&quot;</span>) <span class="sc">+</span></span>
-<span id="cb20-21"><a href="modelado.html#cb20-21" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Fecha&quot;</span>) <span class="sc">+</span></span>
-<span id="cb20-22"><a href="modelado.html#cb20-22" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span> <span class="ot">=</span> <span class="st">&quot;black&quot;</span>, <span class="st">&quot;Pronóstico&quot;</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb20-23"><a href="modelado.html#cb20-23" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-## ℹ Please use `linewidth` instead.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.</code></pre>
-<pre><code>## Don&#39;t know how to automatically pick scale for object of type &lt;ts&gt;. Defaulting
-## to continuous.</code></pre>
 <p><img src="02-capitulo_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="modelado.html#cb20-1" tabindex="-1"></a><span class="co"># Graficar</span></span>
+<span id="cb20-2"><a href="modelado.html#cb20-2" tabindex="-1"></a><span class="fu">plot</span>(forecast_hw, <span class="at">main =</span> <span class="st">&quot;Holt-Winters - Predicción vs Real&quot;</span>)</span>
+<span id="cb20-3"><a href="modelado.html#cb20-3" tabindex="-1"></a><span class="fu">lines</span>(btc_test, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)  <span class="co"># Observado en rojo</span></span>
+<span id="cb20-4"><a href="modelado.html#cb20-4" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Predicción&quot;</span>, <span class="st">&quot;Real&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="modelado.html#cb21-1" tabindex="-1"></a><span class="fu">library</span>(Metrics)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;Metrics&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:forecast&#39;:
+## 
+##     accuracy</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="modelado.html#cb24-1" tabindex="-1"></a><span class="co"># Extraer valores</span></span>
+<span id="cb24-2"><a href="modelado.html#cb24-2" tabindex="-1"></a>predicted <span class="ot">&lt;-</span> forecast_hw<span class="sc">$</span>mean</span>
+<span id="cb24-3"><a href="modelado.html#cb24-3" tabindex="-1"></a>actual <span class="ot">&lt;-</span> btc_test</span>
+<span id="cb24-4"><a href="modelado.html#cb24-4" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="modelado.html#cb24-5" tabindex="-1"></a><span class="co"># Métricas</span></span>
+<span id="cb24-6"><a href="modelado.html#cb24-6" tabindex="-1"></a>rmse_val <span class="ot">&lt;-</span> <span class="fu">rmse</span>(actual, predicted)</span>
+<span id="cb24-7"><a href="modelado.html#cb24-7" tabindex="-1"></a>mae_val <span class="ot">&lt;-</span> <span class="fu">mae</span>(actual, predicted)</span>
+<span id="cb24-8"><a href="modelado.html#cb24-8" tabindex="-1"></a>mape_val <span class="ot">&lt;-</span> <span class="fu">mape</span>(actual, predicted)</span>
+<span id="cb24-9"><a href="modelado.html#cb24-9" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="modelado.html#cb24-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;📊 RMSE:&quot;</span>, rmse_val, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 📊 RMSE: 27326.58</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="modelado.html#cb26-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;📊 MAE :&quot;</span>, mae_val, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 📊 MAE : 22457.13</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="modelado.html#cb28-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;📊 MAPE:&quot;</span>, <span class="fu">round</span>(mape_val <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>), <span class="st">&quot;%</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 📊 MAPE: 24.56 %</code></pre>
 </div>
-<div id="metodología-box-jenkins" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Metodología Box-Jenkins<a href="modelado.html#metodología-box-jenkins" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="expanding-windows-holt-winter" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> EXpanding windows Holt winter<a href="modelado.html#expanding-windows-holt-winter" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="modelado.html#cb30-1" tabindex="-1"></a>expanding_holt_winters <span class="ot">&lt;-</span> <span class="cf">function</span>(serie_ts, <span class="at">initial_train_ratio =</span> <span class="fl">0.8</span>) {</span>
+<span id="cb30-2"><a href="modelado.html#cb30-2" tabindex="-1"></a>  <span class="fu">library</span>(forecast)</span>
+<span id="cb30-3"><a href="modelado.html#cb30-3" tabindex="-1"></a>  <span class="fu">library</span>(Metrics)</span>
+<span id="cb30-4"><a href="modelado.html#cb30-4" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="modelado.html#cb30-5" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(serie_ts)</span>
+<span id="cb30-6"><a href="modelado.html#cb30-6" tabindex="-1"></a>  n_train <span class="ot">&lt;-</span> <span class="fu">floor</span>(n <span class="sc">*</span> initial_train_ratio)</span>
+<span id="cb30-7"><a href="modelado.html#cb30-7" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="modelado.html#cb30-8" tabindex="-1"></a>  errores <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb30-9"><a href="modelado.html#cb30-9" tabindex="-1"></a>  reales <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb30-10"><a href="modelado.html#cb30-10" tabindex="-1"></a>  predichos <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb30-11"><a href="modelado.html#cb30-11" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="modelado.html#cb30-12" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> n_train<span class="sc">:</span>(n <span class="sc">-</span> <span class="dv">1</span>)) {</span>
+<span id="cb30-13"><a href="modelado.html#cb30-13" tabindex="-1"></a>    <span class="co"># Expanding window hasta el tiempo i</span></span>
+<span id="cb30-14"><a href="modelado.html#cb30-14" tabindex="-1"></a>    ts_train <span class="ot">&lt;-</span> <span class="fu">window</span>(serie_ts, <span class="at">end =</span> <span class="fu">time</span>(serie_ts)[i])</span>
+<span id="cb30-15"><a href="modelado.html#cb30-15" tabindex="-1"></a>    </span>
+<span id="cb30-16"><a href="modelado.html#cb30-16" tabindex="-1"></a>    <span class="co"># Ajustar modelo Holt-Winters</span></span>
+<span id="cb30-17"><a href="modelado.html#cb30-17" tabindex="-1"></a>    modelo <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(ts_train)</span>
+<span id="cb30-18"><a href="modelado.html#cb30-18" tabindex="-1"></a></span>
+<span id="cb30-19"><a href="modelado.html#cb30-19" tabindex="-1"></a>    <span class="co"># Predecir 1 paso adelante</span></span>
+<span id="cb30-20"><a href="modelado.html#cb30-20" tabindex="-1"></a>    pred <span class="ot">&lt;-</span> <span class="fu">forecast</span>(modelo, <span class="at">h =</span> <span class="dv">1</span>)<span class="sc">$</span>mean[<span class="dv">1</span>]</span>
+<span id="cb30-21"><a href="modelado.html#cb30-21" tabindex="-1"></a>    </span>
+<span id="cb30-22"><a href="modelado.html#cb30-22" tabindex="-1"></a>    <span class="co"># Valor real del siguiente punto</span></span>
+<span id="cb30-23"><a href="modelado.html#cb30-23" tabindex="-1"></a>    real <span class="ot">&lt;-</span> serie_ts[i <span class="sc">+</span> <span class="dv">1</span>]</span>
+<span id="cb30-24"><a href="modelado.html#cb30-24" tabindex="-1"></a></span>
+<span id="cb30-25"><a href="modelado.html#cb30-25" tabindex="-1"></a>    <span class="co"># Guardar valores</span></span>
+<span id="cb30-26"><a href="modelado.html#cb30-26" tabindex="-1"></a>    errores <span class="ot">&lt;-</span> <span class="fu">c</span>(errores, real <span class="sc">-</span> pred)</span>
+<span id="cb30-27"><a href="modelado.html#cb30-27" tabindex="-1"></a>    reales <span class="ot">&lt;-</span> <span class="fu">c</span>(reales, real)</span>
+<span id="cb30-28"><a href="modelado.html#cb30-28" tabindex="-1"></a>    predichos <span class="ot">&lt;-</span> <span class="fu">c</span>(predichos, pred)</span>
+<span id="cb30-29"><a href="modelado.html#cb30-29" tabindex="-1"></a>  }</span>
+<span id="cb30-30"><a href="modelado.html#cb30-30" tabindex="-1"></a></span>
+<span id="cb30-31"><a href="modelado.html#cb30-31" tabindex="-1"></a>  <span class="co"># Evaluar métricas</span></span>
+<span id="cb30-32"><a href="modelado.html#cb30-32" tabindex="-1"></a>  rmse_val <span class="ot">&lt;-</span> <span class="fu">rmse</span>(reales, predichos)</span>
+<span id="cb30-33"><a href="modelado.html#cb30-33" tabindex="-1"></a>  mae_val <span class="ot">&lt;-</span> <span class="fu">mae</span>(reales, predichos)</span>
+<span id="cb30-34"><a href="modelado.html#cb30-34" tabindex="-1"></a>  mape_val <span class="ot">&lt;-</span> <span class="fu">mape</span>(reales, predichos)</span>
+<span id="cb30-35"><a href="modelado.html#cb30-35" tabindex="-1"></a></span>
+<span id="cb30-36"><a href="modelado.html#cb30-36" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;📊 Expanding Window - Holt-Winters</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb30-37"><a href="modelado.html#cb30-37" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;RMSE:&quot;</span>, <span class="fu">round</span>(rmse_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb30-38"><a href="modelado.html#cb30-38" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;MAE :&quot;</span>, <span class="fu">round</span>(mae_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb30-39"><a href="modelado.html#cb30-39" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;MAPE:&quot;</span>, <span class="fu">round</span>(mape_val <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>), <span class="st">&quot;%</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb30-40"><a href="modelado.html#cb30-40" tabindex="-1"></a></span>
+<span id="cb30-41"><a href="modelado.html#cb30-41" tabindex="-1"></a>  <span class="co"># Gráfico comparativo</span></span>
+<span id="cb30-42"><a href="modelado.html#cb30-42" tabindex="-1"></a>  ts_reales <span class="ot">&lt;-</span> <span class="fu">ts</span>(reales, <span class="at">start =</span> <span class="fu">time</span>(serie_ts)[n_train <span class="sc">+</span> <span class="dv">1</span>], <span class="at">frequency =</span> <span class="fu">frequency</span>(serie_ts))</span>
+<span id="cb30-43"><a href="modelado.html#cb30-43" tabindex="-1"></a>  ts_predichos <span class="ot">&lt;-</span> <span class="fu">ts</span>(predichos, <span class="at">start =</span> <span class="fu">time</span>(serie_ts)[n_train <span class="sc">+</span> <span class="dv">1</span>], <span class="at">frequency =</span> <span class="fu">frequency</span>(serie_ts))</span>
+<span id="cb30-44"><a href="modelado.html#cb30-44" tabindex="-1"></a></span>
+<span id="cb30-45"><a href="modelado.html#cb30-45" tabindex="-1"></a>  <span class="fu">plot</span>(ts_reales, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb30-46"><a href="modelado.html#cb30-46" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">&quot;Expanding Window: Real vs Predicción (Holt-Winters)&quot;</span>,</span>
+<span id="cb30-47"><a href="modelado.html#cb30-47" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&quot;Precio BTC&quot;</span>)</span>
+<span id="cb30-48"><a href="modelado.html#cb30-48" tabindex="-1"></a>  <span class="fu">lines</span>(ts_predichos, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb30-49"><a href="modelado.html#cb30-49" tabindex="-1"></a>  <span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span>, <span class="st">&quot;Predicción&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span>
+<span id="cb30-50"><a href="modelado.html#cb30-50" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="modelado.html#cb31-1" tabindex="-1"></a>resultado_hw<span class="ot">&lt;-</span><span class="fu">expanding_holt_winters</span>(btc_ts, <span class="at">initial_train_ratio =</span> <span class="fl">0.9</span>)</span></code></pre></div>
+<pre><code>## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH
+## Warning in HoltWinters(ts_train): optimization difficulties: ERROR:
+## ABNORMAL_TERMINATION_IN_LNSRCH</code></pre>
+<pre><code>## 📊 Expanding Window - Holt-Winters
+## RMSE: 2255.36 
+## MAE : 1608.23 
+## MAPE: 1.98 %</code></pre>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="metodología-box-jenkins" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Metodología Box-Jenkins<a href="modelado.html#metodología-box-jenkins" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La metodología Box-Jenkins es un enfoque sistemático que permite identificar, estimar y validar modelos ARMA o ARIMA que se ajusten adecuadamente a una serie de tiempo. Esta metodología consta de cuatro etapas principales:</p>
 <p>Identificación del modelo En esta etapa se analiza si la serie es estacionaria. Si no lo es, se aplican transformaciones (como la diferenciación) para lograr la estacionariedad. A continuación, se identifican los posibles valores de los parámetros del modelo ARIMA(p, d, q), con base en el análisis gráfico y estadístico.
 Actividades comunes:</p>
@@ -327,8 +427,8 @@ Actividades:</p>
 <p>Gracias a esta automatización, se simplifican varios pasos tradicionales del proceso de modelado, como la inspección visual de los gráficos ACF y PACF, la identificación manual del grado de diferenciación d, y la evaluación de múltiples combinaciones de parámetros para encontrar el mejor modelo.</p>
 <p>Por tanto, en esta etapa nos enfocaremos únicamente en la validación de los supuestos del modelo sobre los residuos y en la evaluación del desempeño de los pronósticos (Hurtado Garzón 2013).</p>
 </div>
-<div id="modelo-arima" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Modelo Arima<a href="modelado.html#modelo-arima" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="modelo-arima" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Modelo Arima<a href="modelado.html#modelo-arima" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Los modelos autorregresivos integrados de media móvil (ARIMA, por sus siglas en inglés: AutoRegressive Integrated Moving Average) combinan tres componentes:</p>
 <p>AR (Autorregresivo): la serie se explica por sus propios valores pasados.</p>
 <p>I (Integrado): se aplican diferenciaciones a la serie para hacerla estacionaria.</p>
@@ -338,10 +438,10 @@ Actividades:</p>
 <p>d: número de diferenciaciones necesarias para hacer la serie estacionaria.</p>
 <p>q: número de términos de medias móviles (MA).</p>
 <p>Estos modelos permiten describir y pronosticar el comportamiento de una serie de tiempo a partir de sus valores y errores pasados (Hurtado Garzón 2013).</p>
-<div id="transformación-serie-de-tiempo-a-estacionaria." class="section level3 hasAnchor" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> Transformación serie de tiempo a estacionaria.<a href="modelado.html#transformación-serie-de-tiempo-a-estacionaria." class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="modelado.html#cb23-1" tabindex="-1"></a><span class="fu">library</span>(tseries)</span>
-<span id="cb23-2"><a href="modelado.html#cb23-2" tabindex="-1"></a><span class="fu">adf.test</span>(btc_ts,, <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">&quot;stationary&quot;</span>, <span class="st">&quot;explosive&quot;</span>))</span></code></pre></div>
+<div id="transformación-serie-de-tiempo-a-estacionaria." class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Transformación serie de tiempo a estacionaria.<a href="modelado.html#transformación-serie-de-tiempo-a-estacionaria." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="modelado.html#cb34-1" tabindex="-1"></a><span class="fu">library</span>(tseries)</span>
+<span id="cb34-2"><a href="modelado.html#cb34-2" tabindex="-1"></a><span class="fu">adf.test</span>(btc_ts,, <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">&quot;stationary&quot;</span>, <span class="st">&quot;explosive&quot;</span>))</span></code></pre></div>
 <pre><code>## 
 ##  Augmented Dickey-Fuller Test
 ## 
@@ -350,17 +450,17 @@ Actividades:</p>
 ## alternative hypothesis: stationary</code></pre>
 <p>De acuerdo a la prueba Dickey Fuller se concluye que la serie de tiempo no es estacionaria dado que el Valor P esta por encima 0.05 , tal como se esperaba de acuerdo a su naturaleza de mercado financiero.</p>
 <p>Por lo tanto a continuación se procede a realizar la diferenciación de la serie de tiempo.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="modelado.html#cb25-1" tabindex="-1"></a><span class="fu">ndiffs</span>(btc_ts)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="modelado.html#cb36-1" tabindex="-1"></a><span class="fu">ndiffs</span>(btc_ts)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="modelado.html#cb27-1" tabindex="-1"></a><span class="do">## [1] 1</span></span>
-<span id="cb27-2"><a href="modelado.html#cb27-2" tabindex="-1"></a><span class="co">#nos indica que 1 así que diferenciamos una vez y la llamamos dif.Indice.ts</span></span>
-<span id="cb27-3"><a href="modelado.html#cb27-3" tabindex="-1"></a>dif.btc.ts<span class="ot">&lt;-</span><span class="fu">diff</span>(btc_ts)</span>
-<span id="cb27-4"><a href="modelado.html#cb27-4" tabindex="-1"></a><span class="co">#la graficamos</span></span>
-<span id="cb27-5"><a href="modelado.html#cb27-5" tabindex="-1"></a><span class="fu">plot</span>(dif.btc.ts, <span class="at">main=</span><span class="st">&quot; &quot;</span>, <span class="at">ylab=</span><span class="st">&quot;valor&quot;</span>, <span class="at">col=</span><span class="st">&quot;deepskyblue&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Años&quot;</span>)</span>
-<span id="cb27-6"><a href="modelado.html#cb27-6" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main=</span><span class="st">&quot;DIF Precios diarios BTC&quot;</span>)</span></code></pre></div>
-<p><img src="02-capitulo_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="modelado.html#cb38-1" tabindex="-1"></a><span class="do">## [1] 1</span></span>
+<span id="cb38-2"><a href="modelado.html#cb38-2" tabindex="-1"></a><span class="co">#nos indica que 1 así que diferenciamos una vez y la llamamos dif.Indice.ts</span></span>
+<span id="cb38-3"><a href="modelado.html#cb38-3" tabindex="-1"></a>dif.btc.ts<span class="ot">&lt;-</span><span class="fu">diff</span>(btc_ts)</span>
+<span id="cb38-4"><a href="modelado.html#cb38-4" tabindex="-1"></a><span class="co">#la graficamos</span></span>
+<span id="cb38-5"><a href="modelado.html#cb38-5" tabindex="-1"></a><span class="fu">plot</span>(dif.btc.ts, <span class="at">main=</span><span class="st">&quot; &quot;</span>, <span class="at">ylab=</span><span class="st">&quot;valor&quot;</span>, <span class="at">col=</span><span class="st">&quot;deepskyblue&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Años&quot;</span>)</span>
+<span id="cb38-6"><a href="modelado.html#cb38-6" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main=</span><span class="st">&quot;DIF Precios diarios BTC&quot;</span>)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 Ahora se procede a confirmar nuevamente con la prueba Dickey Fuller que la serie diferenciada si sea estacionaria.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="modelado.html#cb28-1" tabindex="-1"></a><span class="fu">adf.test</span>(dif.btc.ts,, <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">&quot;stationary&quot;</span>, <span class="st">&quot;explosive&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="modelado.html#cb39-1" tabindex="-1"></a><span class="fu">adf.test</span>(dif.btc.ts,, <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">&quot;stationary&quot;</span>, <span class="st">&quot;explosive&quot;</span>))</span></code></pre></div>
 <pre><code>## Warning in adf.test(dif.btc.ts, , alternative = c(&quot;stationary&quot;, &quot;explosive&quot;)):
 ## p-value smaller than printed p-value</code></pre>
 <pre><code>## 
@@ -371,8 +471,8 @@ Ahora se procede a confirmar nuevamente con la prueba Dickey Fuller que la serie
 ## alternative hypothesis: stationary</code></pre>
 <p>De acuerdo al resultado de la prueba, se puede afirmar que la serie diferenciada es estacionaria</p>
 </div>
-<div id="funciones-de-acf-y-pact" class="section level3 hasAnchor" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> Funciones de ACF y PACT<a href="modelado.html#funciones-de-acf-y-pact" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="funciones-de-acf-y-pact" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Funciones de ACF y PACT<a href="modelado.html#funciones-de-acf-y-pact" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Continuando con la metodología Box-Jenkins, ahora se define y genera las funciones ACF y PACT</p>
 <p>En análisis de series de tiempo, la ACF (Función de Autocorrelación) y la PACF (Función de Autocorrelación Parcial) son herramientas visuales que ayudan a identificar la estructura de dependencia dentro de una serie temporal. La ACF muestra la correlación de una serie consigo misma a diferentes rezagos, mientras que la PACF controla la correlación de los rezagos anteriores al evaluar la correlación en un rezago específico.</p>
 <p>ACF (Función de Autocorrelación)
@@ -390,62 +490,252 @@ Interpretación:</p>
 <p>Un corte abrupto en el gráfico ACF en un rezago específico sugiere que un modelo de series temporales con ese número de rezagos podría ser apropiado.
 Un gráfico ACF que decae lentamente puede indicar una tendencia en los datos.
 Un corte brusco en el gráfico PACF puede indicar la presencia de estacionalidad.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="modelado.html#cb31-1" tabindex="-1"></a>ACF<span class="ot">&lt;-</span><span class="fu">acf</span>(dif.btc.ts)</span></code></pre></div>
-<p><img src="02-capitulo_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="modelado.html#cb32-1" tabindex="-1"></a>PACF<span class="ot">&lt;-</span><span class="fu">pacf</span>(dif.btc.ts)</span></code></pre></div>
-<p><img src="02-capitulo_files/figure-html/unnamed-chunk-13-1.png" width="672" />
-### Modelado Autoarima</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="modelado.html#cb33-1" tabindex="-1"></a>modelo<span class="ot">&lt;-</span><span class="fu">auto.arima</span>(dif.btc.ts)</span>
-<span id="cb33-2"><a href="modelado.html#cb33-2" tabindex="-1"></a>modelo</span></code></pre></div>
-<pre><code>## Series: dif.btc.ts 
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="modelado.html#cb42-1" tabindex="-1"></a>ACF<span class="ot">&lt;-</span><span class="fu">acf</span>(dif.btc.ts)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="modelado.html#cb43-1" tabindex="-1"></a>PACF<span class="ot">&lt;-</span><span class="fu">pacf</span>(dif.btc.ts)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+A continuación se procede a dividir la serie de tiempo diferenciada para la fasde de entrenamiento y de test</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="modelado.html#cb44-1" tabindex="-1"></a><span class="co"># Parámetros de división</span></span>
+<span id="cb44-2"><a href="modelado.html#cb44-2" tabindex="-1"></a>train_ratio <span class="ot">&lt;-</span> <span class="fl">0.9</span></span>
+<span id="cb44-3"><a href="modelado.html#cb44-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(dif.btc.ts)</span>
+<span id="cb44-4"><a href="modelado.html#cb44-4" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="modelado.html#cb44-5" tabindex="-1"></a>n_train <span class="ot">&lt;-</span> <span class="fu">floor</span>(n <span class="sc">*</span> train_ratio)</span>
+<span id="cb44-6"><a href="modelado.html#cb44-6" tabindex="-1"></a>n_test <span class="ot">&lt;-</span> n <span class="sc">-</span> n_train</span>
+<span id="cb44-7"><a href="modelado.html#cb44-7" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="modelado.html#cb44-8" tabindex="-1"></a><span class="co"># Dividir en train y test</span></span>
+<span id="cb44-9"><a href="modelado.html#cb44-9" tabindex="-1"></a>dif_train <span class="ot">&lt;-</span> <span class="fu">window</span>(dif.btc.ts, <span class="at">end =</span> <span class="fu">time</span>(dif.btc.ts)[n_train])</span>
+<span id="cb44-10"><a href="modelado.html#cb44-10" tabindex="-1"></a>dif_test <span class="ot">&lt;-</span> <span class="fu">window</span>(dif.btc.ts, <span class="at">start =</span> <span class="fu">time</span>(dif.btc.ts)[n_train <span class="sc">+</span> <span class="dv">1</span>])</span></code></pre></div>
+</div>
+<div id="modelado-autoarima" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Modelado Autoarima<a href="modelado.html#modelado-autoarima" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="modelado.html#cb45-1" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">auto.arima</span>(dif_train)</span>
+<span id="cb45-2"><a href="modelado.html#cb45-2" tabindex="-1"></a>modelo</span></code></pre></div>
+<pre><code>## Series: dif_train 
 ## ARIMA(1,0,0) with zero mean 
 ## 
 ## Coefficients:
 ##           ar1
-##       -0.0620
-## s.e.   0.0193
+##       -0.0533
+## s.e.   0.0204
 ## 
-## sigma^2 = 1491145:  log likelihood = -22790.75
-## AIC=45585.49   AICc=45585.5   BIC=45597.27</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="modelado.html#cb35-1" tabindex="-1"></a><span class="fu">library</span>(changepoint)</span></code></pre></div>
-<pre><code>## Successfully loaded changepoint package version 2.3
-##  WARNING: From v.2.3 the default method in cpt.* functions has changed from AMOC to PELT.
-##  See NEWS for details of all changes.</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="modelado.html#cb37-1" tabindex="-1"></a>mval<span class="ot">&lt;-</span><span class="fu">cpt.mean</span>(dif.btc.ts,<span class="at">method =</span> <span class="st">&quot;AMOC&quot;</span>) </span>
-<span id="cb37-2"><a href="modelado.html#cb37-2" tabindex="-1"></a><span class="fu">cpts</span>(mval)</span></code></pre></div>
-<pre><code>## [1] 2654</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="modelado.html#cb39-1" tabindex="-1"></a><span class="fu">plot</span>(mval, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">cpt.col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Value&quot;</span>, <span class="at">cpt.width =</span> <span class="dv">4</span>, <span class="at">main =</span> <span class="st">&quot;default penalty&quot;</span>)</span></code></pre></div>
-<p><img src="02-capitulo_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="modelado.html#cb40-1" tabindex="-1"></a>pred<span class="ot">&lt;-</span><span class="fu">forecast</span>(dif.btc.ts,<span class="at">h=</span><span class="dv">12</span>)</span>
-<span id="cb40-2"><a href="modelado.html#cb40-2" tabindex="-1"></a>pred</span></code></pre></div>
-<pre><code>##           Point Forecast      Lo 80     Hi 80     Lo 95    Hi 95
-## 2025.3260     -382.83972 -1792.1618 1026.4824 -2538.212 1772.532
-## 2025.3288      652.66945  -756.6527 2061.9916 -1502.703 2808.042
-## 2025.3315     -672.31585 -2081.6380  737.0063 -2827.688 1483.056
-## 2025.3342     -491.49158 -1900.8137  917.8306 -2646.864 1663.881
-## 2025.3370      167.17408 -1242.1481 1576.4962 -1988.198 2322.546
-## 2025.3397      425.05245  -984.2697 1834.3746 -1730.320 2580.425
-## 2025.3425      420.51955  -988.8026 1829.8417 -1734.853 2575.892
-## 2025.3452     -343.72783 -1753.0500 1065.5943 -2499.100 1811.644
-## 2025.3479     -109.59213 -1518.9143 1299.7301 -2264.964 2045.780
-## 2025.3507     -342.08749 -1751.4097 1067.2347 -2497.460 1813.285
-## 2025.3534    -1066.13994 -2475.4621  343.1823 -3221.512 1089.232
-## 2025.3562       27.44961 -1381.8726 1436.7718 -2127.923 2182.822</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="modelado.html#cb42-1" tabindex="-1"></a><span class="fu">plot</span>(pred, <span class="at">main=</span><span class="st">&quot; &quot;</span>, <span class="at">ylab=</span><span class="st">&quot;valor&quot;</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Años&quot;</span>)</span>
-<span id="cb42-2"><a href="modelado.html#cb42-2" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main=</span><span class="st">&quot;Predicción DIF Precios del Bitcoin&quot;</span>)</span></code></pre></div>
-<p><img src="02-capitulo_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+## sigma^2 = 1100170:  log likelihood = -20140
+## AIC=40283.99   AICc=40284   BIC=40295.56</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="modelado.html#cb47-1" tabindex="-1"></a>pred_arima <span class="ot">&lt;-</span> <span class="fu">forecast</span>(modelo, <span class="at">h =</span> n_test)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="modelado.html#cb48-1" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">ndiffs</span>(btc_ts)</span>
+<span id="cb48-2"><a href="modelado.html#cb48-2" tabindex="-1"></a>last_value <span class="ot">&lt;-</span> btc_ts[n_train <span class="sc">+</span> d]  <span class="co"># valor original antes del primer test</span></span>
+<span id="cb48-3"><a href="modelado.html#cb48-3" tabindex="-1"></a>predicted <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(pred_arima<span class="sc">$</span>mean) <span class="sc">+</span> last_value</span>
+<span id="cb48-4"><a href="modelado.html#cb48-4" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="modelado.html#cb48-5" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="modelado.html#cb48-6" tabindex="-1"></a><span class="co"># Valores reales correspondientes a la serie original</span></span>
+<span id="cb48-7"><a href="modelado.html#cb48-7" tabindex="-1"></a>actual <span class="ot">&lt;-</span> <span class="fu">window</span>(btc_ts, <span class="at">start =</span> <span class="fu">time</span>(btc_ts)[n_train <span class="sc">+</span> d <span class="sc">+</span> <span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="modelado.html#cb49-1" tabindex="-1"></a><span class="fu">summary</span>(actual)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   53949   64326   84623   81836   96457  106146</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="modelado.html#cb51-1" tabindex="-1"></a><span class="fu">summary</span>(predicted)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   61614   61615   61615   61615   61615   61625</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="modelado.html#cb53-1" tabindex="-1"></a>rmse_val <span class="ot">&lt;-</span> <span class="fu">rmse</span>(actual, predicted)</span>
+<span id="cb53-2"><a href="modelado.html#cb53-2" tabindex="-1"></a>mae_val <span class="ot">&lt;-</span> <span class="fu">mae</span>(actual, predicted)</span>
+<span id="cb53-3"><a href="modelado.html#cb53-3" tabindex="-1"></a>mape_val <span class="ot">&lt;-</span> <span class="fu">mape</span>(actual, predicted)</span>
+<span id="cb53-4"><a href="modelado.html#cb53-4" tabindex="-1"></a></span>
+<span id="cb53-5"><a href="modelado.html#cb53-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;📊 RMSE:&quot;</span>, rmse_val, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 📊 RMSE: 25727.04</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="modelado.html#cb55-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;📊 MAE :&quot;</span>, mae_val, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 📊 MAE : 21253.18</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="modelado.html#cb57-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;📊 MAPE:&quot;</span>, <span class="fu">round</span>(mape_val <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>), <span class="st">&quot;%</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 📊 MAPE: 23.31 %</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="modelado.html#cb59-1" tabindex="-1"></a>predicted_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(predicted, <span class="at">start =</span> <span class="fu">start</span>(actual), <span class="at">frequency =</span> <span class="fu">frequency</span>(btc_ts))</span>
+<span id="cb59-2"><a href="modelado.html#cb59-2" tabindex="-1"></a><span class="fu">plot</span>(actual, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb59-3"><a href="modelado.html#cb59-3" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Predicción vs Real (ARIMA)&quot;</span>,</span>
+<span id="cb59-4"><a href="modelado.html#cb59-4" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Precio&quot;</span>,</span>
+<span id="cb59-5"><a href="modelado.html#cb59-5" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">range</span>(<span class="fu">c</span>(actual, predicted_ts)) <span class="sc">*</span> <span class="fu">c</span>(<span class="fl">0.9</span>, <span class="fl">1.05</span>))  <span class="co"># más margen abajo</span></span>
+<span id="cb59-6"><a href="modelado.html#cb59-6" tabindex="-1"></a><span class="fu">lines</span>(predicted_ts, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
 </div>
-<div id="regresión-de-una-serie-de-tiempo-y-algoritmo-facebooks-prophet" class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> Regresión de una serie de tiempo y Algoritmo Facebook´s Prophet<a href="modelado.html#regresión-de-una-serie-de-tiempo-y-algoritmo-facebooks-prophet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="regresión-de-una-serie" class="section level3 hasAnchor" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> Regresión de una serie<a href="modelado.html#regresión-de-una-serie" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="expanding-window-arima" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Expanding window Arima<a href="modelado.html#expanding-window-arima" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="modelado.html#cb60-1" tabindex="-1"></a>expanding_arima_forecast <span class="ot">&lt;-</span> <span class="cf">function</span>(serie_ts, <span class="at">initial_train_ratio =</span> <span class="fl">0.9</span>) {</span>
+<span id="cb60-2"><a href="modelado.html#cb60-2" tabindex="-1"></a>  <span class="fu">library</span>(forecast)</span>
+<span id="cb60-3"><a href="modelado.html#cb60-3" tabindex="-1"></a>  <span class="fu">library</span>(Metrics)</span>
+<span id="cb60-4"><a href="modelado.html#cb60-4" tabindex="-1"></a></span>
+<span id="cb60-5"><a href="modelado.html#cb60-5" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(serie_ts)</span>
+<span id="cb60-6"><a href="modelado.html#cb60-6" tabindex="-1"></a>  n_train <span class="ot">&lt;-</span> <span class="fu">floor</span>(n <span class="sc">*</span> initial_train_ratio)</span>
+<span id="cb60-7"><a href="modelado.html#cb60-7" tabindex="-1"></a></span>
+<span id="cb60-8"><a href="modelado.html#cb60-8" tabindex="-1"></a>  reales <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb60-9"><a href="modelado.html#cb60-9" tabindex="-1"></a>  predichos <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb60-10"><a href="modelado.html#cb60-10" tabindex="-1"></a></span>
+<span id="cb60-11"><a href="modelado.html#cb60-11" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> n_train<span class="sc">:</span>(n <span class="sc">-</span> <span class="dv">1</span>)) {</span>
+<span id="cb60-12"><a href="modelado.html#cb60-12" tabindex="-1"></a>    <span class="co"># 1. Ventana de entrenamiento hasta el tiempo i</span></span>
+<span id="cb60-13"><a href="modelado.html#cb60-13" tabindex="-1"></a>    ts_train <span class="ot">&lt;-</span> <span class="fu">window</span>(serie_ts, <span class="at">end =</span> <span class="fu">time</span>(serie_ts)[i])</span>
+<span id="cb60-14"><a href="modelado.html#cb60-14" tabindex="-1"></a>    </span>
+<span id="cb60-15"><a href="modelado.html#cb60-15" tabindex="-1"></a>    <span class="co"># 2. Ajustar modelo ARIMA automáticamente</span></span>
+<span id="cb60-16"><a href="modelado.html#cb60-16" tabindex="-1"></a>    modelo <span class="ot">&lt;-</span> <span class="fu">auto.arima</span>(ts_train)</span>
+<span id="cb60-17"><a href="modelado.html#cb60-17" tabindex="-1"></a>    </span>
+<span id="cb60-18"><a href="modelado.html#cb60-18" tabindex="-1"></a>    <span class="co"># 3. Predecir un paso adelante</span></span>
+<span id="cb60-19"><a href="modelado.html#cb60-19" tabindex="-1"></a>    pred <span class="ot">&lt;-</span> <span class="fu">forecast</span>(modelo, <span class="at">h =</span> <span class="dv">1</span>)<span class="sc">$</span>mean[<span class="dv">1</span>]</span>
+<span id="cb60-20"><a href="modelado.html#cb60-20" tabindex="-1"></a>    </span>
+<span id="cb60-21"><a href="modelado.html#cb60-21" tabindex="-1"></a>    <span class="co"># 4. Obtener valor real siguiente (para evaluación)</span></span>
+<span id="cb60-22"><a href="modelado.html#cb60-22" tabindex="-1"></a>    real <span class="ot">&lt;-</span> serie_ts[i <span class="sc">+</span> <span class="dv">1</span>]</span>
+<span id="cb60-23"><a href="modelado.html#cb60-23" tabindex="-1"></a>    </span>
+<span id="cb60-24"><a href="modelado.html#cb60-24" tabindex="-1"></a>    <span class="co"># 5. Guardar resultados</span></span>
+<span id="cb60-25"><a href="modelado.html#cb60-25" tabindex="-1"></a>    reales <span class="ot">&lt;-</span> <span class="fu">c</span>(reales, real)</span>
+<span id="cb60-26"><a href="modelado.html#cb60-26" tabindex="-1"></a>    predichos <span class="ot">&lt;-</span> <span class="fu">c</span>(predichos, pred)</span>
+<span id="cb60-27"><a href="modelado.html#cb60-27" tabindex="-1"></a>  }</span>
+<span id="cb60-28"><a href="modelado.html#cb60-28" tabindex="-1"></a></span>
+<span id="cb60-29"><a href="modelado.html#cb60-29" tabindex="-1"></a>  <span class="co"># Convertir a ts para graficar alineado</span></span>
+<span id="cb60-30"><a href="modelado.html#cb60-30" tabindex="-1"></a>  ts_reales <span class="ot">&lt;-</span> <span class="fu">ts</span>(reales, <span class="at">start =</span> <span class="fu">time</span>(serie_ts)[n_train <span class="sc">+</span> <span class="dv">1</span>], <span class="at">frequency =</span> <span class="fu">frequency</span>(serie_ts))</span>
+<span id="cb60-31"><a href="modelado.html#cb60-31" tabindex="-1"></a>  ts_predichos <span class="ot">&lt;-</span> <span class="fu">ts</span>(predichos, <span class="at">start =</span> <span class="fu">time</span>(serie_ts)[n_train <span class="sc">+</span> <span class="dv">1</span>], <span class="at">frequency =</span> <span class="fu">frequency</span>(serie_ts))</span>
+<span id="cb60-32"><a href="modelado.html#cb60-32" tabindex="-1"></a></span>
+<span id="cb60-33"><a href="modelado.html#cb60-33" tabindex="-1"></a>  <span class="co"># Evaluar métricas</span></span>
+<span id="cb60-34"><a href="modelado.html#cb60-34" tabindex="-1"></a>  rmse_val <span class="ot">&lt;-</span> <span class="fu">rmse</span>(ts_reales, ts_predichos)</span>
+<span id="cb60-35"><a href="modelado.html#cb60-35" tabindex="-1"></a>  mae_val <span class="ot">&lt;-</span> <span class="fu">mae</span>(ts_reales, ts_predichos)</span>
+<span id="cb60-36"><a href="modelado.html#cb60-36" tabindex="-1"></a>  mape_val <span class="ot">&lt;-</span> <span class="fu">mape</span>(ts_reales, ts_predichos)</span>
+<span id="cb60-37"><a href="modelado.html#cb60-37" tabindex="-1"></a></span>
+<span id="cb60-38"><a href="modelado.html#cb60-38" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;📊 Expanding Window - ARIMA</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb60-39"><a href="modelado.html#cb60-39" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;RMSE:&quot;</span>, <span class="fu">round</span>(rmse_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb60-40"><a href="modelado.html#cb60-40" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;MAE :&quot;</span>, <span class="fu">round</span>(mae_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb60-41"><a href="modelado.html#cb60-41" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;MAPE:&quot;</span>, <span class="fu">round</span>(mape_val <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>), <span class="st">&quot;%</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb60-42"><a href="modelado.html#cb60-42" tabindex="-1"></a></span>
+<span id="cb60-43"><a href="modelado.html#cb60-43" tabindex="-1"></a>  <span class="co"># Gráfico</span></span>
+<span id="cb60-44"><a href="modelado.html#cb60-44" tabindex="-1"></a>  <span class="fu">plot</span>(ts_reales, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb60-45"><a href="modelado.html#cb60-45" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">&quot;Expanding Window: Real vs Predicción (ARIMA)&quot;</span>,</span>
+<span id="cb60-46"><a href="modelado.html#cb60-46" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&quot;Precio BTC&quot;</span>)</span>
+<span id="cb60-47"><a href="modelado.html#cb60-47" tabindex="-1"></a>  <span class="fu">lines</span>(ts_predichos, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb60-48"><a href="modelado.html#cb60-48" tabindex="-1"></a>  <span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span>, <span class="st">&quot;Predicción&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span>
+<span id="cb60-49"><a href="modelado.html#cb60-49" tabindex="-1"></a></span>
+<span id="cb60-50"><a href="modelado.html#cb60-50" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">real =</span> ts_reales, <span class="at">pred =</span> ts_predichos,</span>
+<span id="cb60-51"><a href="modelado.html#cb60-51" tabindex="-1"></a>              <span class="at">rmse =</span> rmse_val, <span class="at">mae =</span> mae_val, <span class="at">mape =</span> mape_val))</span>
+<span id="cb60-52"><a href="modelado.html#cb60-52" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="modelado.html#cb61-1" tabindex="-1"></a><span class="co">#resultado_arima &lt;- expanding_arima_forecast(btc_ts, initial_train_ratio = 0.9)</span></span></code></pre></div>
+</div>
+<div id="regresión-de-una-serie-de-tiempo-y-algoritmo-facebooks-prophet" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Regresión de una serie de tiempo y Algoritmo Facebook´s Prophet<a href="modelado.html#regresión-de-una-serie-de-tiempo-y-algoritmo-facebooks-prophet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="regresión-de-una-serie" class="section level3 hasAnchor" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Regresión de una serie<a href="modelado.html#regresión-de-una-serie" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>El proceso de transformar una serie en una regresión consiste en usar sus valores pasados(lags) para predecir valores futuros, esto se logra mediante la creación de variables yt−1yt−1, yt−2yt−2, en general yt−kyt−k para algun k entero y un tiempo t de manera que lo valores ytyt se puedan estimar mediante el modelo:</p>
 <p>yt=β0+β1yt−1+…+βkyt−k+ϵt</p>
 <p>esta es la forma de una regresión lineal autoregresiva AR(p)(Hamilton 1994).Ademas de esta forma se pueden agregar un conjunto de variables externas XtXt, de forma que el modelo se convierte en:yt=β0+β1yt−1+…+βkyt−k+βk+1Xt+ϵtyt=β0+β1yt−1+…+βkyt−k+βk+1Xt+ϵt denominado modelo ARX (Ljung 1999)</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="modelado.html#cb62-1" tabindex="-1"></a><span class="co"># 1. Crear variable de tiempo</span></span>
+<span id="cb62-2"><a href="modelado.html#cb62-2" tabindex="-1"></a>tiempo <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(btc_ts)</span>
+<span id="cb62-3"><a href="modelado.html#cb62-3" tabindex="-1"></a>df_lm <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb62-4"><a href="modelado.html#cb62-4" tabindex="-1"></a>  <span class="at">tiempo =</span> tiempo,</span>
+<span id="cb62-5"><a href="modelado.html#cb62-5" tabindex="-1"></a>  <span class="at">precio =</span> <span class="fu">as.numeric</span>(btc_ts)</span>
+<span id="cb62-6"><a href="modelado.html#cb62-6" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="modelado.html#cb63-1" tabindex="-1"></a><span class="co"># 2. Particionar por proporción</span></span>
+<span id="cb63-2"><a href="modelado.html#cb63-2" tabindex="-1"></a>train_ratio <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
+<span id="cb63-3"><a href="modelado.html#cb63-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df_lm)</span>
+<span id="cb63-4"><a href="modelado.html#cb63-4" tabindex="-1"></a>n_train <span class="ot">&lt;-</span> <span class="fu">floor</span>(train_ratio <span class="sc">*</span> n)</span>
+<span id="cb63-5"><a href="modelado.html#cb63-5" tabindex="-1"></a></span>
+<span id="cb63-6"><a href="modelado.html#cb63-6" tabindex="-1"></a><span class="co"># Conjuntos de entrenamiento y prueba</span></span>
+<span id="cb63-7"><a href="modelado.html#cb63-7" tabindex="-1"></a>train_df <span class="ot">&lt;-</span> df_lm[<span class="dv">1</span><span class="sc">:</span>n_train, ]</span>
+<span id="cb63-8"><a href="modelado.html#cb63-8" tabindex="-1"></a>test_df  <span class="ot">&lt;-</span> df_lm[(n_train <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>n, ]</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="modelado.html#cb64-1" tabindex="-1"></a>modelo_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(precio <span class="sc">~</span> tiempo, <span class="at">data =</span> train_df)</span>
+<span id="cb64-2"><a href="modelado.html#cb64-2" tabindex="-1"></a><span class="fu">summary</span>(modelo_lm)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = precio ~ tiempo, data = train_df)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -16646  -8470  -5232   5103  41008 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 4677.2955   550.0311   8.504   &lt;2e-16 ***
+## tiempo        15.5408     0.4452  34.905   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 12710 on 2137 degrees of freedom
+## Multiple R-squared:  0.3631, Adjusted R-squared:  0.3628 
+## F-statistic:  1218 on 1 and 2137 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="modelado.html#cb66-1" tabindex="-1"></a>pred_test <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_lm, <span class="at">newdata =</span> test_df)</span>
+<span id="cb66-2"><a href="modelado.html#cb66-2" tabindex="-1"></a>actual_test <span class="ot">&lt;-</span> test_df<span class="sc">$</span>precio</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="modelado.html#cb67-1" tabindex="-1"></a>rmse_val <span class="ot">&lt;-</span> <span class="fu">rmse</span>(actual_test, pred_test)</span>
+<span id="cb67-2"><a href="modelado.html#cb67-2" tabindex="-1"></a>mae_val <span class="ot">&lt;-</span> <span class="fu">mae</span>(actual_test, pred_test)</span>
+<span id="cb67-3"><a href="modelado.html#cb67-3" tabindex="-1"></a>mape_val <span class="ot">&lt;-</span> <span class="fu">mape</span>(actual_test, pred_test)</span>
+<span id="cb67-4"><a href="modelado.html#cb67-4" tabindex="-1"></a></span>
+<span id="cb67-5"><a href="modelado.html#cb67-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;📊 RMSE:&quot;</span>, <span class="fu">round</span>(rmse_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 📊 RMSE: 31857.51</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="modelado.html#cb69-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;📊 MAE :&quot;</span>, <span class="fu">round</span>(mae_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 📊 MAE : 27069.4</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="modelado.html#cb71-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;📊 MAPE:&quot;</span>, <span class="fu">round</span>(mape_val <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>), <span class="st">&quot;%</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 📊 MAPE: 35.12 %</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="modelado.html#cb73-1" tabindex="-1"></a><span class="fu">plot</span>(test_df<span class="sc">$</span>tiempo, actual_test, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb73-2"><a href="modelado.html#cb73-2" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Regresión Lineal: Predicción vs Real&quot;</span>,</span>
+<span id="cb73-3"><a href="modelado.html#cb73-3" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Tiempo&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Precio BTC&quot;</span>)</span>
+<span id="cb73-4"><a href="modelado.html#cb73-4" tabindex="-1"></a><span class="fu">lines</span>(test_df<span class="sc">$</span>tiempo, pred_test, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb73-5"><a href="modelado.html#cb73-5" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span>, <span class="st">&quot;Predicción&quot;</span>),</span>
+<span id="cb73-6"><a href="modelado.html#cb73-6" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+## Expanding Window Arima</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="modelado.html#cb74-1" tabindex="-1"></a>expanding_linear_forecast <span class="ot">&lt;-</span> <span class="cf">function</span>(serie_ts, <span class="at">initial_train_ratio =</span> <span class="fl">0.9</span>) {</span>
+<span id="cb74-2"><a href="modelado.html#cb74-2" tabindex="-1"></a>  <span class="fu">library</span>(Metrics)</span>
+<span id="cb74-3"><a href="modelado.html#cb74-3" tabindex="-1"></a></span>
+<span id="cb74-4"><a href="modelado.html#cb74-4" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(serie_ts)</span>
+<span id="cb74-5"><a href="modelado.html#cb74-5" tabindex="-1"></a>  n_train <span class="ot">&lt;-</span> <span class="fu">floor</span>(n <span class="sc">*</span> initial_train_ratio)</span>
+<span id="cb74-6"><a href="modelado.html#cb74-6" tabindex="-1"></a></span>
+<span id="cb74-7"><a href="modelado.html#cb74-7" tabindex="-1"></a>  reales <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb74-8"><a href="modelado.html#cb74-8" tabindex="-1"></a>  predichos <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb74-9"><a href="modelado.html#cb74-9" tabindex="-1"></a></span>
+<span id="cb74-10"><a href="modelado.html#cb74-10" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> n_train<span class="sc">:</span>(n <span class="sc">-</span> <span class="dv">1</span>)) {</span>
+<span id="cb74-11"><a href="modelado.html#cb74-11" tabindex="-1"></a>    <span class="co"># Construir datos de entrenamiento hasta el tiempo i</span></span>
+<span id="cb74-12"><a href="modelado.html#cb74-12" tabindex="-1"></a>    ts_train <span class="ot">&lt;-</span> serie_ts[<span class="dv">1</span><span class="sc">:</span>i]</span>
+<span id="cb74-13"><a href="modelado.html#cb74-13" tabindex="-1"></a>    tiempo_train <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>i</span>
+<span id="cb74-14"><a href="modelado.html#cb74-14" tabindex="-1"></a>    df_train <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb74-15"><a href="modelado.html#cb74-15" tabindex="-1"></a>      <span class="at">tiempo =</span> tiempo_train,</span>
+<span id="cb74-16"><a href="modelado.html#cb74-16" tabindex="-1"></a>      <span class="at">precio =</span> <span class="fu">as.numeric</span>(ts_train)</span>
+<span id="cb74-17"><a href="modelado.html#cb74-17" tabindex="-1"></a>    )</span>
+<span id="cb74-18"><a href="modelado.html#cb74-18" tabindex="-1"></a></span>
+<span id="cb74-19"><a href="modelado.html#cb74-19" tabindex="-1"></a>    <span class="co"># Ajustar modelo lineal</span></span>
+<span id="cb74-20"><a href="modelado.html#cb74-20" tabindex="-1"></a>    modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(precio <span class="sc">~</span> tiempo, <span class="at">data =</span> df_train)</span>
+<span id="cb74-21"><a href="modelado.html#cb74-21" tabindex="-1"></a></span>
+<span id="cb74-22"><a href="modelado.html#cb74-22" tabindex="-1"></a>    <span class="co"># Predecir el siguiente punto (tiempo i+1)</span></span>
+<span id="cb74-23"><a href="modelado.html#cb74-23" tabindex="-1"></a>    nuevo <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">tiempo =</span> i <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb74-24"><a href="modelado.html#cb74-24" tabindex="-1"></a>    pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo, <span class="at">newdata =</span> nuevo)</span>
+<span id="cb74-25"><a href="modelado.html#cb74-25" tabindex="-1"></a></span>
+<span id="cb74-26"><a href="modelado.html#cb74-26" tabindex="-1"></a>    <span class="co"># Valor real en t = i + 1</span></span>
+<span id="cb74-27"><a href="modelado.html#cb74-27" tabindex="-1"></a>    real <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(serie_ts[i <span class="sc">+</span> <span class="dv">1</span>])</span>
+<span id="cb74-28"><a href="modelado.html#cb74-28" tabindex="-1"></a></span>
+<span id="cb74-29"><a href="modelado.html#cb74-29" tabindex="-1"></a>    <span class="co"># Guardar resultados</span></span>
+<span id="cb74-30"><a href="modelado.html#cb74-30" tabindex="-1"></a>    reales <span class="ot">&lt;-</span> <span class="fu">c</span>(reales, real)</span>
+<span id="cb74-31"><a href="modelado.html#cb74-31" tabindex="-1"></a>    predichos <span class="ot">&lt;-</span> <span class="fu">c</span>(predichos, pred)</span>
+<span id="cb74-32"><a href="modelado.html#cb74-32" tabindex="-1"></a>  }</span>
+<span id="cb74-33"><a href="modelado.html#cb74-33" tabindex="-1"></a></span>
+<span id="cb74-34"><a href="modelado.html#cb74-34" tabindex="-1"></a>  <span class="co"># Convertir a ts para alinear</span></span>
+<span id="cb74-35"><a href="modelado.html#cb74-35" tabindex="-1"></a>  ts_reales <span class="ot">&lt;-</span> <span class="fu">ts</span>(reales, <span class="at">start =</span> <span class="fu">time</span>(serie_ts)[n_train <span class="sc">+</span> <span class="dv">1</span>], <span class="at">frequency =</span> <span class="fu">frequency</span>(serie_ts))</span>
+<span id="cb74-36"><a href="modelado.html#cb74-36" tabindex="-1"></a>  ts_predichos <span class="ot">&lt;-</span> <span class="fu">ts</span>(predichos, <span class="at">start =</span> <span class="fu">time</span>(serie_ts)[n_train <span class="sc">+</span> <span class="dv">1</span>], <span class="at">frequency =</span> <span class="fu">frequency</span>(serie_ts))</span>
+<span id="cb74-37"><a href="modelado.html#cb74-37" tabindex="-1"></a></span>
+<span id="cb74-38"><a href="modelado.html#cb74-38" tabindex="-1"></a>  <span class="co"># Evaluar métricas</span></span>
+<span id="cb74-39"><a href="modelado.html#cb74-39" tabindex="-1"></a>  rmse_val <span class="ot">&lt;-</span> <span class="fu">rmse</span>(ts_reales, ts_predichos)</span>
+<span id="cb74-40"><a href="modelado.html#cb74-40" tabindex="-1"></a>  mae_val <span class="ot">&lt;-</span> <span class="fu">mae</span>(ts_reales, ts_predichos)</span>
+<span id="cb74-41"><a href="modelado.html#cb74-41" tabindex="-1"></a>  mape_val <span class="ot">&lt;-</span> <span class="fu">mape</span>(ts_reales, ts_predichos)</span>
+<span id="cb74-42"><a href="modelado.html#cb74-42" tabindex="-1"></a></span>
+<span id="cb74-43"><a href="modelado.html#cb74-43" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;📊 Expanding Window - Regresión Lineal</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb74-44"><a href="modelado.html#cb74-44" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;RMSE:&quot;</span>, <span class="fu">round</span>(rmse_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb74-45"><a href="modelado.html#cb74-45" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;MAE :&quot;</span>, <span class="fu">round</span>(mae_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb74-46"><a href="modelado.html#cb74-46" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;MAPE:&quot;</span>, <span class="fu">round</span>(mape_val <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>), <span class="st">&quot;%</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb74-47"><a href="modelado.html#cb74-47" tabindex="-1"></a></span>
+<span id="cb74-48"><a href="modelado.html#cb74-48" tabindex="-1"></a>  <span class="co"># Gráfico</span></span>
+<span id="cb74-49"><a href="modelado.html#cb74-49" tabindex="-1"></a>  <span class="fu">plot</span>(ts_reales, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb74-50"><a href="modelado.html#cb74-50" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">&quot;Expanding Window: Real vs Predicción (Regresión Lineal)&quot;</span>,</span>
+<span id="cb74-51"><a href="modelado.html#cb74-51" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&quot;Precio BTC&quot;</span>)</span>
+<span id="cb74-52"><a href="modelado.html#cb74-52" tabindex="-1"></a>  <span class="fu">lines</span>(ts_predichos, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb74-53"><a href="modelado.html#cb74-53" tabindex="-1"></a>  <span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span>, <span class="st">&quot;Predicción&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span>
+<span id="cb74-54"><a href="modelado.html#cb74-54" tabindex="-1"></a></span>
+<span id="cb74-55"><a href="modelado.html#cb74-55" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">real =</span> ts_reales, <span class="at">pred =</span> ts_predichos,</span>
+<span id="cb74-56"><a href="modelado.html#cb74-56" tabindex="-1"></a>              <span class="at">rmse =</span> rmse_val, <span class="at">mae =</span> mae_val, <span class="at">mape =</span> mape_val))</span>
+<span id="cb74-57"><a href="modelado.html#cb74-57" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="modelado.html#cb75-1" tabindex="-1"></a>resultado_lm <span class="ot">&lt;-</span> <span class="fu">expanding_linear_forecast</span>(btc_ts, <span class="at">initial_train_ratio =</span> <span class="fl">0.9</span>)</span></code></pre></div>
+<pre><code>## 📊 Expanding Window - Regresión Lineal
+## RMSE: 28586.75 
+## MAE : 25435.98 
+## MAPE: 29.17 %</code></pre>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 </div>
-<div id="algoritmo-facebooks-prophet" class="section level3 hasAnchor" number="3.4.2">
-<h3><span class="header-section-number">3.4.2</span> Algoritmo Facebook´s Prophet<a href="modelado.html#algoritmo-facebooks-prophet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="algoritmo-facebooks-prophet" class="section level3 hasAnchor" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Algoritmo Facebook´s Prophet<a href="modelado.html#algoritmo-facebooks-prophet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Prophet es un algoritmo desarrollado por el equipo de investigación de facebook para el pronostico de series de tiempo, su finalidad es la robustez frente a datos faltantes, cambios en la tendencia y múltiples estacionalidades. El modelo Prophet no es una regresión como tal, mas bien es una descomposición de forma aditiva, ya que se asume una descomposición de la serie de la siguiente forma:
 y(t)=g(t)+s(t)+h(t)+ϵty(t)=g(t)+s(t)+h(t)+ϵt donde:
 g(t):tendencia
@@ -453,69 +743,346 @@ s(t):estacionalidad
 g(t):efecto de dias festivos
 ϵt:error(ruido blanco)
 dado que este metodo solo busca pronosticar valores futuros, no es necesario validar supuestos de normalidad en los errores, sin embargo si se debe verificar como una buena practica, que estos no estén correlacionados y que tengan media cero y varianza constante(Facebook Core Data Science Team 2023).</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="modelado.html#cb43-1" tabindex="-1"></a><span class="fu">library</span>(prophet)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="modelado.html#cb77-1" tabindex="-1"></a><span class="fu">library</span>(prophet)</span></code></pre></div>
 <pre><code>## Loading required package: Rcpp</code></pre>
 <pre><code>## Loading required package: rlang</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="modelado.html#cb46-1" tabindex="-1"></a>start_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&quot;2018-01-01&quot;</span>)  </span>
-<span id="cb46-2"><a href="modelado.html#cb46-2" tabindex="-1"></a>btc_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb46-3"><a href="modelado.html#cb46-3" tabindex="-1"></a>  <span class="at">ds =</span> <span class="fu">seq</span>(start_date, <span class="at">by =</span> <span class="st">&quot;day&quot;</span>, <span class="at">length.out =</span> <span class="fu">length</span>(btc_ts)),</span>
-<span id="cb46-4"><a href="modelado.html#cb46-4" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">as.numeric</span>(btc_ts)</span>
-<span id="cb46-5"><a href="modelado.html#cb46-5" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="modelado.html#cb47-1" tabindex="-1"></a>modelo_pr <span class="ot">&lt;-</span> <span class="fu">prophet</span>(btc_df)</span></code></pre></div>
-<pre><code>## Disabling daily seasonality. Run prophet with daily.seasonality=TRUE to override this.</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="modelado.html#cb49-1" tabindex="-1"></a><span class="co"># Hacer predicciones a  30 días</span></span>
-<span id="cb49-2"><a href="modelado.html#cb49-2" tabindex="-1"></a>future <span class="ot">&lt;-</span> <span class="fu">make_future_dataframe</span>(modelo_pr, <span class="at">periods =</span> <span class="dv">30</span>)</span>
-<span id="cb49-3"><a href="modelado.html#cb49-3" tabindex="-1"></a></span>
-<span id="cb49-4"><a href="modelado.html#cb49-4" tabindex="-1"></a>forecast <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_pr, future)</span>
-<span id="cb49-5"><a href="modelado.html#cb49-5" tabindex="-1"></a></span>
-<span id="cb49-6"><a href="modelado.html#cb49-6" tabindex="-1"></a><span class="co"># Grafico</span></span>
-<span id="cb49-7"><a href="modelado.html#cb49-7" tabindex="-1"></a><span class="fu">plot</span>(modelo_pr, forecast) <span class="sc">+</span></span>
-<span id="cb49-8"><a href="modelado.html#cb49-8" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Predicción de precios BTC con Prophet&quot;</span>)</span></code></pre></div>
-<p><img src="02-capitulo_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="modelado.html#cb50-1" tabindex="-1"></a><span class="co"># Residuales </span></span>
-<span id="cb50-2"><a href="modelado.html#cb50-2" tabindex="-1"></a>residuos <span class="ot">&lt;-</span> btc_df<span class="sc">$</span>y <span class="sc">-</span> <span class="fu">predict</span>(modelo_pr, btc_df)<span class="sc">$</span>yhat[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(btc_df)]</span>
-<span id="cb50-3"><a href="modelado.html#cb50-3" tabindex="-1"></a></span>
-<span id="cb50-4"><a href="modelado.html#cb50-4" tabindex="-1"></a><span class="co"># Graficar residuos</span></span>
-<span id="cb50-5"><a href="modelado.html#cb50-5" tabindex="-1"></a><span class="fu">plot</span>(residuos, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Residuos&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Error&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Tiempo&quot;</span>)</span></code></pre></div>
-<p><img src="02-capitulo_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="modelado.html#cb51-1" tabindex="-1"></a><span class="co"># Autocorrelación</span></span>
-<span id="cb51-2"><a href="modelado.html#cb51-2" tabindex="-1"></a><span class="fu">acf</span>(residuos, <span class="at">main =</span> <span class="st">&quot;ACF de los residuos&quot;</span>)</span></code></pre></div>
-<p><img src="02-capitulo_files/figure-html/unnamed-chunk-21-2.png" width="672" /></p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="modelado.html#cb52-1" tabindex="-1"></a><span class="co"># Normalidad</span></span>
-<span id="cb52-2"><a href="modelado.html#cb52-2" tabindex="-1"></a><span class="fu">qqnorm</span>(residuos); <span class="fu">qqline</span>(residuos)</span></code></pre></div>
-<p><img src="02-capitulo_files/figure-html/unnamed-chunk-21-3.png" width="672" /></p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="modelado.html#cb53-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(residuos)  <span class="co"># prueba de normalidad</span></span></code></pre></div>
 <pre><code>## 
-##  Shapiro-Wilk normality test
+## Attaching package: &#39;rlang&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:Metrics&#39;:
 ## 
-## data:  residuos
-## W = 0.97799, p-value &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="modelado.html#cb55-1" tabindex="-1"></a><span class="fu">prophet_plot_components</span>(modelo_pr, forecast)</span></code></pre></div>
-<p><img src="02-capitulo_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="modelado.html#cb56-1" tabindex="-1"></a><span class="co"># Validación cruzada: horizonte de 30 días</span></span>
-<span id="cb56-2"><a href="modelado.html#cb56-2" tabindex="-1"></a>df_cv <span class="ot">&lt;-</span> <span class="fu">cross_validation</span>(modelo_pr, <span class="at">initial =</span> <span class="dv">180</span>, <span class="at">period =</span> <span class="dv">30</span>, <span class="at">horizon =</span> <span class="dv">30</span>, <span class="at">units =</span> <span class="st">&quot;days&quot;</span>)</span></code></pre></div>
-<pre><code>## Making 83 forecasts with cutoffs between 2018-07-03 and 2025-03-28</code></pre>
-<pre><code>## Warning in cross_validation(modelo_pr, initial = 180, period = 30, horizon =
-## 30, : Seasonality has period of 365.25 days which is larger than initial
-## window. Consider increasing initial.</code></pre>
-<pre><code>## Warning in .local(object, ...): non-zero return code in optimizing</code></pre>
-<pre><code>## Optimization terminated abnormally. Falling back to Newton optimizer.</code></pre>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="modelado.html#cb61-1" tabindex="-1"></a>df_p <span class="ot">&lt;-</span> <span class="fu">performance_metrics</span>(df_cv)</span>
-<span id="cb61-2"><a href="modelado.html#cb61-2" tabindex="-1"></a></span>
-<span id="cb61-3"><a href="modelado.html#cb61-3" tabindex="-1"></a><span class="co"># Ver resultados</span></span>
-<span id="cb61-4"><a href="modelado.html#cb61-4" tabindex="-1"></a><span class="fu">head</span>(df_p)</span></code></pre></div>
-<pre><code>##   horizon      mse     rmse      mae      mape     mdape     smape  coverage
-## 1  3 days 57994507 7615.412 5233.187 0.1679582 0.1274214 0.1706609 0.4337349
-## 2  4 days 60848792 7800.564 5395.434 0.1760910 0.1285579 0.1797146 0.4257028
-## 3  5 days 67162563 8195.277 5674.725 0.1879776 0.1426778 0.1928939 0.4096386
-## 4  6 days 70884858 8419.315 5867.574 0.1957333 0.1514895 0.2045129 0.4136546
-## 5  7 days 72944942 8540.781 6008.401 0.2014874 0.1540398 0.2131053 0.3975904
-## 6  8 days 73639451 8581.343 5998.679 0.2047503 0.1514895 0.2174448 0.3975904</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="modelado.html#cb63-1" tabindex="-1"></a><span class="co"># Gráfico de RMSE</span></span>
-<span id="cb63-2"><a href="modelado.html#cb63-2" tabindex="-1"></a><span class="fu">plot_cross_validation_metric</span>(df_cv, <span class="at">metric =</span> <span class="st">&quot;rmse&quot;</span>)</span></code></pre></div>
-<p><img src="02-capitulo_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+##     ll</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="modelado.html#cb82-1" tabindex="-1"></a>start_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&quot;2018-01-01&quot;</span>)  </span>
+<span id="cb82-2"><a href="modelado.html#cb82-2" tabindex="-1"></a>btc_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb82-3"><a href="modelado.html#cb82-3" tabindex="-1"></a>  <span class="at">ds =</span> <span class="fu">seq</span>(start_date, <span class="at">by =</span> <span class="st">&quot;day&quot;</span>, <span class="at">length.out =</span> <span class="fu">length</span>(btc_ts)),</span>
+<span id="cb82-4"><a href="modelado.html#cb82-4" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">as.numeric</span>(btc_ts)</span>
+<span id="cb82-5"><a href="modelado.html#cb82-5" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="modelado.html#cb83-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(btc_df)</span>
+<span id="cb83-2"><a href="modelado.html#cb83-2" tabindex="-1"></a>n_train <span class="ot">&lt;-</span> <span class="fu">floor</span>(n <span class="sc">*</span> <span class="fl">0.8</span>)</span>
+<span id="cb83-3"><a href="modelado.html#cb83-3" tabindex="-1"></a></span>
+<span id="cb83-4"><a href="modelado.html#cb83-4" tabindex="-1"></a>df_train <span class="ot">&lt;-</span> btc_df[<span class="dv">1</span><span class="sc">:</span>n_train, ]</span>
+<span id="cb83-5"><a href="modelado.html#cb83-5" tabindex="-1"></a>df_test <span class="ot">&lt;-</span> btc_df[(n_train <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>n, ]</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="modelado.html#cb84-1" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">prophet</span>(df_train)</span></code></pre></div>
+<pre><code>## Disabling daily seasonality. Run prophet with daily.seasonality=TRUE to override this.</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="modelado.html#cb86-1" tabindex="-1"></a><span class="co"># 4. Crear dataframe futuro para predecir el mismo horizonte de test</span></span>
+<span id="cb86-2"><a href="modelado.html#cb86-2" tabindex="-1"></a>future <span class="ot">&lt;-</span> <span class="fu">make_future_dataframe</span>(modelo, <span class="at">periods =</span> n <span class="sc">-</span> n_train)</span>
+<span id="cb86-3"><a href="modelado.html#cb86-3" tabindex="-1"></a></span>
+<span id="cb86-4"><a href="modelado.html#cb86-4" tabindex="-1"></a><span class="co"># 5. Predecir</span></span>
+<span id="cb86-5"><a href="modelado.html#cb86-5" tabindex="-1"></a>forecast <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo, future)</span>
+<span id="cb86-6"><a href="modelado.html#cb86-6" tabindex="-1"></a><span class="co"># 6. Extraer solo predicciones del período de prueba</span></span>
+<span id="cb86-7"><a href="modelado.html#cb86-7" tabindex="-1"></a>pred_test <span class="ot">&lt;-</span> forecast[(n_train <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>n, ]</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="modelado.html#cb87-1" tabindex="-1"></a>rmse_val <span class="ot">&lt;-</span> <span class="fu">rmse</span>(df_test<span class="sc">$</span>y, pred_test<span class="sc">$</span>yhat)</span>
+<span id="cb87-2"><a href="modelado.html#cb87-2" tabindex="-1"></a>mae_val  <span class="ot">&lt;-</span> <span class="fu">mae</span>(df_test<span class="sc">$</span>y, pred_test<span class="sc">$</span>yhat)</span>
+<span id="cb87-3"><a href="modelado.html#cb87-3" tabindex="-1"></a>mape_val <span class="ot">&lt;-</span> <span class="fu">mape</span>(df_test<span class="sc">$</span>y, pred_test<span class="sc">$</span>yhat)</span>
+<span id="cb87-4"><a href="modelado.html#cb87-4" tabindex="-1"></a></span>
+<span id="cb87-5"><a href="modelado.html#cb87-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;📊 Prophet con división 80/20:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 📊 Prophet con división 80/20:</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="modelado.html#cb89-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;RMSE:&quot;</span>, <span class="fu">round</span>(rmse_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## RMSE: 33526.99</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="modelado.html#cb91-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;MAE :&quot;</span>, <span class="fu">round</span>(mae_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## MAE : 29892.62</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="modelado.html#cb93-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;MAPE:&quot;</span>, <span class="fu">round</span>(mape_val <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>), <span class="st">&quot;%</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## MAPE: 40.53 %</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="modelado.html#cb95-1" tabindex="-1"></a><span class="co"># 8. Gráfico</span></span>
+<span id="cb95-2"><a href="modelado.html#cb95-2" tabindex="-1"></a><span class="fu">plot</span>(df_test<span class="sc">$</span>ds, df_test<span class="sc">$</span>y, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb95-3"><a href="modelado.html#cb95-3" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Predicción Prophet vs Real (80/20)&quot;</span>,</span>
+<span id="cb95-4"><a href="modelado.html#cb95-4" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Precio BTC&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Fecha&quot;</span>)</span>
+<span id="cb95-5"><a href="modelado.html#cb95-5" tabindex="-1"></a><span class="fu">lines</span>(pred_test<span class="sc">$</span>ds, pred_test<span class="sc">$</span>yhat, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb95-6"><a href="modelado.html#cb95-6" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span>, <span class="st">&quot;Predicción&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-41-1.png" width="672" />
+## Expading Window Prophet</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="modelado.html#cb96-1" tabindex="-1"></a>expanding_prophet_forecast <span class="ot">&lt;-</span> <span class="cf">function</span>(btc_ts, <span class="at">initial_train_ratio =</span> <span class="fl">0.9</span>) {</span>
+<span id="cb96-2"><a href="modelado.html#cb96-2" tabindex="-1"></a>  <span class="fu">library</span>(prophet)</span>
+<span id="cb96-3"><a href="modelado.html#cb96-3" tabindex="-1"></a>  <span class="fu">library</span>(Metrics)</span>
+<span id="cb96-4"><a href="modelado.html#cb96-4" tabindex="-1"></a></span>
+<span id="cb96-5"><a href="modelado.html#cb96-5" tabindex="-1"></a>  <span class="co"># 1. Preparar datos con fecha y valor</span></span>
+<span id="cb96-6"><a href="modelado.html#cb96-6" tabindex="-1"></a>  btc_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb96-7"><a href="modelado.html#cb96-7" tabindex="-1"></a>    <span class="at">ds =</span> <span class="fu">seq.Date</span>(<span class="at">from =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2018-01-01&quot;</span>), <span class="at">by =</span> <span class="st">&quot;day&quot;</span>, <span class="at">length.out =</span> <span class="fu">length</span>(btc_ts)),</span>
+<span id="cb96-8"><a href="modelado.html#cb96-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">as.numeric</span>(btc_ts)</span>
+<span id="cb96-9"><a href="modelado.html#cb96-9" tabindex="-1"></a>  )</span>
+<span id="cb96-10"><a href="modelado.html#cb96-10" tabindex="-1"></a></span>
+<span id="cb96-11"><a href="modelado.html#cb96-11" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(btc_df)</span>
+<span id="cb96-12"><a href="modelado.html#cb96-12" tabindex="-1"></a>  n_train <span class="ot">&lt;-</span> <span class="fu">floor</span>(n <span class="sc">*</span> initial_train_ratio)</span>
+<span id="cb96-13"><a href="modelado.html#cb96-13" tabindex="-1"></a></span>
+<span id="cb96-14"><a href="modelado.html#cb96-14" tabindex="-1"></a>  reales <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb96-15"><a href="modelado.html#cb96-15" tabindex="-1"></a>  predichos <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb96-16"><a href="modelado.html#cb96-16" tabindex="-1"></a>  fechas <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb96-17"><a href="modelado.html#cb96-17" tabindex="-1"></a></span>
+<span id="cb96-18"><a href="modelado.html#cb96-18" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> n_train<span class="sc">:</span>(n <span class="sc">-</span> <span class="dv">1</span>)) {</span>
+<span id="cb96-19"><a href="modelado.html#cb96-19" tabindex="-1"></a>    <span class="co"># Subconjunto hasta t = i</span></span>
+<span id="cb96-20"><a href="modelado.html#cb96-20" tabindex="-1"></a>    df_train <span class="ot">&lt;-</span> btc_df[<span class="dv">1</span><span class="sc">:</span>i, ]</span>
+<span id="cb96-21"><a href="modelado.html#cb96-21" tabindex="-1"></a></span>
+<span id="cb96-22"><a href="modelado.html#cb96-22" tabindex="-1"></a>    <span class="co"># Entrenar modelo Prophet</span></span>
+<span id="cb96-23"><a href="modelado.html#cb96-23" tabindex="-1"></a>    modelo <span class="ot">&lt;-</span> <span class="fu">prophet</span>(df_train, <span class="at">verbose =</span> <span class="cn">FALSE</span>, <span class="at">daily.seasonality =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb96-24"><a href="modelado.html#cb96-24" tabindex="-1"></a></span>
+<span id="cb96-25"><a href="modelado.html#cb96-25" tabindex="-1"></a>    <span class="co"># Crear data.frame para predecir t = i + 1</span></span>
+<span id="cb96-26"><a href="modelado.html#cb96-26" tabindex="-1"></a>    fecha_pred <span class="ot">&lt;-</span> btc_df<span class="sc">$</span>ds[i <span class="sc">+</span> <span class="dv">1</span>]</span>
+<span id="cb96-27"><a href="modelado.html#cb96-27" tabindex="-1"></a>    future <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ds =</span> fecha_pred)</span>
+<span id="cb96-28"><a href="modelado.html#cb96-28" tabindex="-1"></a></span>
+<span id="cb96-29"><a href="modelado.html#cb96-29" tabindex="-1"></a>    <span class="co"># Predecir</span></span>
+<span id="cb96-30"><a href="modelado.html#cb96-30" tabindex="-1"></a>    forecast <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo, future)</span>
+<span id="cb96-31"><a href="modelado.html#cb96-31" tabindex="-1"></a></span>
+<span id="cb96-32"><a href="modelado.html#cb96-32" tabindex="-1"></a>    <span class="co"># Guardar resultados</span></span>
+<span id="cb96-33"><a href="modelado.html#cb96-33" tabindex="-1"></a>    reales <span class="ot">&lt;-</span> <span class="fu">c</span>(reales, btc_df<span class="sc">$</span>y[i <span class="sc">+</span> <span class="dv">1</span>])</span>
+<span id="cb96-34"><a href="modelado.html#cb96-34" tabindex="-1"></a>    predichos <span class="ot">&lt;-</span> <span class="fu">c</span>(predichos, forecast<span class="sc">$</span>yhat[<span class="dv">1</span>])</span>
+<span id="cb96-35"><a href="modelado.html#cb96-35" tabindex="-1"></a>    fechas <span class="ot">&lt;-</span> <span class="fu">c</span>(fechas, <span class="fu">as.character</span>(fecha_pred))</span>
+<span id="cb96-36"><a href="modelado.html#cb96-36" tabindex="-1"></a>  }</span>
+<span id="cb96-37"><a href="modelado.html#cb96-37" tabindex="-1"></a></span>
+<span id="cb96-38"><a href="modelado.html#cb96-38" tabindex="-1"></a>  <span class="co"># Convertir a serie de tiempo</span></span>
+<span id="cb96-39"><a href="modelado.html#cb96-39" tabindex="-1"></a>  ts_reales <span class="ot">&lt;-</span> <span class="fu">ts</span>(reales, <span class="at">start =</span> n_train <span class="sc">+</span> <span class="dv">1</span>, <span class="at">frequency =</span> <span class="dv">1</span>)</span>
+<span id="cb96-40"><a href="modelado.html#cb96-40" tabindex="-1"></a>  ts_predichos <span class="ot">&lt;-</span> <span class="fu">ts</span>(predichos, <span class="at">start =</span> n_train <span class="sc">+</span> <span class="dv">1</span>, <span class="at">frequency =</span> <span class="dv">1</span>)</span>
+<span id="cb96-41"><a href="modelado.html#cb96-41" tabindex="-1"></a></span>
+<span id="cb96-42"><a href="modelado.html#cb96-42" tabindex="-1"></a>  <span class="co"># Métricas</span></span>
+<span id="cb96-43"><a href="modelado.html#cb96-43" tabindex="-1"></a>  rmse_val <span class="ot">&lt;-</span> <span class="fu">rmse</span>(ts_reales, ts_predichos)</span>
+<span id="cb96-44"><a href="modelado.html#cb96-44" tabindex="-1"></a>  mae_val  <span class="ot">&lt;-</span> <span class="fu">mae</span>(ts_reales, ts_predichos)</span>
+<span id="cb96-45"><a href="modelado.html#cb96-45" tabindex="-1"></a>  mape_val <span class="ot">&lt;-</span> <span class="fu">mape</span>(ts_reales, ts_predichos)</span>
+<span id="cb96-46"><a href="modelado.html#cb96-46" tabindex="-1"></a></span>
+<span id="cb96-47"><a href="modelado.html#cb96-47" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;📊 Expanding Window - Prophet</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb96-48"><a href="modelado.html#cb96-48" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;RMSE:&quot;</span>, <span class="fu">round</span>(rmse_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb96-49"><a href="modelado.html#cb96-49" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;MAE :&quot;</span>, <span class="fu">round</span>(mae_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb96-50"><a href="modelado.html#cb96-50" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;MAPE:&quot;</span>, <span class="fu">round</span>(mape_val <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>), <span class="st">&quot;%</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb96-51"><a href="modelado.html#cb96-51" tabindex="-1"></a></span>
+<span id="cb96-52"><a href="modelado.html#cb96-52" tabindex="-1"></a>  <span class="co"># Gráfico</span></span>
+<span id="cb96-53"><a href="modelado.html#cb96-53" tabindex="-1"></a>  fechas_ts <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(fechas)</span>
+<span id="cb96-54"><a href="modelado.html#cb96-54" tabindex="-1"></a>  <span class="fu">plot</span>(fechas_ts, ts_reales, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb96-55"><a href="modelado.html#cb96-55" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">&quot;Expanding Window: Real vs Predicción (Prophet)&quot;</span>,</span>
+<span id="cb96-56"><a href="modelado.html#cb96-56" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&quot;Precio BTC&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Fecha&quot;</span>)</span>
+<span id="cb96-57"><a href="modelado.html#cb96-57" tabindex="-1"></a>  <span class="fu">lines</span>(fechas_ts, ts_predichos, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb96-58"><a href="modelado.html#cb96-58" tabindex="-1"></a>  <span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span>, <span class="st">&quot;Predicción&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span>
+<span id="cb96-59"><a href="modelado.html#cb96-59" tabindex="-1"></a></span>
+<span id="cb96-60"><a href="modelado.html#cb96-60" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(</span>
+<span id="cb96-61"><a href="modelado.html#cb96-61" tabindex="-1"></a>    <span class="at">fecha =</span> fechas_ts,</span>
+<span id="cb96-62"><a href="modelado.html#cb96-62" tabindex="-1"></a>    <span class="at">real =</span> ts_reales,</span>
+<span id="cb96-63"><a href="modelado.html#cb96-63" tabindex="-1"></a>    <span class="at">pred =</span> ts_predichos</span>
+<span id="cb96-64"><a href="modelado.html#cb96-64" tabindex="-1"></a>  ))</span>
+<span id="cb96-65"><a href="modelado.html#cb96-65" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="modelado.html#cb97-1" tabindex="-1"></a>resultado_prophet <span class="ot">&lt;-</span> <span class="fu">expanding_prophet_forecast</span>(btc_ts, <span class="at">initial_train_ratio =</span> <span class="fl">0.9</span>)</span></code></pre></div>
+<pre><code>## 📊 Expanding Window - Prophet
+## RMSE: 11777.56 
+## MAE : 10131.19 
+## MAPE: 12.34 %</code></pre>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+</div>
+</div>
+<div id="red-neuronal-elman" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> Red Neuronal Elman<a href="modelado.html#red-neuronal-elman" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="modelado.html#cb99-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;RSNNS&quot;</span>)</span></code></pre></div>
+<pre><code>## Installing package into &#39;/cloud/lib/x86_64-pc-linux-gnu-library/4.4&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="modelado.html#cb101-1" tabindex="-1"></a><span class="fu">library</span>(RSNNS)</span>
+<span id="cb101-2"><a href="modelado.html#cb101-2" tabindex="-1"></a></span>
+<span id="cb101-3"><a href="modelado.html#cb101-3" tabindex="-1"></a><span class="co"># Normalizar serie</span></span>
+<span id="cb101-4"><a href="modelado.html#cb101-4" tabindex="-1"></a>btc_norm <span class="ot">&lt;-</span> (btc_ts <span class="sc">-</span> <span class="fu">min</span>(btc_ts)) <span class="sc">/</span> (<span class="fu">max</span>(btc_ts) <span class="sc">-</span> <span class="fu">min</span>(btc_ts))</span>
+<span id="cb101-5"><a href="modelado.html#cb101-5" tabindex="-1"></a></span>
+<span id="cb101-6"><a href="modelado.html#cb101-6" tabindex="-1"></a><span class="co"># Parámetros</span></span>
+<span id="cb101-7"><a href="modelado.html#cb101-7" tabindex="-1"></a>n_lags <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb101-8"><a href="modelado.html#cb101-8" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(btc_norm)</span>
+<span id="cb101-9"><a href="modelado.html#cb101-9" tabindex="-1"></a>n_train <span class="ot">&lt;-</span> <span class="fu">floor</span>(n <span class="sc">*</span> <span class="fl">0.9</span>)</span>
+<span id="cb101-10"><a href="modelado.html#cb101-10" tabindex="-1"></a></span>
+<span id="cb101-11"><a href="modelado.html#cb101-11" tabindex="-1"></a><span class="co"># Crear matriz de entrada y salida</span></span>
+<span id="cb101-12"><a href="modelado.html#cb101-12" tabindex="-1"></a>crear_dataset <span class="ot">&lt;-</span> <span class="cf">function</span>(serie, n_lags) {</span>
+<span id="cb101-13"><a href="modelado.html#cb101-13" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">embed</span>(serie, n_lags <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb101-14"><a href="modelado.html#cb101-14" tabindex="-1"></a>  y <span class="ot">&lt;-</span> X[, <span class="dv">1</span>]</span>
+<span id="cb101-15"><a href="modelado.html#cb101-15" tabindex="-1"></a>  X <span class="ot">&lt;-</span> X[, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb101-16"><a href="modelado.html#cb101-16" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">X =</span> X, <span class="at">y =</span> y))</span>
+<span id="cb101-17"><a href="modelado.html#cb101-17" tabindex="-1"></a>}</span>
+<span id="cb101-18"><a href="modelado.html#cb101-18" tabindex="-1"></a></span>
+<span id="cb101-19"><a href="modelado.html#cb101-19" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">crear_dataset</span>(btc_norm, n_lags)</span>
+<span id="cb101-20"><a href="modelado.html#cb101-20" tabindex="-1"></a></span>
+<span id="cb101-21"><a href="modelado.html#cb101-21" tabindex="-1"></a>X <span class="ot">&lt;-</span> datos<span class="sc">$</span>X</span>
+<span id="cb101-22"><a href="modelado.html#cb101-22" tabindex="-1"></a>y <span class="ot">&lt;-</span> datos<span class="sc">$</span>y</span>
+<span id="cb101-23"><a href="modelado.html#cb101-23" tabindex="-1"></a></span>
+<span id="cb101-24"><a href="modelado.html#cb101-24" tabindex="-1"></a><span class="co"># División train/test</span></span>
+<span id="cb101-25"><a href="modelado.html#cb101-25" tabindex="-1"></a>X_train <span class="ot">&lt;-</span> X[<span class="dv">1</span><span class="sc">:</span>(n_train <span class="sc">-</span> n_lags), ]</span>
+<span id="cb101-26"><a href="modelado.html#cb101-26" tabindex="-1"></a>y_train <span class="ot">&lt;-</span> y[<span class="dv">1</span><span class="sc">:</span>(n_train <span class="sc">-</span> n_lags)]</span>
+<span id="cb101-27"><a href="modelado.html#cb101-27" tabindex="-1"></a></span>
+<span id="cb101-28"><a href="modelado.html#cb101-28" tabindex="-1"></a>X_test <span class="ot">&lt;-</span> X[(n_train <span class="sc">-</span> n_lags <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n <span class="sc">-</span> n_lags), ]</span>
+<span id="cb101-29"><a href="modelado.html#cb101-29" tabindex="-1"></a>y_test <span class="ot">&lt;-</span> y[(n_train <span class="sc">-</span> n_lags <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n <span class="sc">-</span> n_lags)]</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="modelado.html#cb102-1" tabindex="-1"></a><span class="co"># Ajustar red Elman</span></span>
+<span id="cb102-2"><a href="modelado.html#cb102-2" tabindex="-1"></a>modelo_elman <span class="ot">&lt;-</span> <span class="fu">elman</span>(X_train, y_train,</span>
+<span id="cb102-3"><a href="modelado.html#cb102-3" tabindex="-1"></a>                      <span class="at">size =</span> <span class="dv">10</span>,</span>
+<span id="cb102-4"><a href="modelado.html#cb102-4" tabindex="-1"></a>                      <span class="at">learnFuncParams =</span> <span class="fu">c</span>(<span class="fl">0.1</span>), <span class="at">maxit =</span> <span class="dv">100</span>,</span>
+<span id="cb102-5"><a href="modelado.html#cb102-5" tabindex="-1"></a>                      <span class="at">linOut =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb102-6"><a href="modelado.html#cb102-6" tabindex="-1"></a></span>
+<span id="cb102-7"><a href="modelado.html#cb102-7" tabindex="-1"></a><span class="co"># Predicción</span></span>
+<span id="cb102-8"><a href="modelado.html#cb102-8" tabindex="-1"></a>pred_norm <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_elman, X_test)</span>
+<span id="cb102-9"><a href="modelado.html#cb102-9" tabindex="-1"></a></span>
+<span id="cb102-10"><a href="modelado.html#cb102-10" tabindex="-1"></a><span class="co"># Desnormalizar</span></span>
+<span id="cb102-11"><a href="modelado.html#cb102-11" tabindex="-1"></a>min_y <span class="ot">&lt;-</span> <span class="fu">min</span>(btc_ts)</span>
+<span id="cb102-12"><a href="modelado.html#cb102-12" tabindex="-1"></a>max_y <span class="ot">&lt;-</span> <span class="fu">max</span>(btc_ts)</span>
+<span id="cb102-13"><a href="modelado.html#cb102-13" tabindex="-1"></a>pred <span class="ot">&lt;-</span> pred_norm <span class="sc">*</span> (max_y <span class="sc">-</span> min_y) <span class="sc">+</span> min_y</span>
+<span id="cb102-14"><a href="modelado.html#cb102-14" tabindex="-1"></a>real <span class="ot">&lt;-</span> y_test <span class="sc">*</span> (max_y <span class="sc">-</span> min_y) <span class="sc">+</span> min_y</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="modelado.html#cb103-1" tabindex="-1"></a><span class="fu">library</span>(Metrics)</span>
+<span id="cb103-2"><a href="modelado.html#cb103-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;📊 Elman Neural Net:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 📊 Elman Neural Net:</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="modelado.html#cb105-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;RMSE:&quot;</span>, <span class="fu">round</span>(<span class="fu">rmse</span>(real, pred), <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## RMSE: 15327.92</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="modelado.html#cb107-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;MAE :&quot;</span>, <span class="fu">round</span>(<span class="fu">mae</span>(real, pred), <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## MAE : 12516.27</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="modelado.html#cb109-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;MAPE:&quot;</span>, <span class="fu">round</span>(<span class="fu">mape</span>(real, pred) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>), <span class="st">&quot;%</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## MAPE: 13.7 %</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="modelado.html#cb111-1" tabindex="-1"></a><span class="co"># Gráfico</span></span>
+<span id="cb111-2"><a href="modelado.html#cb111-2" tabindex="-1"></a><span class="fu">plot</span>(real, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">ylab =</span> <span class="st">&quot;Precio BTC&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Red Elman&quot;</span>)</span>
+<span id="cb111-3"><a href="modelado.html#cb111-3" tabindex="-1"></a><span class="fu">lines</span>(pred, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb111-4"><a href="modelado.html#cb111-4" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span>, <span class="st">&quot;Predicho&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+</div>
+<div id="red-neuronal-elman-con-expanding-window" class="section level2 hasAnchor" number="3.8">
+<h2><span class="header-section-number">3.8</span> Red Neuronal Elman con Expanding window<a href="modelado.html#red-neuronal-elman-con-expanding-window" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="modelado.html#cb112-1" tabindex="-1"></a>expanding_elman_forecast <span class="ot">&lt;-</span> <span class="cf">function</span>(btc_ts, <span class="at">n_lags =</span> <span class="dv">5</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">initial_train_ratio =</span> <span class="fl">0.8</span>, <span class="at">maxit =</span> <span class="dv">100</span>) {</span>
+<span id="cb112-2"><a href="modelado.html#cb112-2" tabindex="-1"></a>  <span class="fu">library</span>(RSNNS)</span>
+<span id="cb112-3"><a href="modelado.html#cb112-3" tabindex="-1"></a>  <span class="fu">library</span>(Metrics)</span>
+<span id="cb112-4"><a href="modelado.html#cb112-4" tabindex="-1"></a></span>
+<span id="cb112-5"><a href="modelado.html#cb112-5" tabindex="-1"></a>  <span class="co"># Normalizar la serie</span></span>
+<span id="cb112-6"><a href="modelado.html#cb112-6" tabindex="-1"></a>  btc_norm <span class="ot">&lt;-</span> (btc_ts <span class="sc">-</span> <span class="fu">min</span>(btc_ts)) <span class="sc">/</span> (<span class="fu">max</span>(btc_ts) <span class="sc">-</span> <span class="fu">min</span>(btc_ts))</span>
+<span id="cb112-7"><a href="modelado.html#cb112-7" tabindex="-1"></a>  min_val <span class="ot">&lt;-</span> <span class="fu">min</span>(btc_ts)</span>
+<span id="cb112-8"><a href="modelado.html#cb112-8" tabindex="-1"></a>  max_val <span class="ot">&lt;-</span> <span class="fu">max</span>(btc_ts)</span>
+<span id="cb112-9"><a href="modelado.html#cb112-9" tabindex="-1"></a></span>
+<span id="cb112-10"><a href="modelado.html#cb112-10" tabindex="-1"></a>  <span class="co"># Preparar función para ventana deslizante</span></span>
+<span id="cb112-11"><a href="modelado.html#cb112-11" tabindex="-1"></a>  crear_dataset <span class="ot">&lt;-</span> <span class="cf">function</span>(serie, n_lags) {</span>
+<span id="cb112-12"><a href="modelado.html#cb112-12" tabindex="-1"></a>    X <span class="ot">&lt;-</span> <span class="fu">embed</span>(serie, n_lags <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb112-13"><a href="modelado.html#cb112-13" tabindex="-1"></a>    y <span class="ot">&lt;-</span> X[, <span class="dv">1</span>]</span>
+<span id="cb112-14"><a href="modelado.html#cb112-14" tabindex="-1"></a>    X <span class="ot">&lt;-</span> X[, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb112-15"><a href="modelado.html#cb112-15" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">X =</span> X, <span class="at">y =</span> y))</span>
+<span id="cb112-16"><a href="modelado.html#cb112-16" tabindex="-1"></a>  }</span>
+<span id="cb112-17"><a href="modelado.html#cb112-17" tabindex="-1"></a></span>
+<span id="cb112-18"><a href="modelado.html#cb112-18" tabindex="-1"></a>  datos <span class="ot">&lt;-</span> <span class="fu">crear_dataset</span>(btc_norm, n_lags)</span>
+<span id="cb112-19"><a href="modelado.html#cb112-19" tabindex="-1"></a>  X_all <span class="ot">&lt;-</span> datos<span class="sc">$</span>X</span>
+<span id="cb112-20"><a href="modelado.html#cb112-20" tabindex="-1"></a>  y_all <span class="ot">&lt;-</span> datos<span class="sc">$</span>y</span>
+<span id="cb112-21"><a href="modelado.html#cb112-21" tabindex="-1"></a>  total <span class="ot">&lt;-</span> <span class="fu">nrow</span>(X_all)</span>
+<span id="cb112-22"><a href="modelado.html#cb112-22" tabindex="-1"></a></span>
+<span id="cb112-23"><a href="modelado.html#cb112-23" tabindex="-1"></a>  <span class="co"># Punto inicial para expanding window</span></span>
+<span id="cb112-24"><a href="modelado.html#cb112-24" tabindex="-1"></a>  start <span class="ot">&lt;-</span> <span class="fu">floor</span>(total <span class="sc">*</span> initial_train_ratio)</span>
+<span id="cb112-25"><a href="modelado.html#cb112-25" tabindex="-1"></a></span>
+<span id="cb112-26"><a href="modelado.html#cb112-26" tabindex="-1"></a>  pred <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb112-27"><a href="modelado.html#cb112-27" tabindex="-1"></a>  real <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb112-28"><a href="modelado.html#cb112-28" tabindex="-1"></a></span>
+<span id="cb112-29"><a href="modelado.html#cb112-29" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> start<span class="sc">:</span>(total <span class="sc">-</span> <span class="dv">1</span>)) {</span>
+<span id="cb112-30"><a href="modelado.html#cb112-30" tabindex="-1"></a>    X_train <span class="ot">&lt;-</span> X_all[<span class="dv">1</span><span class="sc">:</span>i, ]</span>
+<span id="cb112-31"><a href="modelado.html#cb112-31" tabindex="-1"></a>    y_train <span class="ot">&lt;-</span> y_all[<span class="dv">1</span><span class="sc">:</span>i]</span>
+<span id="cb112-32"><a href="modelado.html#cb112-32" tabindex="-1"></a>    X_next  <span class="ot">&lt;-</span> <span class="fu">matrix</span>(X_all[i <span class="sc">+</span> <span class="dv">1</span>, ], <span class="at">nrow =</span> <span class="dv">1</span>)</span>
+<span id="cb112-33"><a href="modelado.html#cb112-33" tabindex="-1"></a></span>
+<span id="cb112-34"><a href="modelado.html#cb112-34" tabindex="-1"></a>    <span class="co"># Ajustar red Elman</span></span>
+<span id="cb112-35"><a href="modelado.html#cb112-35" tabindex="-1"></a>    modelo <span class="ot">&lt;-</span> <span class="fu">elman</span>(X_train, y_train,</span>
+<span id="cb112-36"><a href="modelado.html#cb112-36" tabindex="-1"></a>                    <span class="at">size =</span> size,</span>
+<span id="cb112-37"><a href="modelado.html#cb112-37" tabindex="-1"></a>                    <span class="at">learnFuncParams =</span> <span class="fu">c</span>(<span class="fl">0.1</span>),</span>
+<span id="cb112-38"><a href="modelado.html#cb112-38" tabindex="-1"></a>                    <span class="at">maxit =</span> maxit,</span>
+<span id="cb112-39"><a href="modelado.html#cb112-39" tabindex="-1"></a>                    <span class="at">linOut =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb112-40"><a href="modelado.html#cb112-40" tabindex="-1"></a></span>
+<span id="cb112-41"><a href="modelado.html#cb112-41" tabindex="-1"></a>    pred_i <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo, X_next)</span>
+<span id="cb112-42"><a href="modelado.html#cb112-42" tabindex="-1"></a>    pred <span class="ot">&lt;-</span> <span class="fu">c</span>(pred, pred_i)</span>
+<span id="cb112-43"><a href="modelado.html#cb112-43" tabindex="-1"></a>    real <span class="ot">&lt;-</span> <span class="fu">c</span>(real, y_all[i <span class="sc">+</span> <span class="dv">1</span>])</span>
+<span id="cb112-44"><a href="modelado.html#cb112-44" tabindex="-1"></a>  }</span>
+<span id="cb112-45"><a href="modelado.html#cb112-45" tabindex="-1"></a></span>
+<span id="cb112-46"><a href="modelado.html#cb112-46" tabindex="-1"></a>  <span class="co"># Desnormalizar</span></span>
+<span id="cb112-47"><a href="modelado.html#cb112-47" tabindex="-1"></a>  pred_desnorm <span class="ot">&lt;-</span> pred <span class="sc">*</span> (max_val <span class="sc">-</span> min_val) <span class="sc">+</span> min_val</span>
+<span id="cb112-48"><a href="modelado.html#cb112-48" tabindex="-1"></a>  real_desnorm <span class="ot">&lt;-</span> real <span class="sc">*</span> (max_val <span class="sc">-</span> min_val) <span class="sc">+</span> min_val</span>
+<span id="cb112-49"><a href="modelado.html#cb112-49" tabindex="-1"></a></span>
+<span id="cb112-50"><a href="modelado.html#cb112-50" tabindex="-1"></a>  <span class="co"># Métricas</span></span>
+<span id="cb112-51"><a href="modelado.html#cb112-51" tabindex="-1"></a>  rmse_val <span class="ot">&lt;-</span> <span class="fu">rmse</span>(real_desnorm, pred_desnorm)</span>
+<span id="cb112-52"><a href="modelado.html#cb112-52" tabindex="-1"></a>  mae_val  <span class="ot">&lt;-</span> <span class="fu">mae</span>(real_desnorm, pred_desnorm)</span>
+<span id="cb112-53"><a href="modelado.html#cb112-53" tabindex="-1"></a>  mape_val <span class="ot">&lt;-</span> <span class="fu">mape</span>(real_desnorm, pred_desnorm)</span>
+<span id="cb112-54"><a href="modelado.html#cb112-54" tabindex="-1"></a></span>
+<span id="cb112-55"><a href="modelado.html#cb112-55" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;📊 Expanding Window - Red Elman</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb112-56"><a href="modelado.html#cb112-56" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;RMSE:&quot;</span>, <span class="fu">round</span>(rmse_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb112-57"><a href="modelado.html#cb112-57" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;MAE :&quot;</span>, <span class="fu">round</span>(mae_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb112-58"><a href="modelado.html#cb112-58" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;MAPE:&quot;</span>, <span class="fu">round</span>(mape_val <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>), <span class="st">&quot;%</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb112-59"><a href="modelado.html#cb112-59" tabindex="-1"></a></span>
+<span id="cb112-60"><a href="modelado.html#cb112-60" tabindex="-1"></a>  <span class="co"># Gráfico</span></span>
+<span id="cb112-61"><a href="modelado.html#cb112-61" tabindex="-1"></a>  <span class="fu">plot</span>(real_desnorm, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">ylab =</span> <span class="st">&quot;Precio BTC&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Red Elman - Expanding Window&quot;</span>)</span>
+<span id="cb112-62"><a href="modelado.html#cb112-62" tabindex="-1"></a>  <span class="fu">lines</span>(pred_desnorm, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb112-63"><a href="modelado.html#cb112-63" tabindex="-1"></a>  <span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span>, <span class="st">&quot;Predicho&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span>
+<span id="cb112-64"><a href="modelado.html#cb112-64" tabindex="-1"></a></span>
+<span id="cb112-65"><a href="modelado.html#cb112-65" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">real =</span> real_desnorm, <span class="at">pred =</span> pred_desnorm))</span>
+<span id="cb112-66"><a href="modelado.html#cb112-66" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="modelado.html#cb113-1" tabindex="-1"></a>resultado_elman <span class="ot">&lt;-</span> <span class="fu">expanding_elman_forecast</span>(btc_ts, <span class="at">n_lags =</span> <span class="dv">7</span>, <span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## 📊 Expanding Window - Red Elman
+## RMSE: 2137.92 
+## MAE : 1542.39 
+## MAPE: 2.24 %</code></pre>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+</div>
+<div id="red-neuronal-jordan" class="section level2 hasAnchor" number="3.9">
+<h2><span class="header-section-number">3.9</span> Red neuronal Jordan<a href="modelado.html#red-neuronal-jordan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="modelado.html#cb115-1" tabindex="-1"></a>expanding_jordan_forecast <span class="ot">&lt;-</span> <span class="cf">function</span>(btc_ts, <span class="at">n_lags =</span> <span class="dv">7</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">initial_train_ratio =</span> <span class="fl">0.9</span>, <span class="at">maxit =</span> <span class="dv">100</span>) {</span>
+<span id="cb115-2"><a href="modelado.html#cb115-2" tabindex="-1"></a>  <span class="fu">library</span>(RSNNS)</span>
+<span id="cb115-3"><a href="modelado.html#cb115-3" tabindex="-1"></a>  <span class="fu">library</span>(Metrics)</span>
+<span id="cb115-4"><a href="modelado.html#cb115-4" tabindex="-1"></a></span>
+<span id="cb115-5"><a href="modelado.html#cb115-5" tabindex="-1"></a>  <span class="co"># 1. Normalizar serie</span></span>
+<span id="cb115-6"><a href="modelado.html#cb115-6" tabindex="-1"></a>  btc_norm <span class="ot">&lt;-</span> (btc_ts <span class="sc">-</span> <span class="fu">min</span>(btc_ts)) <span class="sc">/</span> (<span class="fu">max</span>(btc_ts) <span class="sc">-</span> <span class="fu">min</span>(btc_ts))</span>
+<span id="cb115-7"><a href="modelado.html#cb115-7" tabindex="-1"></a>  min_val <span class="ot">&lt;-</span> <span class="fu">min</span>(btc_ts)</span>
+<span id="cb115-8"><a href="modelado.html#cb115-8" tabindex="-1"></a>  max_val <span class="ot">&lt;-</span> <span class="fu">max</span>(btc_ts)</span>
+<span id="cb115-9"><a href="modelado.html#cb115-9" tabindex="-1"></a></span>
+<span id="cb115-10"><a href="modelado.html#cb115-10" tabindex="-1"></a>  <span class="co"># 2. Crear dataset con ventanas</span></span>
+<span id="cb115-11"><a href="modelado.html#cb115-11" tabindex="-1"></a>  crear_dataset <span class="ot">&lt;-</span> <span class="cf">function</span>(serie, n_lags) {</span>
+<span id="cb115-12"><a href="modelado.html#cb115-12" tabindex="-1"></a>    X <span class="ot">&lt;-</span> <span class="fu">embed</span>(serie, n_lags <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb115-13"><a href="modelado.html#cb115-13" tabindex="-1"></a>    y <span class="ot">&lt;-</span> X[, <span class="dv">1</span>]</span>
+<span id="cb115-14"><a href="modelado.html#cb115-14" tabindex="-1"></a>    X <span class="ot">&lt;-</span> X[, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb115-15"><a href="modelado.html#cb115-15" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">X =</span> X, <span class="at">y =</span> y))</span>
+<span id="cb115-16"><a href="modelado.html#cb115-16" tabindex="-1"></a>  }</span>
+<span id="cb115-17"><a href="modelado.html#cb115-17" tabindex="-1"></a></span>
+<span id="cb115-18"><a href="modelado.html#cb115-18" tabindex="-1"></a>  datos <span class="ot">&lt;-</span> <span class="fu">crear_dataset</span>(btc_norm, n_lags)</span>
+<span id="cb115-19"><a href="modelado.html#cb115-19" tabindex="-1"></a>  X_all <span class="ot">&lt;-</span> datos<span class="sc">$</span>X</span>
+<span id="cb115-20"><a href="modelado.html#cb115-20" tabindex="-1"></a>  y_all <span class="ot">&lt;-</span> datos<span class="sc">$</span>y</span>
+<span id="cb115-21"><a href="modelado.html#cb115-21" tabindex="-1"></a>  total <span class="ot">&lt;-</span> <span class="fu">nrow</span>(X_all)</span>
+<span id="cb115-22"><a href="modelado.html#cb115-22" tabindex="-1"></a></span>
+<span id="cb115-23"><a href="modelado.html#cb115-23" tabindex="-1"></a>  <span class="co"># 3. División inicial</span></span>
+<span id="cb115-24"><a href="modelado.html#cb115-24" tabindex="-1"></a>  start <span class="ot">&lt;-</span> <span class="fu">floor</span>(total <span class="sc">*</span> initial_train_ratio)</span>
+<span id="cb115-25"><a href="modelado.html#cb115-25" tabindex="-1"></a></span>
+<span id="cb115-26"><a href="modelado.html#cb115-26" tabindex="-1"></a>  pred <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb115-27"><a href="modelado.html#cb115-27" tabindex="-1"></a>  real <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb115-28"><a href="modelado.html#cb115-28" tabindex="-1"></a></span>
+<span id="cb115-29"><a href="modelado.html#cb115-29" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> start<span class="sc">:</span>(total <span class="sc">-</span> <span class="dv">1</span>)) {</span>
+<span id="cb115-30"><a href="modelado.html#cb115-30" tabindex="-1"></a>    X_train <span class="ot">&lt;-</span> X_all[<span class="dv">1</span><span class="sc">:</span>i, ]</span>
+<span id="cb115-31"><a href="modelado.html#cb115-31" tabindex="-1"></a>    y_train <span class="ot">&lt;-</span> y_all[<span class="dv">1</span><span class="sc">:</span>i]</span>
+<span id="cb115-32"><a href="modelado.html#cb115-32" tabindex="-1"></a>    X_next  <span class="ot">&lt;-</span> <span class="fu">matrix</span>(X_all[i <span class="sc">+</span> <span class="dv">1</span>, ], <span class="at">nrow =</span> <span class="dv">1</span>)</span>
+<span id="cb115-33"><a href="modelado.html#cb115-33" tabindex="-1"></a></span>
+<span id="cb115-34"><a href="modelado.html#cb115-34" tabindex="-1"></a>    <span class="co"># 4. Ajustar modelo Jordan</span></span>
+<span id="cb115-35"><a href="modelado.html#cb115-35" tabindex="-1"></a>    modelo <span class="ot">&lt;-</span> <span class="fu">jordan</span>(X_train, y_train,</span>
+<span id="cb115-36"><a href="modelado.html#cb115-36" tabindex="-1"></a>                     <span class="at">size =</span> size,</span>
+<span id="cb115-37"><a href="modelado.html#cb115-37" tabindex="-1"></a>                     <span class="at">learnFuncParams =</span> <span class="fu">c</span>(<span class="fl">0.1</span>),</span>
+<span id="cb115-38"><a href="modelado.html#cb115-38" tabindex="-1"></a>                     <span class="at">maxit =</span> maxit,</span>
+<span id="cb115-39"><a href="modelado.html#cb115-39" tabindex="-1"></a>                     <span class="at">linOut =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb115-40"><a href="modelado.html#cb115-40" tabindex="-1"></a></span>
+<span id="cb115-41"><a href="modelado.html#cb115-41" tabindex="-1"></a>    pred_i <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo, X_next)</span>
+<span id="cb115-42"><a href="modelado.html#cb115-42" tabindex="-1"></a>    pred <span class="ot">&lt;-</span> <span class="fu">c</span>(pred, pred_i)</span>
+<span id="cb115-43"><a href="modelado.html#cb115-43" tabindex="-1"></a>    real <span class="ot">&lt;-</span> <span class="fu">c</span>(real, y_all[i <span class="sc">+</span> <span class="dv">1</span>])</span>
+<span id="cb115-44"><a href="modelado.html#cb115-44" tabindex="-1"></a>  }</span>
+<span id="cb115-45"><a href="modelado.html#cb115-45" tabindex="-1"></a></span>
+<span id="cb115-46"><a href="modelado.html#cb115-46" tabindex="-1"></a>  <span class="co"># 5. Desnormalizar</span></span>
+<span id="cb115-47"><a href="modelado.html#cb115-47" tabindex="-1"></a>  pred_desnorm <span class="ot">&lt;-</span> pred <span class="sc">*</span> (max_val <span class="sc">-</span> min_val) <span class="sc">+</span> min_val</span>
+<span id="cb115-48"><a href="modelado.html#cb115-48" tabindex="-1"></a>  real_desnorm <span class="ot">&lt;-</span> real <span class="sc">*</span> (max_val <span class="sc">-</span> min_val) <span class="sc">+</span> min_val</span>
+<span id="cb115-49"><a href="modelado.html#cb115-49" tabindex="-1"></a></span>
+<span id="cb115-50"><a href="modelado.html#cb115-50" tabindex="-1"></a>  <span class="co"># 6. Métricas</span></span>
+<span id="cb115-51"><a href="modelado.html#cb115-51" tabindex="-1"></a>  rmse_val <span class="ot">&lt;-</span> <span class="fu">rmse</span>(real_desnorm, pred_desnorm)</span>
+<span id="cb115-52"><a href="modelado.html#cb115-52" tabindex="-1"></a>  mae_val  <span class="ot">&lt;-</span> <span class="fu">mae</span>(real_desnorm, pred_desnorm)</span>
+<span id="cb115-53"><a href="modelado.html#cb115-53" tabindex="-1"></a>  mape_val <span class="ot">&lt;-</span> <span class="fu">mape</span>(real_desnorm, pred_desnorm)</span>
+<span id="cb115-54"><a href="modelado.html#cb115-54" tabindex="-1"></a></span>
+<span id="cb115-55"><a href="modelado.html#cb115-55" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;📊 Expanding Window - Red Jordan</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb115-56"><a href="modelado.html#cb115-56" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;RMSE:&quot;</span>, <span class="fu">round</span>(rmse_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb115-57"><a href="modelado.html#cb115-57" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;MAE :&quot;</span>, <span class="fu">round</span>(mae_val, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb115-58"><a href="modelado.html#cb115-58" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;MAPE:&quot;</span>, <span class="fu">round</span>(mape_val <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>), <span class="st">&quot;%</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb115-59"><a href="modelado.html#cb115-59" tabindex="-1"></a></span>
+<span id="cb115-60"><a href="modelado.html#cb115-60" tabindex="-1"></a>  <span class="co"># 7. Gráfico</span></span>
+<span id="cb115-61"><a href="modelado.html#cb115-61" tabindex="-1"></a>  <span class="fu">plot</span>(real_desnorm, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">ylab =</span> <span class="st">&quot;Precio BTC&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Red Jordan - Expanding Window&quot;</span>)</span>
+<span id="cb115-62"><a href="modelado.html#cb115-62" tabindex="-1"></a>  <span class="fu">lines</span>(pred_desnorm, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb115-63"><a href="modelado.html#cb115-63" tabindex="-1"></a>  <span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span>, <span class="st">&quot;Predicho&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span>
+<span id="cb115-64"><a href="modelado.html#cb115-64" tabindex="-1"></a></span>
+<span id="cb115-65"><a href="modelado.html#cb115-65" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">real =</span> real_desnorm, <span class="at">pred =</span> pred_desnorm))</span>
+<span id="cb115-66"><a href="modelado.html#cb115-66" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="modelado.html#cb116-1" tabindex="-1"></a>resultado_jordan <span class="ot">&lt;-</span> <span class="fu">expanding_jordan_forecast</span>(btc_ts, <span class="at">n_lags =</span> <span class="dv">7</span>, <span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## 📊 Expanding Window - Red Jordan
+## RMSE: 2350.64 
+## MAE : 1756.91 
+## MAPE: 2.16 %</code></pre>
+<p><img src="02-capitulo_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 
 </div>
+<div id="r-markdown" class="section level2 hasAnchor" number="3.10">
+<h2><span class="header-section-number">3.10</span> R Markdown<a href="modelado.html#r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="including-plots" class="section level2 hasAnchor" number="3.11">
+<h2><span class="header-section-number">3.11</span> Including Plots<a href="modelado.html#including-plots" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
 </div>
 </div>
             </section>
