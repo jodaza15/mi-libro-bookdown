@@ -4,6 +4,10 @@ A continuación, se realizará una revisión descriptiva de los precios del bitc
 
 Dentro de este análisis descriptivo se validará algunas medias móviles y el movimiento de los retornos de los precios diarios del bitcoin.
 
+## Graficos de precios HLOC
+
+A continuación, se visualizaran los gráficos de cada una de las series de tiempo correspondiente a los precio más alto, precio más bajo, precio de apertura y cierre del Bitcoin, con el fin de visualizar sus diferencias.
+
 ```{r}
 #install.packages("quantmod")
 #install.packages("zoo")
@@ -39,7 +43,7 @@ tail(btc_zoo)
 
 
 ```
-**1. Graficos de precios HLOC**
+
 
 ```{r}
 tc_df <- data.frame(date = index(btc_zoo), coredata(btc_zoo))
@@ -77,7 +81,9 @@ ggplot(tc_df, aes(x = date, y = BTC.USD.Close)) +
   theme_minimal()
 ```
 
-**2. Grafico de seasonal**
+## Grafico de seasonal
+
+En este grafico se revisará la estacionalidad que se presento en la serie diaria de precio de BTC/USD en ventanas de tiempo de un año.
 
 ```{r}
 # Extraemos la serie de precios de cierre
@@ -95,14 +101,26 @@ ggseasonplot(btc_close_ts, year.labels = TRUE) +
   ggtitle("Seasonal Plot - BTC/USD Close Price")
 
 ```
-**3. Grafico de subserie**
+No se evidencia una clara estacionalidad, lo que indica que los precios del Bitcoin pueden o tener un ciclo de subida y de bajada mayor a un año o que no tiene un comportamiento estacional per se.
+
+
+##  Grafico de subserie
+
+En el siguiente grafico se busca validar patrones de estacionalidad, tal como se reviso en el grafico anterior y corroborar lo mencionado sobre la estacionalidad del BTC. 
 ```{r}
 ggsubseriesplot(btc_close_ts) +
   ggtitle("Subseries Plot - BTC/USD Close Price")
 
 ```
 
-**4. Grafico de autocorrelación**
+De acuerdo a lo observado se puede inferir que no hay una estacionalidad anual fuerte en el precio, puede haber ciclos suaves, pero no repetitivos de forma clara lo que indica un activo de alta volatilidad.
+
+## Grafico de autocorrelación
+
+En este parte se procede a revisar como se relaciona la serie de tiempo con valores anteriores de la misma.
+
+En este capítulo solo se visualizará la autocorrelación, sin embargo, será explicada con mayor detalle en el capítulo 3 del modelado.
+
 
 ```{r}
 ggAcf(btc_close_ts) +
@@ -110,7 +128,19 @@ ggAcf(btc_close_ts) +
 
 ```
 
-**5. Grafico de descomposición de la serie de tiempo**
+## Grafico de descomposición de la serie de tiempo
+
+La descomposición de series de tiempo es una técnica fundamental del análisis temporal que permite separar una serie observada en sus componentes estructurales. Esto facilita la comprensión de los patrones subyacentes y mejora la capacidad de predicción al modelar cada componente por separado.
+
+**Modelo Aditivo**
+En el modelo aditivo, se asume que la serie de tiempo YtY_tYt puede descomponerse como:
+Yt=Tt+St+RtY_t = T_t + S_t + R_tYt=Tt+St+Rt 
+
+Donde:
+* TtT_tTt: Componente de tendencia (trend), que refleja la evolución a largo plazo de la serie.
+* StS_tSt: Componente estacional (seasonal), que representa los patrones sistemáticos y repetitivos en intervalos fijos (como días, meses o años).
+* 	RtR_tRt: Componente aleatoria (residual o random), que capta las variaciones no explicadas por la tendencia ni por la estacionalidad.
+
 
 ```{r}
 # Descomposición
@@ -121,7 +151,10 @@ plot(btc_close_decomp)
 
 ```
 
-**6. Grafica de retraso**
+## Grafica de retraso
+
+La grafica a continuación se procede para revisar el comportamiento del precio real sobre un retraso de 5 periodos diarios.
+
 
 ```{r}
 # Desplazamiento de 5 periodos atrás
@@ -135,7 +168,9 @@ legend("topleft", legend = c("Backshift (Lag 5)", "Original"), col = c("blue", "
 
 ```
 
-**7. Grafico de diferenciación**
+##  Grafico de diferenciación
+
+La grafica a continuación se procede para revisar la serie de tiempo diferenciada,la cual tiene gran revelancia en el capitulo 3 en el modelado Arima, en dicho capitulo se abordará con mayor detalle.
 
 ```{r}
 # Diferencia de la serie
@@ -147,7 +182,40 @@ plot(btc_close_diff, main = "Diferencia de 1 periodo - BTC/USD Close",
 abline(h = 0, lty = 2, col = "black")  
 ```
 
-**8. Grafico de medias moviles**
+** Grafico de precios diferenciados interactivo **
+
+```{r}
+# Crear la serie de diferencias
+tc_df <- tc_df %>%
+  mutate(
+    diferencia = c(NA, diff(BTC.USD.Close))  # Usamos c(NA, diff(...)) para que el tamaño quede igual
+  )
+
+# Crear el gráfico de diferencias
+p_diff <-tc_df %>%
+  ggplot(aes(x = date)) +
+  
+  # Área para la diferencia
+  geom_area(aes(y = diferencia), fill = "#FF7F0E", alpha = 0.3) +
+  geom_line(aes(y = diferencia, color = "Diferencia Diario"), size = 1) +
+  
+  ylab("Cambio Diario BTC/USD ($)") +
+  xlab("Fecha") +
+  ggtitle("Diferencia de Precio de Bitcoin (BTC/USD) entre días") +
+  theme_ipsum() +
+  scale_color_manual(values = c("Diferencia Diario" = "#FF7F0E"))
+
+# Convertir en gráfico interactivo
+p_diff <- ggplotly(p_diff)
+
+# Mostrar
+p_diff
+```
+
+
+## Grafico de medias moviles
+
+La grafica a continuación se procede para revisar diferentes medias móviles de la serie de tiempo original y validar el movimiento con menor ruido que la serie original.
 
 ```{r}
 
@@ -174,7 +242,7 @@ legend("topleft",
 
 ```
 
-**9. Grafico de precios y medias moviles interactivo **
+** Grafico de precios y medias moviles interactivo **
 
 
 ```{r}
@@ -215,37 +283,8 @@ p <- ggplotly(p)
 p
 ```
 
-**10. Grafico de precios diferenciados interactivo **
 
-```{r}
-# Crear la serie de diferencias
-tc_df <- tc_df %>%
-  mutate(
-    diferencia = c(NA, diff(BTC.USD.Close))  # Usamos c(NA, diff(...)) para que el tamaño quede igual
-  )
-
-# Crear el gráfico de diferencias
-p_diff <-tc_df %>%
-  ggplot(aes(x = date)) +
-  
-  # Área para la diferencia
-  geom_area(aes(y = diferencia), fill = "#FF7F0E", alpha = 0.3) +
-  geom_line(aes(y = diferencia, color = "Diferencia Diario"), size = 1) +
-  
-  ylab("Cambio Diario BTC/USD ($)") +
-  xlab("Fecha") +
-  ggtitle("Diferencia de Precio de Bitcoin (BTC/USD) entre días") +
-  theme_ipsum() +
-  scale_color_manual(values = c("Diferencia Diario" = "#FF7F0E"))
-
-# Convertir en gráfico interactivo
-p_diff <- ggplotly(p_diff)
-
-# Mostrar
-p_diff
-```
-
-**11. Grafico de retornos de precios interactivo**
+## Grafico de retornos de precios interactivo
 
 ```{r}
 tc_df <-tc_df %>%
@@ -279,7 +318,7 @@ p_retornos
 
 ```
 
-**12. Grafico heatmap de retornos diarios**
+** Grafico heatmap de retornos diarios**
 
 ```{r}
 

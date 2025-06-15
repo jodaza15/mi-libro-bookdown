@@ -1,5 +1,31 @@
 # MODELADO
 
+## Consideraciones en el modelado.
+
+### División de datos de entrenamiento y test
+
+En este capítulo se abordará el entrenamiento y validación de los modelos desde un enfoque clásico de división de datos del 80%/20% en orden cronológico, así como el enfoque de ventana expansiva
+
+
+En el enfoque de Expanding Window, se entrena un modelo usando un conjunto inicial de observaciones históricas. Luego, se avanza paso a paso en el tiempo, y en cada iteración:
+Se reentrena el modelo utilizando todos los datos disponibles hasta el tiempo actual ,
+Se realiza una predicción para el siguiente punto temporal t+1t + 1t+1,
+Se expande la ventana de entrenamiento incorporando el valor real observado en t+1t + 1t+1,
+Se repite el proceso hasta cubrir todo el conjunto de prueba.
+
+### Metricas de evaluación
+
+En el análisis y pronóstico de series de tiempo, es fundamental evaluar la precisión de los modelos. Para ello, se utilizan métricas de error que cuantifican la discrepancia entre los valores reales y los valores predichos. Entre las más comunes se encuentran:
+
+* MAE (Mean Absolute Error): mide el promedio de las diferencias absolutas entre las predicciones y los valores reales. Es una métrica simple e intuitiva, menos sensible a valores atípicos.
+
+* RMSE (Root Mean Squared Error): es la raíz cuadrada del promedio del error cuadrático. Penaliza más fuertemente los errores grandes, lo que la hace útil cuando los errores extremos son costosos.
+
+* MAPE (Mean Absolute Percentage Error): expresa el error como un porcentaje del valor real, lo que permite comparar entre series con diferentes escalas. No es adecuada si los valores reales pueden ser cero.
+
+Estas métricas permiten comparar el rendimiento de diferentes modelos de manera objetiva y cuantitativa, siendo útiles tanto para validación como para selección de modelos.
+
+
 ## Modelo de Holt Winters
 
 La metodología de Holt-Winters, también conocida como suavizamiento exponencial triple, es una técnica ampliamente utilizada en el análisis de series temporales para realizar pronósticos que presentan patrones de tendencia y estacionalidad. Esta metodología extiende el suavizamiento exponencial simple incorporando componentes adicionales que permiten capturar dinámicamente la evolución de la tendencia y la estacionalidad a lo largo del tiempo. Holt-Winters se presenta en dos variantes principales: aditiva y multiplicativa, dependiendo de la naturaleza del componente estacional. Es particularmente útil en contextos donde los datos muestran fluctuaciones regulares en intervalos específicos (como días, semanas o meses), y permite generar predicciones a corto y mediano plazo con un alto grado de precisión. Su implementación práctica ha demostrado ser eficaz en áreas como la economía, la meteorología, la gestión de inventarios y el consumo de recursos, como agua o energía(Hurtado Garzón 2013).
@@ -786,7 +812,7 @@ legend("topleft", legend = c("Real", "Predicción"),
 ```
 
 <img src="02-capitulo_files/figure-html/unnamed-chunk-33-1.png" width="672" />
-## Expanding Window Arima
+## Expanding Window Regresión lineal
 
 
 ``` r
@@ -1073,6 +1099,10 @@ resultado_prophet <- expanding_prophet_forecast(btc_ts, initial_train_ratio = 0.
 
 ## Red Neuronal Elman
 
+``` r
+unlink("/cloud/lib/x86_64-pc-linux-gnu-library/4.4/00LOCK-RSNNS", recursive = TRUE)
+```
+
 
 ``` r
 install.packages("RSNNS")
@@ -1150,7 +1180,7 @@ cat("RMSE:", round(rmse(real, pred), 2), "\n")
 ```
 
 ```
-## RMSE: 15327.92
+## RMSE: 17212.97
 ```
 
 ``` r
@@ -1158,7 +1188,7 @@ cat("MAE :", round(mae(real, pred), 2), "\n")
 ```
 
 ```
-## MAE : 12516.27
+## MAE : 14187.74
 ```
 
 ``` r
@@ -1166,7 +1196,7 @@ cat("MAPE:", round(mape(real, pred) * 100, 2), "%\n")
 ```
 
 ```
-## MAPE: 13.7 %
+## MAPE: 15.6 %
 ```
 
 ``` r
@@ -1176,7 +1206,7 @@ lines(pred, col = "blue", lwd = 2)
 legend("topleft", legend = c("Real", "Predicho"), col = c("red", "blue"), lty = 1)
 ```
 
-<img src="02-capitulo_files/figure-html/unnamed-chunk-47-1.png" width="672" />
+<img src="02-capitulo_files/figure-html/unnamed-chunk-48-1.png" width="672" />
 
 ## Red Neuronal Elman con Expanding window
 
@@ -1257,12 +1287,12 @@ resultado_elman <- expanding_elman_forecast(btc_ts, n_lags = 7, size = 10)
 
 ```
 ## 📊 Expanding Window - Red Elman
-## RMSE: 2137.92 
-## MAE : 1542.39 
-## MAPE: 2.24 %
+## RMSE: 2128.29 
+## MAE : 1518.67 
+## MAPE: 2.2 %
 ```
 
-<img src="02-capitulo_files/figure-html/unnamed-chunk-49-1.png" width="672" />
+<img src="02-capitulo_files/figure-html/unnamed-chunk-50-1.png" width="672" />
 
 ## Red neuronal Jordan
 
@@ -1343,11 +1373,34 @@ resultado_jordan <- expanding_jordan_forecast(btc_ts, n_lags = 7, size = 10)
 
 ```
 ## 📊 Expanding Window - Red Jordan
-## RMSE: 2350.64 
-## MAE : 1756.91 
-## MAPE: 2.16 %
+## RMSE: 2284.06 
+## MAE : 1722.89 
+## MAPE: 2.12 %
 ```
 
-<img src="02-capitulo_files/figure-html/unnamed-chunk-51-1.png" width="672" />
+<img src="02-capitulo_files/figure-html/unnamed-chunk-52-1.png" width="672" />
 
+## Resultados.
+
+A continuación, se presenta una tabla donde se resume el desempeño de los diferentes modelos con el entrenamiento de ventana expansiva.
+
+ ![Tabla de resultado](resultado_modelos.png)
+
+De acuerdo a los resultados se puede inferir que:
+
+*	El modelo con mejor desempeño fue el modelo Auto-arima muy cercano con el modelo Holt Winters. Esto indica que los modelos tradicionales para este tipo de activo resultan más precisos que modelos muy sofisticados.
+*	Posteriormente los modelos basados en Deep learning tuvieron un gran desempeño cercanos a los modelos tradicionales.
+*	El modelo Prophet no tuvo un desempeño aceptable, por lo que no es apto para este tipo de series de tiempo, dado que el BTC no tiene un desempeño estacional definido.
+*	Por ultimo la regresión lineal nos indica que el activo tiene una tendencia al alza a lo largo del tiempo.
+
+
+## Conclusiones
+
+* El enfoque de ventaja expansiva genera un entrenamiento en los modelos con una gran precisión, sin embargo, su costo computacional es muy alto, por lo que este podría combinarse con el enfoque de ventana deslizante el cual es menos costoso a nivel computacional y genera resultados cercanos a el enfoque de ventaja expansiva.
+
+* Para una mayor precisión de estos modelos, podría integrarse variables exógenas que puedan contribuir al poder predictivo de los modelos, tales como análisis de sentimiento, variables macroeconómicas e indicadores técnicos.
+
+*Así mismo podría contrastarse con otras series de tiempo del mismo activo, pero en horizontes de tiempo diferentes.
+
+* Por ultimo prospectivamente hablando, es fundamental para la puesta en marcha en productivo de alguno de los modelos vistos anteriormente, se debe establecer unas políticas como se volverá a validar o actualizar el modelo, que variables o métricas serán las que disparen que el modelo ya no esta cerca a la realidad del mercado, como será la validación del mismo con los datos del mercado en tiempo real como otras consideraciones desde la perspectiva de las MLops.
 

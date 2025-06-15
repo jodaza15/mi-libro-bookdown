@@ -19,6 +19,7 @@ Dentro de los mercados financieros donde la volatilidad es parte de su naturalez
 
 Según TradingView (s.f.), la dominancia de Bitcoin en el mercado de criptomonedas es de más del 50%, lo que lo hace el dominador del mercado. Es por ello, el interés de realizar el estudio de series de tiempo a esta criptomoneda desde un enfoque univariado.
 
+
 Para este estudio se propone realizar análisis de serie para:
 
 1.	Periodo diario: Desde 01 de enero de 2022 al 27 de abril de 2025.
