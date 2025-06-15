@@ -1,7 +1,7 @@
 ---
 title: "Mi libro con bookdown"
 author: "José David Zamudio R"
-date: "`r Sys.Date()`"
+date: "2025-06-15"
 site: bookdown::bookdown_site
 documentclass: book
 output: bookdown::gitbook
